@@ -146,109 +146,111 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-$colorPurple: #615dfa;
-$colorDark: #3e3f5e;
+$primaryColor: #115D33;
+$colorDark: #2d2d2d;
 
 .lang-top {
     position: fixed;
     right: 10px;
     top: 10px;
+    z-index: 10;
 }
 
 .input-icon {
     position: absolute;
     right: 10px;
-    top: 55%;
+    top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 .circle {
     position: fixed;
-    top: 0;
-    left: 0;
-    padding: 350px;
     background: #ffffff28;
     z-index: 1;
     pointer-events: none;
     border-radius: 50%;
     opacity: .15;
+    border: 2px solid #fff;
+    box-shadow: 0 0 15px #fff;
 }
 
 .circle.one {
     top: 50%;
     left: 50%;
-    padding: 400px 600px;
-    border: 2px solid #fff;
-    box-shadow: 0 0 15px #fff;
+    width: 800px;
+    height: 800px;
 }
 
 .circle.two {
     top: 80%;
-    left: 0%;
-    padding: 200px 200px;
-    border: 2px solid #fff;
-    box-shadow: 0 0 15px #fff;
+    left: 0;
+    width: 400px;
+    height: 400px;
 }
 
 .circle.four {
     right: -300px;
-    border: 2px solid #fff;
-    box-shadow: 0 0 15px #fff;
     height: 210vh;
     top: -100vh;
+    width: 600px;
 }
 
 .circle.three {
     top: -70%;
     left: 50vw;
-    border: 2px solid #fff;
-    box-shadow: 0 0 15px #fff;
+    width: 600px;
+    height: 600px;
 }
 
 .form_body {
-    align-items: center;
-    background: linear-gradient(135deg, #0c3eb4, #4470d8, #4470d8, #b4707d, #b06774);
     display: flex;
-    height: 100vh;
+    align-items: center;
     justify-content: center;
+    background: linear-gradient(135deg, $primaryColor, lighten($primaryColor, 10%), lighten($primaryColor, 20%));
+    min-height: 100vh;
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .contact-wrapper {
     background: #fff;
-    box-shadow: 3px 3px 2px rgba(0, 0, 0, .15);
-    border-radius: .75em;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 0.75em;
     padding: 2em;
-    width: 30em;
+    width: 100%;
+    max-width: 400px;
+    z-index: 2;
 }
 
-.login-cta {
-    &>h2 {
-        color: $colorDark;
-        font-size: 1.75rem;
-        text-align: center;
-    }
+.login-cta>h2 {
+    color: $colorDark;
+    font-size: 1.75rem;
+    text-align: center;
 }
-
 
 form {
     margin: 2em 0;
 
     .form-row {
         display: flex;
-        margin: .75em 0;
+        margin: 1em 0;
         position: relative;
+        flex-direction: column;
 
         span {
             background: #fff;
-            color: #adafca;
+            color: #666;
             display: inline-block;
             font-weight: 400;
             left: 1em;
             padding: 0 .5em;
             position: absolute;
             pointer-events: none;
-            transform: translatey(-50%);
+            transform: translateY(-50%);
             top: 50%;
             transition: all 300ms ease;
             user-select: none;
@@ -258,79 +260,66 @@ form {
         button {
             border-radius: .5em;
             font-family: inherit;
-            padding: 1em .5em;
+            padding: 1em;
             width: 100%;
             font-size: 16px;
         }
 
         input {
-            font-weight: bold;
-            transition: 100ms ease all;
-            width: 100%;
+            font-weight: 500;
+            transition: border-color 0.3s;
+            border: .075em solid #ddd;
 
-            &[type=text],
-            &[type=password] {
-                border: .075em solid #ddd;
-            }
-
-            &:valid {
-                &+span {
-                    top: 0;
-                    font-size: .90rem;
-                }
-            }
-
-            &:invalid {
-                &+span {
-                    top: 50%;
-                }
+            &:valid+span,
+            &:focus+span {
+                top: 0;
+                font-size: .85rem;
+                color: $primaryColor;
             }
 
             &:focus {
-                &+span {
-                    top: 0;
-                }
-            }
-
-            &:required {
-                box-shadow: none;
-            }
-
-            &:focus {
-                border-color: #7b5dfa;
+                border-color: $primaryColor;
                 outline: none;
-
-                &:invalid {
-                    box-shadow: none;
-                    top: 50%;
-                }
-
-                &:valid {
-                    top: 0;
-                }
             }
         }
 
-        &>button {
-            background: linear-gradient(135deg, #0c3eb4, #4470d8, #4470d8, #b4707d, #b06774);
-            // border: .10em solid #0c3eb4;
+        button {
+            background: $primaryColor;
             border: none;
             color: #fff;
             cursor: pointer;
             font-weight: bold;
-            transition: all 300ms ease;
-            font-weight: bold;
+            transition: background-color 300ms ease;
             font-size: 17px;
 
             &:focus {
-                border: .10em solid darken(#7b5dfa, 10);
                 outline: none;
+                box-shadow: 0 0 0 3px lighten($primaryColor, 20%);
             }
 
             &:hover {
-                background-color: darken(#7b5dfa, 5);
+                background-color: darken($primaryColor, 5);
             }
         }
+    }
+}
+
+@media (max-width: 600px) {
+    .contact-wrapper {
+        padding: 1.5em 1em;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .form_body {
+        padding: 0.5em;
+    }
+
+    .lang-top {
+        width: 100%;
+        text-align: right;
+        right: 0;
+        padding: 1em;
     }
 }
 </style>

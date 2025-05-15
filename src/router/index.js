@@ -30,6 +30,11 @@ const router = createRouter({
           name: "category",
           component: () => import("@/views/Category/Index.vue"),
         },
+           {
+          path: "/brand-table",
+          name: "brand",
+          component: () => import("@/views/Brand/Index.vue"),
+        },
       ]
     },
     {

@@ -19,6 +19,7 @@ import {
   CategoryIcon,
   NewsIcon,
   SettingIcon,
+  BrandIcon,
   ClientIcon as DefaultAvatarIcon
 } from "../../components/icons/icon.js";
 
@@ -101,6 +102,7 @@ const menuOptions = computed(() => [
       { label: t("admin"), key: "admin", icon: renderIcon(AdminIcon) },
       { label: t("client"), key: "client", icon: renderIcon(ClientIcon) },
       { label: t("category"), key: "category", icon: renderIcon(CategoryIcon) },
+      { label: t("brand"), key: "brand", icon: renderIcon(BrandIcon) },
       { label: t("news"), key: "news", icon: renderIcon(NewsIcon) },
       { label: "F.A.Q", key: "F.A.Q", icon: renderIcon(FaqIcon) }
     ]

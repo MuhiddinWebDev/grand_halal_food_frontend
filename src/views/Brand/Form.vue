@@ -4,7 +4,7 @@
       <!-- Header -->
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-4 sm:space-y-0">
         <p class="text-xl font-semibold">
-          {{ t('category') }}
+          {{ t('brand') }}
           {{ props.type == 'create' ? t('add').toLowerCase() : t('change').toLowerCase() }}
         </p>
         <div class="flex gap-2">
@@ -27,27 +27,10 @@
         </div>
       </div>
 
-      <!-- Image Upload Section -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
-        <div class="md:col-span-2">
-          <n-upload :max="1" accept="image/png, image/jpeg" list-type="image" directory-dnd
-            @update:file-list="updateUpload" @remove="removeUpload">
-            <n-upload-dragger accept="image/png, image/jpeg">
-              <n-text class="text-base">
-                {{ $t('upload_image') }}
-              </n-text>
-              <n-p depth="3" class="mt-2">
-                {{ $t('drop_image') }}
-              </n-p>
-            </n-upload-dragger>
-          </n-upload>
-        </div>
-        <div>
-          <n-image v-if="form_data.image" :src="fileUrl + form_data.image" width="120" height="80" class="rounded" />
-        </div>
-      </div>
-
-      <!-- Input Fields -->
+      <n-form-item :label="t('category')" path="category_id">
+        <n-select :options="categoryOption" fitlerable clearable @keydown="keySave"
+          v-model:value="form_data.category_id" :label-field="'title_' + locale" value-field="id" />
+      </n-form-item>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
         <n-form-item :label="t('title') + ' UZB'" path="title_uz">
           <n-input ref="inputInstRef" @keydown="keySave" v-model:value="form_data.title_uz" show-count clearable />
@@ -66,38 +49,40 @@
   </n-form>
 </template>
 <script setup>
-import { ref, onMounted, inject } from "vue";
+import { ref, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
-import ModelService from "@/services/category.service";
+import ModelService from "@/services/brand.service";
+import categoryService from "@/services/category.service";
 import uploadService from "@/services/upload.service";
 import { ExitIcon, SaveIcon } from "@/components/icons/icon";
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 const props = defineProps({
   type: String,
   id: [String, Number]
 });
+
 const emit = defineEmits(["create", "update", "close"]);
 
-// Refs
 const formRef = ref(null);
 const spinner = ref(false);
 const inputInstRef = ref(null);
+const categoryOption = ref([]);
 
-// Fayl URL - provide/inject orqali global file URL olinyapti
-const fileUrl = inject('fileUrl');
 
-// Form data
 const form_data = ref({
   title_uz: "",
   title_ru: "",
   title_kr: "",
   title_en: "",
-  image: "",
+  category_id: null
 });
-
-// Form rules (validation)
+const getAllCategory = () => {
+  categoryService.all().then(res => {
+    categoryOption.value = res;
+  })
+}
 const createValidator = (field) => ({
   required: true,
   trigger: "blur",
@@ -114,8 +99,8 @@ const rules = {
   image: createValidator("image"),
 };
 
-// On mounted: agar update bo‘lsa ma’lumotni yuklab olish
 onMounted(async () => {
+  getAllCategory();
   if (props.type === "update" && props.id) {
     try {
       const res = await ModelService.getOne(props.id);
@@ -124,8 +109,6 @@ onMounted(async () => {
       console.error("Ma'lumot yuklashda xatolik:", error);
     }
   }
-
-  // Autofocus input
   setTimeout(() => {
     inputInstRef.value?.focus();
   }, 100);
@@ -145,17 +128,14 @@ const save = async () => {
       emit("update", res);
     }
   } catch (e) {
-    // validation error or exception
     console.warn("Form not valid or failed", e);
   } finally {
     spinner.value = false;
   }
 };
 
-// Modalni yopish
 const exitBtn = () => emit("close");
 
-// Faylni serverdan o‘chirish
 const deletedFile = async (file) => {
   if (file) {
     try {
@@ -166,7 +146,6 @@ const deletedFile = async (file) => {
   }
 };
 
-// Yangi fayl yuklandi
 const updateUpload = async (data) => {
   if (data.length > 0) {
     const sendData = new FormData();
