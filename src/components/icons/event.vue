@@ -1,0 +1,5 @@
+<template>
+    <div class="main-icons">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16"><g fill="none"><path d="M4 9V8h1v1H4zM1 4a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v6.5a.5.5 0 0 0 1 0V4a2 2 0 0 1 2 2v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 10.5V4zm2.5 1a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1h-6zm0 2a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-2zm4 0a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 2a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" fill="currentColor"></path></g></svg>
+    </div>
+</template>
