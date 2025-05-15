@@ -1,7 +1,7 @@
 <script setup>
 import { ref, h, onMounted, computed, watch, inject } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { NIcon, useDialog } from "naive-ui";
+import { c, NIcon, useDialog } from "naive-ui";
 import { useI18n } from "vue-i18n";
 import { useGlobalStore } from "@/stores/global";
 import usersService from "@/services/users.service.js";
@@ -132,7 +132,7 @@ const handleResize = () => {
 };
 
 onMounted(() => {
-  window.addEventListener("resize", handleResize);
+  window.addEventListener("resize", handleResize());
   globalStore.currentLang = localStorage.getItem("lang") || "uz";
   locale.value = globalStore.currentLang;
   fallbackLocale.value = globalStore.currentLang;
@@ -161,8 +161,9 @@ window.addEventListener("resize", handleResize);
 const openMenuEvent = () => {
   handleResize();
   if (windowWidth.value > 768) {
-    collapsed.value = !collapsed.value
+    collapsed.value = !collapsed.value;
   }
+  responsiveMenu.value =! responsiveMenu.value
 }
 const UpdateAccordion = (e) => {
   accordionValue.value = e;
