@@ -45,14 +45,14 @@ const tableColumn = computed(() => [
         render: (_, index) => index + 1,
     },
     {
-        title: t("category") + ' UZB',
-        key: "title",
+        title: t("title") + ' UZB',
+        key: "title_uz",
         render(row) {
             console.log(row.category)
             return h("div", { class: "flex items-center" }, [
                 row.image
                     ? h(NImage, {
-                        src: fileUrl + row.category?.image,
+                        src: fileUrl + row.image,
                         height: 35,
                         width: 50,
                         style: { borderRadius: "35px", marginRight: "8px" },
@@ -63,13 +63,9 @@ const tableColumn = computed(() => [
                         size: "small",
                         style: { marginRight: "8px" },
                     }),
-                h("span", { class: "font-semibold" }, row.category?.title),
+                h("span", { class: "font-semibold" }, row.title_uz),
             ]);
         },
-    },
-    {
-        title: t("title") + ' UZB',
-        key: "title_uz",
     },
     {
         title: t("title") + ' KOR',
@@ -82,6 +78,10 @@ const tableColumn = computed(() => [
     {
         title: t("title") + ' ENG',
         key: "title_en",
+    },
+    {
+        title: t("link") ,
+        key: "link",
     },
     {
         title: t("action"),
