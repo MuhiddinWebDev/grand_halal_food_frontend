@@ -290,23 +290,22 @@ export const useGlobalStore = defineStore('global', () => {
   }
   const langOption = ref([
     {
-      label: "O'zbekcha",
+      label: "O'zbekcha",   // O'zbek tili
       value: "uz"
     },
     {
-      label: "Ўзбекча (кирилл)",
-      value: "ka"
+      label: "한국어",        // Koreys tili (Korean)
+      value: "ko"
     },
     {
-      label: "Русский",
+      label: "Русский",     // Rus tili
       value: "ru"
     },
-    // {
-    //   label: "English",
-    //   value: "en"
-    // },
-
-  ]);
+    {
+      label: "English",     // Ingliz tili
+      value: "en"
+    }
+  ])
 
   const roleOption = computed(() => [
     {

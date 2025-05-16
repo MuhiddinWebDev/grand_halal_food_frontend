@@ -74,7 +74,7 @@ const tableColumn = computed(() => [
     },
     {
         title: t("title") + ' KOR',
-        key: "title_kr",
+        key: "title_ko",
     },
     {
         title: t("title") + ' RUS',

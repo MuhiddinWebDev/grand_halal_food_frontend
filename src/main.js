@@ -20,7 +20,7 @@ const i18n = createI18n({
   globalInjection: true,
   locale: "uz",
   fallbackLocale: "uz",
-  availableLocales: ["en", "ru", "uz", 'ka'],
+  availableLocales: ["en", "ru", "uz", 'ko'],
   messages: messages,
 });
 

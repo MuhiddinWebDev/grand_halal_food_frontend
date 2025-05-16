@@ -52,7 +52,7 @@
 import { ref, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import ModelService from "@/services/brand.service";
-import categoryService from "@/services/category.service";
+import categoryService from "@/services/offersTable.service";
 import uploadService from "@/services/upload.service";
 import { ExitIcon, SaveIcon } from "@/components/icons/icon";
 

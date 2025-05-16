@@ -52,8 +52,8 @@
         <n-form-item :label="t('title') + ' UZB'" path="title_uz">
           <n-input ref="inputInstRef" @keydown="keySave" v-model:value="form_data.title_uz" show-count clearable />
         </n-form-item>
-        <n-form-item :label="t('title') + ' KOR'" path="title_kr">
-          <n-input @keydown="keySave" v-model:value="form_data.title_kr" show-count clearable />
+        <n-form-item :label="t('title') + ' KOR'" path="title_ko">
+          <n-input @keydown="keySave" v-model:value="form_data.title_ko" show-count clearable />
         </n-form-item>
         <n-form-item :label="t('title') + ' RUS'" path="title_ru">
           <n-input @keydown="keySave" v-model:value="form_data.title_ru" show-count clearable />
@@ -92,7 +92,7 @@ const fileUrl = inject('fileUrl');
 const form_data = ref({
   title_uz: "",
   title_ru: "",
-  title_kr: "",
+  title_ko: "",
   title_en: "",
   image: "",
 });
@@ -108,7 +108,7 @@ const createValidator = (field) => ({
 
 const rules = {
   title_uz: createValidator("title_uz"),
-  title_kr: createValidator("title_kr"),
+  title_ko: createValidator("title_ko"),
   title_ru: createValidator("title_ru"),
   title_en: createValidator("title_en"),
   image: createValidator("image"),

@@ -7,8 +7,7 @@ import { AddIcon, RefreshIcon, PenIcon, DeleteIcon, SearchIcon } from '@/compone
 import { useGlobalStore } from "@/stores/global";
 import { useI18n } from "vue-i18n";
 import ModelForm from "./Form.vue";
-import ModelService from "@/services/category.service";
-import { usePhoneFormat } from "@/composible/NumberFormat";
+import ModelService from "@/services/offersTable.service";
 
 const { t, locale } = useI18n();
 const { insert, shift, r } = useMagicKeys();
@@ -47,13 +46,14 @@ const tableColumn = computed(() => [
         render: (_, index) => index + 1,
     },
     {
-        title: t("title") + ' UZB',
+        title: t("category") + ' UZB',
         key: "title",
         render(row) {
+            console.log(row.category)
             return h("div", { class: "flex items-center" }, [
                 row.image
                     ? h(NImage, {
-                        src: fileUrl + row.image,
+                        src: fileUrl + row.category?.image,
                         height: 35,
                         width: 50,
                         style: { borderRadius: "35px", marginRight: "8px" },
@@ -64,9 +64,13 @@ const tableColumn = computed(() => [
                         size: "small",
                         style: { marginRight: "8px" },
                     }),
-                h("span", { class: "font-semibold" }, row.title_uz),
+                h("span", { class: "font-semibold" }, row.category?.title),
             ]);
         },
+    },
+    {
+        title: t("title") + ' UZB',
+        key: "title_uz",
     },
     {
         title: t("title") + ' KOR',
@@ -177,7 +181,7 @@ onMounted(() => getAllData());
     <div class="p-4 space-y-4">
         <!-- Header -->
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <h2 class="text-xl font-bold">{{ t('category') }}</h2>
+            <h2 class="text-xl font-bold">{{ t('brand') }}</h2>
             <div class="flex flex-col sm:flex-row gap-2 sm:items-center">
                 <n-input v-model:value="filterHeader.text" @input="searchAction" :placeholder="t('search')" clearable
                     class="w-full sm:w-80">
