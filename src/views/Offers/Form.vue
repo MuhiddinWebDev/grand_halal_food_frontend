@@ -4,7 +4,7 @@
       <!-- Header -->
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-4 sm:space-y-0">
         <p class="text-xl font-semibold">
-          {{ t('brand') }}
+          {{ t('offer') }}
           {{ props.type == 'create' ? t('add').toLowerCase() : t('change').toLowerCase() }}
         </p>
         <div class="flex gap-2">
@@ -27,10 +27,25 @@
         </div>
       </div>
 
-      <n-form-item :label="t('category')" path="category_id">
-        <n-select :options="categoryOption" fitlerable clearable @keydown="keySave"
-          v-model:value="form_data.category_id" :label-field="'title_' + locale" value-field="id" />
-      </n-form-item>
+      <!-- Image Upload Section -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
+        <div class="md:col-span-2">
+          <n-upload :max="1" accept="image/png, image/jpeg" list-type="image" directory-dnd
+            @update:file-list="updateUpload" @remove="removeUpload">
+            <n-upload-dragger accept="image/png, image/jpeg">
+              <n-text class="text-base">
+                {{ $t('upload_image') }}
+              </n-text>
+              <n-p depth="3" class="mt-2">
+                {{ $t('drop_image') }}
+              </n-p>
+            </n-upload-dragger>
+          </n-upload>
+        </div>
+        <div>
+          <n-image v-if="form_data.image" :src="fileUrl + form_data.image" width="120" height="80" class="rounded" />
+        </div>
+      </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
         <n-form-item :label="t('title') + ' UZB'" path="title_uz">
           <n-input ref="inputInstRef" @keydown="keySave" v-model:value="form_data.title_uz" show-count clearable />
@@ -45,19 +60,21 @@
           <n-input @keydown="keySave" v-model:value="form_data.title_en" show-count clearable />
         </n-form-item>
       </div>
+      <n-form-item :label="t('link')" path="link">
+        <n-input @keydown="keySave" v-model:value="form_data.link" show-count clearable />
+      </n-form-item>
     </n-spin>
   </n-form>
 </template>
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, inject } from "vue";
 import { useI18n } from "vue-i18n";
-import ModelService from "@/services/brand.service";
-import categoryService from "@/services/offersTable.service";
+import ModelService from "@/services/offersTable.service";
 import uploadService from "@/services/upload.service";
 import { ExitIcon, SaveIcon } from "@/components/icons/icon";
 
 const { t, locale } = useI18n();
-
+const fileUrl = inject('fileUrl');
 const props = defineProps({
   type: String,
   id: [String, Number]
@@ -68,21 +85,16 @@ const emit = defineEmits(["create", "update", "close"]);
 const formRef = ref(null);
 const spinner = ref(false);
 const inputInstRef = ref(null);
-const categoryOption = ref([]);
-
 
 const form_data = ref({
   title_uz: "",
   title_ru: "",
   title_ko: "",
   title_en: "",
-  category_id: null
+  link: "",
+  image: "",
 });
-const getAllCategory = () => {
-  categoryService.all().then(res => {
-    categoryOption.value = res;
-  })
-}
+
 const createValidator = (field) => ({
   required: true,
   trigger: "blur",
@@ -100,7 +112,6 @@ const rules = {
 };
 
 onMounted(async () => {
-  getAllCategory();
   if (props.type === "update" && props.id) {
     try {
       const res = await ModelService.getOne(props.id);

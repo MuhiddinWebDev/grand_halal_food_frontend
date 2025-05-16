@@ -53,11 +53,9 @@ import { ref, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import ModelService from "@/services/brand.service";
 import categoryService from "@/services/category.service";
-import uploadService from "@/services/upload.service";
 import { ExitIcon, SaveIcon } from "@/components/icons/icon";
 
 const { t, locale } = useI18n();
-
 const props = defineProps({
   type: String,
   id: [String, Number]
@@ -96,7 +94,13 @@ const rules = {
   title_ko: createValidator("title_ko"),
   title_ru: createValidator("title_ru"),
   title_en: createValidator("title_en"),
-  image: createValidator("image"),
+  category_id: {
+    required: true,
+    trigger: "blur",
+    validator: (rule, value) => {
+      if (!value) return new Error(t('require_category'));
+    }
+  },
 };
 
 onMounted(async () => {
@@ -135,37 +139,6 @@ const save = async () => {
 };
 
 const exitBtn = () => emit("close");
-
-const deletedFile = async (file) => {
-  if (file) {
-    try {
-      await uploadService.delFile(file);
-    } catch (err) {
-      console.warn("Faylni o‘chirishda xatolik:", err);
-    }
-  }
-};
-
-const updateUpload = async (data) => {
-  if (data.length > 0) {
-    const sendData = new FormData();
-    sendData.append("file", data[0].file);
-
-    try {
-      const res = await uploadService.uploadFile(sendData);
-      await deletedFile(form_data.value.image);
-      form_data.value.image = res.file;
-    } catch (err) {
-      console.error("Yuklashda xatolik:", err);
-    }
-  }
-};
-
-// Fayl o‘chirish
-const removeUpload = () => {
-  deletedFile(form_data.value.image);
-  form_data.value.image = "";
-};
 
 // Klaviaturada Enter bosilsa saqlash
 const keySave = (e) => {

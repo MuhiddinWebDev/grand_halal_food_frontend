@@ -104,7 +104,7 @@ const menuOptions = computed(() => [
       { label: t("client"), key: "client", icon: renderIcon(ClientIcon) },
       { label: t("category"), key: "category", icon: renderIcon(CategoryIcon) },
       { label: t("brand"), key: "brand", icon: renderIcon(BrandIcon) },
-      { label: t("offer"), key: "brand", icon: renderIcon(BrandIcon) },
+      { label: t("offers"), key: "offers", icon: renderIcon(EventIcon) },
       { label: t("news"), key: "news", icon: renderIcon(NewsIcon) },
       { label: "F.A.Q", key: "F.A.Q", icon: renderIcon(FaqIcon) }
     ]

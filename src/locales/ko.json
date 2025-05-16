@@ -157,5 +157,7 @@
   "warranty_sms": "SMS로 보증 확인됨",
   "mail_reject": "이메일로 거부됨",
   "sms_reject": "SMS로 거부됨",
-  "offers": "제안"
+  "offers": "제안",
+  "offer":"제안",
+  "link":"링크"
 }

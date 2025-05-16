@@ -2,14 +2,14 @@
 import { ref, reactive, computed, onMounted, watch, watchEffect, h, inject } from "vue";
 import { useRouter } from "vue-router";
 import { useMagicKeys } from "@vueuse/core";
-import { useMessage, useDialog, NIcon, NImage, NSwitch, NAvatar, NButton } from "naive-ui";
+import { useMessage, useDialog, NIcon, NImage, NAvatar, NButton } from "naive-ui";
 import { AddIcon, RefreshIcon, PenIcon, DeleteIcon, SearchIcon } from '@/components/icons/icon';
 import { useGlobalStore } from "@/stores/global";
 import { useI18n } from "vue-i18n";
 import ModelForm from "./Form.vue";
 import ModelService from "@/services/offersTable.service";
 
-const { t, locale } = useI18n();
+const { t } = useI18n();
 const { insert, shift, r } = useMagicKeys();
 const router = useRouter();
 const dialog = useDialog();
@@ -19,7 +19,6 @@ const fileUrl = inject("fileUrl");
 
 const tableData = ref([]);
 const loading = ref(false);
-const activeLoading = ref(false);
 const filterHeader = ref({ text: "" });
 
 const model_act = ref({
@@ -181,7 +180,7 @@ onMounted(() => getAllData());
     <div class="p-4 space-y-4">
         <!-- Header -->
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <h2 class="text-xl font-bold">{{ t('brand') }}</h2>
+            <h2 class="text-xl font-bold">{{ t('offers') }}</h2>
             <div class="flex flex-col sm:flex-row gap-2 sm:items-center">
                 <n-input v-model:value="filterHeader.text" @input="searchAction" :placeholder="t('search')" clearable
                     class="w-full sm:w-80">
