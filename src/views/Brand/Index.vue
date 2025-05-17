@@ -46,7 +46,7 @@ const tableColumn = computed(() => [
         render: (_, index) => index + 1,
     },
     {
-        title: t("category") + ' UZB',
+        title: t("category"),
         key: "title",
         render(row) {
             console.log(row.category)
@@ -64,7 +64,7 @@ const tableColumn = computed(() => [
                         size: "small",
                         style: { marginRight: "8px" },
                     }),
-                h("span", { class: "font-semibold" }, row.category?.title),
+                h("span", { class: "font-semibold" }, row.category?.['title_' + locale.value]),
             ]);
         },
     },

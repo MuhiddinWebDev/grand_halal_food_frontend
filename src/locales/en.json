@@ -159,5 +159,9 @@
   "sms_reject": "Rejected via SMS",
   "offers": "Offers",
   "offer": "Offer",
-  "link": "Link"
+  "link": "Link",
+  "contact":"Contact",
+  "telegram":"Telegram",
+  "instagram":"Instagram",
+  "tiktok":"TikTok"
 } 

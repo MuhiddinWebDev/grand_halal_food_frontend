@@ -159,5 +159,9 @@
   "sms_reject": "SMS로 거부됨",
   "offers": "제안",
   "offer":"제안",
-  "link":"링크"
+  "link":"링크",
+  "contact":"역량",
+  "telegram":"텔레그램",
+  "instagram":"인스타그램",
+  "tiktok":"티크톤"
 }

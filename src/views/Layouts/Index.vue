@@ -1,5 +1,6 @@
 <script setup>
 import { ref, h, onMounted, computed, watch, inject } from "vue";
+import { useNotification } from "naive-ui";
 import { useRouter, useRoute } from "vue-router";
 import { c, NIcon, useDialog } from "naive-ui";
 import { useI18n } from "vue-i18n";
@@ -21,10 +22,12 @@ import {
   SettingIcon,
   BrandIcon,
   EventIcon,
-  ClientIcon as DefaultAvatarIcon
+  ClientIcon as DefaultAvatarIcon,
+  ContactIcon
 } from "../../components/icons/icon.js";
 
 const emits = defineEmits(["updatelang"]);
+const notification = useNotification();
 const { t, locale, fallbackLocale } = useI18n();
 const fileUrl = inject('fileUrl')
 const router = useRouter();
@@ -104,6 +107,7 @@ const menuOptions = computed(() => [
       { label: t("client"), key: "client", icon: renderIcon(ClientIcon) },
       { label: t("category"), key: "category", icon: renderIcon(CategoryIcon) },
       { label: t("brand"), key: "brand", icon: renderIcon(BrandIcon) },
+      { label: t("contact"), key: "contact", icon: renderIcon(ContactIcon) },
       { label: t("offers"), key: "offers", icon: renderIcon(EventIcon) },
       { label: t("news"), key: "news", icon: renderIcon(NewsIcon) },
       { label: "F.A.Q", key: "F.A.Q", icon: renderIcon(FaqIcon) }
@@ -168,9 +172,28 @@ const openMenuEvent = () => {
   responsiveMenu.value =! responsiveMenu.value
 }
 const UpdateAccordion = (e) => {
-  accordionValue.value = e;
-  localStorage.removeItem("accordion");
-  localStorage.setItem("accordion", JSON.stringify(e));
+  try {
+    accordionValue.value = e;
+    localStorage.removeItem("accordion");
+    localStorage.setItem("accordion", JSON.stringify(e));
+  }catch(e){
+    console.log("Xatolik");
+    console.log(e);
+  }
+}
+const updateMenu = (e) => {
+  try{
+    selectMenu.value = e;
+    responsiveMenu.value = false;
+    router.push({ name: e });
+  }catch(err){
+    notification.warning({
+      title:"Ogohlantirish",
+      content:"Texnik ishlar olib borilmoqda",
+      keepAliveOnHover: true,
+      duration: 1000
+    })
+  }
 }
 </script>
 
@@ -186,7 +209,7 @@ const UpdateAccordion = (e) => {
           <img style="width: 200px; height: 100px; border-radius: 10px;" :src="MainLogo" alt="">
         </div>
         <n-menu accordion :collapsed="collapsed" v-model:value="selectMenu" :options="menuOptions"
-          :on-update:value="(e) => { selectMenu = e; responsiveMenu = false; router.push({ name: e }) }"
+          :on-update:value="updateMenu"
           @update:expanded-keys="UpdateAccordion" :default-expanded-keys="accordionValue" />
       </n-layout-sider>
 
@@ -233,7 +256,7 @@ const UpdateAccordion = (e) => {
       placement="left">
       <n-drawer-content title="Menu" closable>
         <n-menu v-model:value="selectMenu" :options="menuOptions"
-          :on-update:value="(e) => { selectMenu = e; responsiveMenu = false; router.push({ name: e }) }" />
+          :on-update:value="updateMenu" />
       </n-drawer-content>
     </n-drawer>
   </div>

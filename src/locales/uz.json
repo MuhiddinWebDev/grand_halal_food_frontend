@@ -159,5 +159,9 @@
     "sms_reject": "SMS orqali rad etildi",
     "offers":"Takliflar",
     "offer":"Taklif",
-    "link":"Havola"
+    "link":"Havola",
+    "contact":"Aloqa",
+    "telegram":"Telegram",
+    "instagram":"Instagram",
+    "tiktok":"Tiktok"
 }

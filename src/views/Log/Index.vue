@@ -1,9 +1,10 @@
 <script setup>
-import { ref, onMounted, h, computed } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
 import { useNotification } from 'naive-ui';
 import { useRouter } from 'vue-router';
 import { useGlobalStore } from "@/stores/global"
 import { EyeIcon, EyeOffIcon } from '@/components/icons/icon';
+import { inputPhoneNumberFormat } from '@/composible/NumberFormat';
 import axios from 'axios';
 import { useI18n } from "vue-i18n";
 const { t, locale } = useI18n();
@@ -13,35 +14,13 @@ const router = useRouter();
 const passwordInput = ref(null);
 const showPassword = ref(false);
 const form_data = ref({
-    phone: "+998",
+    phone: "+",
     password: "",
 })
 
-const length = ref(0)
-const formatTelNumber = () => {
-    if (length.value < form_data.value.phone.length) {
-        let numbers = formatNumber(form_data.value.phone)
-        form_data.value.phone = numbers
-    }
-    length.value = form_data.value.phone.length;
-}
+const length = ref(0);
+const phoneInput = ref(null);
 
-const formatNumber = (value) => {
-    if (!value) return value
-    const phoneNumber = value.replace(/[^\d]/g, "")
-    const phoneNumberLength = phoneNumber.length
-    if (phoneNumberLength < 4) return `+998${phoneNumber}`
-    if (phoneNumberLength < 6) {
-        return `+${phoneNumber.slice(0, 3)} (${phoneNumber.slice(3, 5)}`
-    }
-    if (phoneNumberLength < 8) {
-        return `+${phoneNumber.slice(0, 3)} (${phoneNumber.slice(3, 5)}) ${phoneNumber.slice(5)}`
-    }
-    if (phoneNumberLength < 10) {
-        return `+${phoneNumber.slice(0, 3)} (${phoneNumber.slice(3, 5)}) ${phoneNumber.slice(5, 8)} ${phoneNumber.slice(8)}`
-    }
-    return `+${phoneNumber.slice(0, 3)} (${phoneNumber.slice(3, 5)}) ${phoneNumber.slice(5, 8)} ${phoneNumber.slice(8, 10)} ${phoneNumber.slice(10)}`
-}
 const noteAction = (content) => {
     notification.warning({
         title: t('warning'),
@@ -70,7 +49,6 @@ const login = async () => {
                 router.push({ path: currentPage });
             }).catch((err) => {
                 length.value = 0;
-                formatTelNumber()
             })
         }
         catch (err) {
@@ -115,8 +93,8 @@ onMounted(() => {
             </header>
             <form>
                 <div class="form-row">
-                    <input @keydown="keyPhone" v-model="form_data.phone" type="text" @input="formatTelNumber()" required
-                        maxlength="19">
+                    <input @keydown="keyPhone" v-model="form_data.phone" type="text" 
+                        required maxlength="19" ref="phoneInput" :placeholder="locale == 'uz' ? '+998' : '+82'">
                     <span>{{ t('phone') }}</span>
                 </div>
 

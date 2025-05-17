@@ -35,10 +35,15 @@ const router = createRouter({
           name: "brand",
           component: () => import("@/views/Brand/Index.vue"),
         },
-          {
+        {
           path: "/offers-table",
           name: "offers",
           component: () => import("@/views/Offers/Index.vue"),
+        },
+        {
+          path: "/contact-table",
+          name: "contact",
+          component: () => import("@/views/Contact/Index.vue"),
         },
       ]
     },
