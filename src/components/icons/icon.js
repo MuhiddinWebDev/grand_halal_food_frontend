@@ -63,6 +63,7 @@ import SettingIcon from "./setting.vue";
 import LockCloseIcon from "./lockClose.vue";
 import LockOpenIcon from "./lockOpen.vue";
 import NewsIcon from "./news.vue";
+import BasketIcon from "./baseket.vue"
 // Export all icons
 export {
   SMSIcon,
@@ -128,6 +129,7 @@ export {
   EyeOffIcon,
   BellIcon,
   ArchiveIcon,
-  TelegramIcon
+  TelegramIcon,
+  BasketIcon
   // Add other icons as needed
 };

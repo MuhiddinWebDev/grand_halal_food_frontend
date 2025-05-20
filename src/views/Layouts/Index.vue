@@ -23,7 +23,8 @@ import {
   BrandIcon,
   EventIcon,
   ClientIcon as DefaultAvatarIcon,
-  ContactIcon
+  ContactIcon,
+  BasketIcon
 } from "../../components/icons/icon.js";
 
 const emits = defineEmits(["updatelang"]);
@@ -107,6 +108,7 @@ const menuOptions = computed(() => [
       { label: t("client"), key: "client", icon: renderIcon(ClientIcon) },
       { label: t("category"), key: "category", icon: renderIcon(CategoryIcon) },
       { label: t("brand"), key: "brand", icon: renderIcon(BrandIcon) },
+      { label: t("products"), key: "product", icon: renderIcon(BasketIcon) },
       { label: t("contact"), key: "contact", icon: renderIcon(ContactIcon) },
       { label: t("offers"), key: "offers", icon: renderIcon(EventIcon) },
       { label: t("news"), key: "news", icon: renderIcon(NewsIcon) },

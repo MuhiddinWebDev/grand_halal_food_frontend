@@ -1,5 +1,5 @@
 import axios from "axios";
-const END_POINT = "/brand";
+const END_POINT = "/product";
 
 class Service {
   all(filter) {
@@ -21,14 +21,14 @@ class Service {
     });
   }
 
-  getOne(id) {
-    return axios.get(END_POINT + `/getById/${id}`).then((res) => {
+  updateTools(id, data) {
+    return axios.patch(END_POINT + `/update-tools/${id}`, data).then((res) => {
       return res;
     });
   }
 
-  getBrandsByCategory(cat_id) {
-    return axios.get(END_POINT + `/getBrandsByCat/${cat_id}`).then((res) => {
+  getOne(id) {
+    return axios.get(END_POINT + `/getById/${id}`).then((res) => {
       return res;
     });
   }

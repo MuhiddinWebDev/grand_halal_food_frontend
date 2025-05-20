@@ -117,7 +117,7 @@
   "sms service sverka": "SMS service reconciliation",
   "total": "Total",
   "top": "Top",
-  "unity": "Unit",
+  "unit": "Unit",
   "handle": "Handle",
   "client battery": "Client battery",
   "client battery report": "Client battery report",
@@ -163,5 +163,7 @@
   "contact":"Contact",
   "telegram":"Telegram",
   "instagram":"Instagram",
-  "tiktok":"TikTok"
+  "tiktok":"TikTok",
+  "product":"Product",
+  "products":"Products"
 } 

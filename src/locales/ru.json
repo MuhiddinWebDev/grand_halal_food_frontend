@@ -117,7 +117,7 @@
   "sms service sverka": "Сверка SMS-сервиса",
   "total": "Итого",
   "top": "Топ",
-  "unity": "Единица",
+  "unit": "Единица",
   "handle": "Ручка",
   "client battery": "Батарея клиента",
   "client battery report": "Отчет по батареям клиентов",
@@ -163,5 +163,7 @@
   "contact":"Контакты",
   "telegram":"Телеграм",
   "instagram":"Инстаграм",
-  "tiktok":"ТикТок"
+  "tiktok":"ТикТок",
+  "product":"Продукт",
+  "products":"Продукция"
 }

@@ -234,7 +234,6 @@ export const useGlobalStore = defineStore('global', () => {
       "tipClose": "Ёпиш (Esc)"
     }
   }
-
   const menuStyle = {
     common: {
       modalColor: '#fffefe',
@@ -306,7 +305,6 @@ export const useGlobalStore = defineStore('global', () => {
       value: "en"
     }
   ])
-
   const roleOption = computed(() => [
     {
       key: "Admin",
@@ -325,7 +323,6 @@ export const useGlobalStore = defineStore('global', () => {
       disabled: currentData.value.role == "Programmer" ? false : true,
     },
   ]);
-
   const orderStatus = ref([
     {
       value: 'new',
@@ -349,12 +346,10 @@ export const useGlobalStore = defineStore('global', () => {
       label_ka: "Бекор қилинган"
     }
   ])
-
   const errorPage = ref({
     error_code: 0,
     message: ""
   })
-
   const allowRole = ref({
     information: true,
     document: true,
@@ -425,6 +420,29 @@ export const useGlobalStore = defineStore('global', () => {
       label_uz: "SMS orqali rad etildi"
     }
   ])
+  const unitOption = ref([
+    {
+      element: "piece",
+      title_uz: "Dona",
+      title_ru: "Кусок",
+      title_en: "Litre",
+      title_ko: "조각"
+    },
+    {
+      element: "kg",
+      title_uz: "Kilogram",
+      title_ru: "Килограмм",
+      title_en: "Kilogram",
+      title_ko: "킬로그램"
+    },
+    {
+      element: "ltr",
+      title_uz: "Litr",
+      title_ru: "Литр",
+      title_en: "Litre",
+      title_ko: "리터"
+    },
+  ])
   return {
     currentData,
     allowRole,
@@ -436,6 +454,7 @@ export const useGlobalStore = defineStore('global', () => {
     roleOption,
     currentLang,
     orderStatus,
-    sms_type
+    sms_type,
+    unitOption
   }
 })

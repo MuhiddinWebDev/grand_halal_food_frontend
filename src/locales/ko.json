@@ -117,7 +117,7 @@
   "sms service sverka": "SMS 서비스 대조",
   "total": "총합",
   "top": "상위",
-  "unity": "단위",
+  "unit": "단위",
   "handle": "핸들",
   "client battery": "고객 배터리",
   "client battery report": "고객 배터리 보고서",
@@ -163,5 +163,7 @@
   "contact":"역량",
   "telegram":"텔레그램",
   "instagram":"인스타그램",
-  "tiktok":"티크톤"
+  "tiktok":"티크톤",
+  "product":"제품",
+  "products":"제품"
 }

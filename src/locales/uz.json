@@ -117,7 +117,7 @@
     "sms service sverka": "SMS xizmat sverka",
     "total": "Jami",
     "top": "Top",
-    "unity": "Birlik",
+    "unit": "Birlik",
     "handle": "Tutqich",
     "client battery": "Mijoz batareyasi",
     "client battery report": "Mijoz batareya hisoboti",
@@ -163,5 +163,7 @@
     "contact":"Aloqa",
     "telegram":"Telegram",
     "instagram":"Instagram",
-    "tiktok":"Tiktok"
+    "tiktok":"Tiktok",
+    "product":"Mahsulot",
+    "products":"Mahsulotlar"
 }

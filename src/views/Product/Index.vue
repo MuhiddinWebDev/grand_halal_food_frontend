@@ -7,7 +7,8 @@ import { AddIcon, RefreshIcon, PenIcon, DeleteIcon, SearchIcon } from '@/compone
 import { useGlobalStore } from "@/stores/global";
 import { useI18n } from "vue-i18n";
 import ModelForm from "./Form.vue";
-import ModelService from "@/services/brand.service";
+import ModelService from "@/services/product.service";
+import { useSummaFormat } from "@/composible/NumberFormat";
 
 const { t, locale } = useI18n();
 const { insert, shift, r } = useMagicKeys();
@@ -19,7 +20,6 @@ const fileUrl = inject("fileUrl");
 
 const tableData = ref([]);
 const loading = ref(false);
-const activeLoading = ref(false);
 const filterHeader = ref({ text: "" });
 
 const model_act = ref({
@@ -47,7 +47,7 @@ const tableColumn = computed(() => [
     },
     {
         title: t("category"),
-        key: "title",
+        key: "name",
         render(row) {
             return h("div", { class: "flex items-center" }, [
                 row.category?.image
@@ -68,20 +68,82 @@ const tableColumn = computed(() => [
         },
     },
     {
-        title: t("title") + ' UZB',
-        key: "title_uz",
+        title: t("brand"),
+        key: "brand.title_" + locale.value,
     },
     {
-        title: t("title") + ' KOR',
-        key: "title_ko",
+        title: t("name"),
+        key: "title_" + locale.value,
     },
     {
-        title: t("title") + ' RUS',
-        key: "title_ru",
+        title: t("price"),
+        align: "right",
+        titleAlign: "left",
+        render(row) {
+            return h("span", { class: "font-semibold" }, useSummaFormat(row.price));
+        }
+    },
+
+    {
+        title: t("active"),
+        align: "center",
+        titleAlign: "left",
+        width: 100,
+        render(row) {
+            return h(NSwitch, {
+                size: "small",
+                value: row.is_active,
+                onUpdateValue: (value) => {
+                    let data = {
+                        is_active: !row.is_active,
+                        top: row.top
+                    };
+                    ModelService.updateTools(row.id, data).then(() => getAllData());
+                },
+            })
+        }
     },
     {
-        title: t("title") + ' ENG',
-        key: "title_en",
+        title: t("top"),
+        align: "center",
+        titleAlign: "left",
+        width: 100,
+        render(row) {
+            return h(NSwitch, {
+                size: "small",
+                value: row.top,
+                onUpdateValue: (value) => {
+                    let data = {
+                        is_active: row.is_active,
+                        top: !row.top
+                    };
+                    console.log(data);
+                    ModelService.updateTools(row.id, data).then(() => getAllData());
+                },
+            })
+        }
+    },
+      {
+        title: t("admin_one"),
+        key: "name",
+        render(row) {
+            return h("div", { class: "flex items-center" }, [
+                row.user?.image
+                    ? h(NImage, {
+                        src: fileUrl + row.user?.image,
+                        height: 35,
+                        width: 50,
+                        style: { borderRadius: "35px", marginRight: "8px" },
+                        lazy: true,
+                        previewDisabled: true,
+                    })
+                    : h(NAvatar, {
+                        size: "small",
+                        style: { marginRight: "8px" },
+                    }),
+                h("span", { class: "font-semibold" }, row.user?.fullname),
+            ]);
+        },
     },
     {
         title: t("action"),
@@ -180,7 +242,7 @@ onMounted(() => getAllData());
     <div class="p-4 space-y-4">
         <!-- Header -->
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <h2 class="text-xl font-bold">{{ t('brand') }}</h2>
+            <h2 class="text-xl font-bold">{{ t('products') }}</h2>
             <div class="flex flex-col sm:flex-row gap-2 sm:items-center">
                 <n-input v-model:value="filterHeader.text" @input="searchAction" :placeholder="t('search')" clearable
                     class="w-full sm:w-80">
@@ -214,13 +276,13 @@ onMounted(() => getAllData());
             max-height="calc(100vh - 315px)" />
 
         <n-modal transform-origin="center" v-model:show="model_act.create">
-            <n-card class="w-full max-w-3xl" :bordered="false" role="dialog" aria-modal="true">
+            <n-card class="w-full max-w-5xl" :bordered="false" role="dialog" aria-modal="true">
                 <ModelForm @close="showClose('create')" @create="modalEmit('create')" type="create" />
             </n-card>
         </n-modal>
 
         <n-modal transform-origin="center" v-model:show="model_act.update">
-            <n-card class="w-full max-w-3xl" :bordered="false" role="dialog" aria-modal="true">
+            <n-card class="w-full max-w-5xl" :bordered="false" role="dialog" aria-modal="true">
                 <ModelForm type="update" :id="model_act.update_id" @close="showClose('update')"
                     @update="modalEmit('update')" />
             </n-card>
