@@ -81,14 +81,14 @@
   "stores": "Stores",
   "username": "Username",
   "choose address": "Address selected",
-  "prixod": "Store income",
+  "prixod": "Product income",
   "rasxod": "Expense",
   "count": "Quantity",
   "serial number": "Serial number",
   "input serial number": "Enter serial number",
-  "prixod report": "Store income report",
+  "prixod report": "Product income report",
   "rasxod report": "Expense report",
-  "prixod sverka": "Store income reconciliation",
+  "prixod sverka": "Product income reconciliation",
   "rasxod sverka": "Expense reconciliation",
   "service": "Service",
   "service report": "Service report",
@@ -165,5 +165,6 @@
   "instagram":"Instagram",
   "tiktok":"TikTok",
   "product":"Product",
-  "products":"Products"
+  "products":"Products",
+  "limit":"Limit"
 } 

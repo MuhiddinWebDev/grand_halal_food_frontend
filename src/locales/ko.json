@@ -81,14 +81,14 @@
   "stores": "상점들",
   "username": "사용자 이름",
   "choose address": "주소 선택됨",
-  "prixod": "상점 입고",
+  "prixod": "상품 입고",
   "rasxod": "출고",
   "count": "수량",
   "serial number": "일련번호",
   "input serial number": "일련번호를 입력하세요",
-  "prixod report": "상점 입고 보고서",
+  "prixod report": "상품 입고",
   "rasxod report": "출고 보고서",
-  "prixod sverka": "상점 입고 대조",
+  "prixod sverka": "상품 입고",
   "rasxod sverka": "출고 대조",
   "service": "서비스",
   "service report": "서비스 보고서",
@@ -165,5 +165,6 @@
   "instagram":"인스타그램",
   "tiktok":"티크톤",
   "product":"제품",
-  "products":"제품"
+  "products":"제품",
+  "limit":"제한"
 }

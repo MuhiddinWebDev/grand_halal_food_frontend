@@ -96,7 +96,7 @@ const tableColumn = computed(() => [
             negativeText: t("no"),
             onPositiveClick: () => {
               row.status = !row.status;
-              ModelService.update(row.id, row).then(() => getAllData());
+              ModelService.updateStatus(row.id, row).then(() => getAllData());
             },
             onNegativeClick: () => message.success(t("cancel")),
           });

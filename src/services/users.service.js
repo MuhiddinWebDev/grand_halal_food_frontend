@@ -3,7 +3,7 @@ const END_POINT = "/users";
 
 class Service {
   all(filter) {
-    let url = filter?.text ?  '?text=' + filter.text:'';
+    let url = filter?.text ? '?text=' + filter.text : '';
     return axios.get(END_POINT + "/all" + url).then((res) => {
       return res;
     });
@@ -22,8 +22,14 @@ class Service {
     });
   }
 
+  updateStatus(id) {
+    return axios.patch(END_POINT + `/update-status/${id}`).then((res) => {
+      return res;
+    });
+  }
+
   getOne(id) {
-    return axios.get(END_POINT + `/getById/${id}`).then((res) => {
+    return axios.get(END_POINT + `/getByUserId/${id}`).then((res) => {
       return res;
     });
   }

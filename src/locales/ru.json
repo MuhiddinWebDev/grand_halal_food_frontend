@@ -81,14 +81,14 @@
   "stores": "Магазины",
   "username": "Имя пользователя",
   "choose address": "Адрес выбран",
-  "prixod": "Поступление в магазин",
+  "prixod": "Поступление товара",
   "rasxod": "Расход",
   "count": "Количество",
   "serial number": "Серийный номер",
   "input serial number": "Введите серийный номер",
-  "prixod report": "Отчет о поступлении в магазин",
+  "prixod report": "Отчет о Поступление товара",
   "rasxod report": "Отчет о расходе",
-  "prixod sverka": "Сверка поступлений в магазин",
+  "prixod sverka": "Сверка Поступление товара",
   "rasxod sverka": "Сверка расходов",
   "service": "Обслуживание",
   "service report": "Отчет об обслуживании",
@@ -165,5 +165,6 @@
   "instagram":"Инстаграм",
   "tiktok":"ТикТок",
   "product":"Продукт",
-  "products":"Продукция"
+  "products":"Продукция",
+  "limit":"Лимит"
 }

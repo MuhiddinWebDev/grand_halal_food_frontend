@@ -17,7 +17,7 @@ const dialog = useDialog();
 const message = useMessage();
 const globalStore = useGlobalStore();
 const fileUrl = inject("fileUrl");
-
+const dayJS = inject('dayJS')
 const tableData = ref([]);
 const loading = ref(false);
 const filterHeader = ref({ text: "" });
@@ -44,6 +44,14 @@ const tableColumn = computed(() => [
         align: "center",
         width: 50,
         render: (_, index) => index + 1,
+    },
+    {
+        title: t("datetime"),
+        key: "datetime",
+        width: 150,
+        render(row) {
+            return dayJS(row.datetime).format("YYYY-MM-DD HH:mm:ss");
+        }
     },
     {
         title: t("category"),
@@ -83,7 +91,14 @@ const tableColumn = computed(() => [
             return h("span", { class: "font-semibold" }, useSummaFormat(row.price));
         }
     },
-
+      {
+        title: t("limit"),
+        align: "right",
+        titleAlign: "left",
+        render(row) {
+            return h("span", { class: "font-semibold" }, row.limit);
+        }
+    },
     {
         title: t("active"),
         align: "center",

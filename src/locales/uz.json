@@ -81,14 +81,14 @@
     "stores": "Do'konlar",
     "username": "Foydalanuvchi nomi",
     "choose address": "Manzil belgilandi",
-    "prixod": "Do'konga kirim",
+    "prixod": "Mahsulot kirim",
     "rasxod": "Chiqim",
     "count": "Soni",
     "serial number": "Seriya raqam",
     "input serial number": "Seriya raqamni kiriting",
-    "prixod report": "Do'konga kirim hisoboti",
+    "prixod report": "Mahsulot kirim hisoboti",
     "rasxod report": "Chiqim hisoboti",
-    "prixod sverka": "Do'konga kirim sverka",
+    "prixod sverka": "Mahsulot kirim sverka",
     "rasxod sverka": "Chiqim sverka",
     "service": "Xizmat ko'rsatish",
     "service report": "Xizmat ko'rsatish hisoboti",
@@ -165,5 +165,6 @@
     "instagram":"Instagram",
     "tiktok":"Tiktok",
     "product":"Mahsulot",
-    "products":"Mahsulotlar"
+    "products":"Mahsulotlar",
+    "limit":"Limit"
 }

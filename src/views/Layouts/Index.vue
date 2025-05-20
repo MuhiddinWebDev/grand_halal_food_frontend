@@ -93,12 +93,12 @@ const menuOptions = computed(() => [
   //   key: "Hisobotlar",
   //   icon: renderIcon(ReportIcon)
   // },
-  // {
-  //   label: t("document"),
-  //   key: "documents",
-  //   icon: renderIcon(BuildIcon),
-  //   children: []
-  // },
+  {
+    label: t("document"),
+    key: "documents",
+    icon: renderIcon(BuildIcon),
+    children: []
+  },
   {
     label: t("information"),
     key: "information",
@@ -171,27 +171,27 @@ const openMenuEvent = () => {
   if (windowWidth.value > 768) {
     collapsed.value = !collapsed.value;
   }
-  responsiveMenu.value =! responsiveMenu.value
+  responsiveMenu.value = !responsiveMenu.value
 }
 const UpdateAccordion = (e) => {
   try {
     accordionValue.value = e;
     localStorage.removeItem("accordion");
     localStorage.setItem("accordion", JSON.stringify(e));
-  }catch(e){
+  } catch (e) {
     console.log("Xatolik");
     console.log(e);
   }
 }
 const updateMenu = (e) => {
-  try{
+  try {
     selectMenu.value = e;
     responsiveMenu.value = false;
     router.push({ name: e });
-  }catch(err){
+  } catch (err) {
     notification.warning({
-      title:"Ogohlantirish",
-      content:"Texnik ishlar olib borilmoqda",
+      title: "Ogohlantirish",
+      content: "Texnik ishlar olib borilmoqda",
       keepAliveOnHover: true,
       duration: 1000
     })
@@ -211,8 +211,8 @@ const updateMenu = (e) => {
           <img style="width: 200px; height: 100px; border-radius: 10px;" :src="MainLogo" alt="">
         </div>
         <n-menu accordion :collapsed="collapsed" v-model:value="selectMenu" :options="menuOptions"
-          :on-update:value="updateMenu"
-          @update:expanded-keys="UpdateAccordion" :default-expanded-keys="accordionValue" />
+          :on-update:value="updateMenu" @update:expanded-keys="UpdateAccordion"
+          :default-expanded-keys="accordionValue" />
       </n-layout-sider>
 
       <!-- Main Layout -->
@@ -257,8 +257,7 @@ const updateMenu = (e) => {
     <n-drawer v-model:show="responsiveMenu" :style="{ height: '100vh', width: '80vw', background: '#115D33' }"
       placement="left">
       <n-drawer-content title="Menu" closable>
-        <n-menu v-model:value="selectMenu" :options="menuOptions"
-          :on-update:value="updateMenu" />
+        <n-menu v-model:value="selectMenu" :options="menuOptions" :on-update:value="updateMenu" />
       </n-drawer-content>
     </n-drawer>
   </div>

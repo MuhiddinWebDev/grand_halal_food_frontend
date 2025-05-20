@@ -71,7 +71,7 @@ const emit = defineEmits(["create", "update", "close"]);
 const formRef = ref(null);
 const spinner = ref(false);
 const message = useMessage();
-const fileUrl = inject("file");
+const fileUrl = inject("fileUrl");
 const globalStore = useGlobalStore();
 
 const form_data = ref({
