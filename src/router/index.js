@@ -45,10 +45,15 @@ const router = createRouter({
           name: "contact",
           component: () => import("@/views/Contact/Index.vue"),
         },
-         {
+        {
           path: "/product-table",
           name: "product",
           component: () => import("@/views/Product/Index.vue"),
+        },
+        {
+          path: "/prixod-table",
+          name: "prixod",
+          component: () => import("@/views/Prixod/Index.vue"),
         },
       ]
     },

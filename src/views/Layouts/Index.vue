@@ -24,7 +24,8 @@ import {
   EventIcon,
   ClientIcon as DefaultAvatarIcon,
   ContactIcon,
-  BasketIcon
+  BasketIcon,
+  WarehouseIcon
 } from "../../components/icons/icon.js";
 
 const emits = defineEmits(["updatelang"]);
@@ -97,7 +98,9 @@ const menuOptions = computed(() => [
     label: t("document"),
     key: "documents",
     icon: renderIcon(BuildIcon),
-    children: []
+    children: [
+      { label: t("prixod"), key: "prixod", icon: renderIcon(WarehouseIcon) },
+    ]
   },
   {
     label: t("information"),

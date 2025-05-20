@@ -68,7 +68,7 @@
           </n-form-item>
         </n-space>
                 <n-form-item :label="t('comment') + ' UZB'" path="description_uz">
-          <n-input type="textarea" ref="inputInstRef" @keydown="keySave" v-model:value="form_data.description_uz" show-count clearable />
+          <n-input type="textarea"  @keydown="keySave" v-model:value="form_data.description_uz" show-count clearable />
         </n-form-item>
         <n-form-item :label="t('comment') + ' KOR'" path="description_ko">
           <n-input type="textarea" @keydown="keySave" v-model:value="form_data.description_ko" show-count clearable />
