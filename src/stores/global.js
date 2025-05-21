@@ -350,76 +350,7 @@ export const useGlobalStore = defineStore('global', () => {
     error_code: 0,
     message: ""
   })
-  const allowRole = ref({
-    information: true,
-    document: true,
-    report: true,
-    home: true,
-    delete: true,
-    update: true,
-    prixod: true,
-    service: true,
-    order: true,
-    refund: true,
-    sms_table: true,
-    sklad_add: true
-  })
-  const sms_type = ref([
-    {
-      value: 'sms_by_user',
-      label_uz: "SMS jo'natgan xodim",
-      label_ru: "Отправитель SMS",
-      label_ka: "SMS жўнатган ходим",
-    },
-    {
-      value: 'register_sms',
-      label_uz: "SMS orqali ro'yxatdan o'tkazildi",
-      label_ru: "Зарегистрировано через SMS",
-      label_ka: "SMS орқали рўйхатдан ўтказилди",
-    },
-    {
-      value: 'register_mail',
-      label_uz: "Elektron pochta orqali ro'yxatdan o'tkazildi",
-      label_ru: "Зарегистрировано через почту",
-      label_ka: "Электрон почта орқали рўйхатдан ўтказилди",
-    },
-    {
-      value: 'login_sms',
-      label_uz: "SMS orqali kirildi",
-      label_ru: "Вход через SMS",
-      label_ka: "SMS орқали кирилди",
-    },
-    {
-      value: 'login_mail',
-      label_uz: "Elektron pochta orqali kirildi",
-      label_ru: "Вход через почту",
-      label_ka: "Электрон почта орқали кирилди",
-    },
-    {
-      value: 'warranty_mail',
-      label_uz: "Elektron pochta orqali kafolat tasdiqlandi",
-      label_ru: "Подтверждено через почту",
-      label_ka: "Электрон почта орқали кафолат тасдиқланди",
-    },
-    {
-      value: "warranty_sms",
-      label_uz: "SMS orqali kafolat tasdiqlandi",
-      label_ru: "Подтверждено через SMS",
-      label_ka: "SMS орқали кафолат тасдиқланди",
-    },
-    {
-      value: "mail_reject",
-      label_uz: "Elektron pochta orqali rad etildi",
-      label_ru: "Отказано через почту",
-      label_ka: "Электрон почта орқали рад етилди",
-    },
-    {
-      value: "sms_reject",
-      label_ru: "Отказано через SMS",
-      label_ka: "SMS орқали рад етилди",
-      label_uz: "SMS orqali rad etildi"
-    }
-  ])
+
   const unitOption = ref([
     {
       element: "piece",
@@ -445,7 +376,6 @@ export const useGlobalStore = defineStore('global', () => {
   ])
   return {
     currentData,
-    allowRole,
     uzUz,
     kaKa,
     errorPage,
@@ -454,7 +384,6 @@ export const useGlobalStore = defineStore('global', () => {
     roleOption,
     currentLang,
     orderStatus,
-    sms_type,
     unitOption
   }
 })

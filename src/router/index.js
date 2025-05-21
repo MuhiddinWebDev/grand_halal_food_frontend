@@ -51,10 +51,15 @@ const router = createRouter({
           component: () => import("@/views/Product/Index.vue"),
         },
         {
-          path: "/prixod-table",
-          name: "prixod",
-          component: () => import("@/views/Prixod/Index.vue"),
+          path: "/stock-entries-table",
+          name: "stock-entries",
+          component: () => import("@/views/StockEntries/Index.vue"),
         },
+        {
+          path: "/order-table",
+          name: "order",
+          component: () => import("@/views/Order/Index.vue"),
+        }
       ]
     },
     {

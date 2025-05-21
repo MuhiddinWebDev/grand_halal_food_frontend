@@ -35,13 +35,7 @@ const getReport = () => {
     })
 }
 
-const getHomePrixod = () => {
-    chartBatteryData.value.data1 = [];
-    chartBatteryData.value.data2 = [];
-    reportService.homePrixodReport(filterHeader.value).then((res) => {
-        chartBatteryData.value = res;
-    })
-}
+
 
 
 const barDataByRegion = computed(() => {
@@ -164,7 +158,6 @@ const barDataByBattery = computed(() => {
 });
 
 const updateDiagramm = () => {
-    getHomePrixod()
 }
 
 

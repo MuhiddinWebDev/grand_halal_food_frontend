@@ -10,11 +10,7 @@ class Service {
   }
 
 
-  homePrixodReport(data) {
-    return axios.post(END_POINT + "/home-rasxod", data).then((res) => {
-      return res;
-    });
-  }
+ 
 
   rasxodReport(data) {
     return axios.post(END_POINT + "/rasxod-report", data).then((res) => {
@@ -24,18 +20,6 @@ class Service {
 
   rasxodSverka(data) {
     return axios.post(END_POINT + "/rasxod-sverka", data).then((res) => {
-      return res;
-    });
-  }
-
-  prixodReport(data) {
-    return axios.post(END_POINT + "/prixod-report", data).then((res) => {
-      return res;
-    });
-  }
-
-  prixodSverka(data) {
-    return axios.post(END_POINT + "/prixod-sverka", data).then((res) => {
       return res;
     });
   }

@@ -1,5 +1,5 @@
 import axios from "axios";
-const END_POINT = "/prixod";
+const END_POINT = "/stock-entries";
 
 class Service {
   all(filter) {

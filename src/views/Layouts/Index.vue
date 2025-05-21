@@ -14,6 +14,7 @@ import {
   AdminIcon,
   BuildIcon,
   ReportIcon,
+  OrderIcon,
   threeLineIcon,
   ClientIcon,
   FaqIcon,
@@ -99,7 +100,8 @@ const menuOptions = computed(() => [
     key: "documents",
     icon: renderIcon(BuildIcon),
     children: [
-      { label: t("prixod"), key: "prixod", icon: renderIcon(WarehouseIcon) },
+      { label: t("prixod"), key: "stock-entries", icon: renderIcon(WarehouseIcon) },
+      { label: t("order"), key: "order", icon: renderIcon(OrderIcon) },
     ]
   },
   {
