@@ -172,5 +172,6 @@
   "location":"위치",
   "discount":"할인",
   "discount price":"할인가격",
-  "additional phone number":"숙제 전화번호"
+  "additional phone number":"숙제 전화번호",
+  "order not available":"주문은 없습니다"
 }

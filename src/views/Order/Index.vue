@@ -118,7 +118,7 @@ onMounted(() => getOrders());
       </svg>
 
       <!-- Text -->
-      <p class="text-gray-600 text-lg font-medium">Buyurtma mavjud emas</p>
+      <p class="text-gray-600 text-lg font-medium">{{ t('order not available') }}</p>
     </div>
 
   </div>

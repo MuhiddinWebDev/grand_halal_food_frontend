@@ -173,5 +173,6 @@
   "location":"Расположение",
   "discount":"Скидка",
   "discount price":"Цена со скидкой",
-  "additional phone number":"Дополнительный номер телефона"
+  "additional phone number":"Дополнительный номер телефона",
+  "order not available":"Заказ не доступен"
 }

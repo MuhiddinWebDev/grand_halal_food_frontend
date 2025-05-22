@@ -172,5 +172,6 @@
   "location":"Location",
   "discount":"Discount",
   "dicount price":"Discount price",
-  "additional phone number":"Additional phone number"
+  "additional phone number":"Additional phone number",
+  "order not available":"Order not available"
 } 

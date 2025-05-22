@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, onMounted, h, } from "vue";
-import { NIcon, NButton } from "naive-ui";
+import { NIcon, NButton, NTag } from "naive-ui";
 import { PenIcon, } from '@/components/icons/icon';
 import { useI18n } from "vue-i18n";
 import ModelForm from "./Form.vue";
@@ -40,18 +40,88 @@ const tableColumn = computed(() => [
     {
         title: t("telegram"),
         key: "telegram",
+        render(row) {
+            return [
+                h(
+                    NTag,
+                    {
+                        size: "small",
+                        type: "success",
+                        round: true,
+                        style: { cursor: "pointer" },
+                        onClick: () => {
+                            window.open(row.telegram, '_blank');
+                        }
+                    },
+                    { default: () => row.telegram },
+                ),
+            ];
+        }
+
     },
     {
         title: t("instagram"),
         key: "instagram",
+        render(row) {
+            return [
+                h(
+                    NTag,
+                    {
+                        size: "small",
+                        type: "error",
+                        round: true,
+                        style: { cursor: "pointer" },
+                        onClick: () => {
+                            window.open(row.instagram, '_blank');
+                        }
+                    },
+                    { default: () => row.instagram },
+                ),
+            ];
+        }
     },
     {
         title: t("tiktok"),
         key: "tiktok",
+        render(row) {
+            return [
+                h(
+                    NTag,
+                    {
+                        size: "small",
+                        type: "tertiary",
+                        round: true,
+                        style: { cursor: "pointer" },
+                        onClick: () => {
+                            window.open(row.tiktok, '_blank');
+                        }
+                    },
+                    { default: () => row.tiktok },
+                ),
+            ];
+        }
     },
     {
         title: t("phone"),
         key: "phone",
+        render(row) {
+            return [
+                h(
+                    NTag,
+                    {
+                        size: "small",
+                        type: "info",
+                        round: true,
+                        style: { cursor: "pointer" },
+                        onClick: () => {
+                            window.open(`tel:${row.phone}`, '_self');
+                        }
+                    },
+                    { default: () => row.phone },
+                ),
+            ];
+        }
+
     },
     {
         title: t("action"),
@@ -116,4 +186,3 @@ onMounted(() => {
         </n-modal>
     </div>
 </template>
-
