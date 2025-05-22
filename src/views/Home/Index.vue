@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
 import reportService from "../../services/report.service";
-import { ClientIcon, AdminIcon, BatteryIcon, StoreIcon, RefreshIcon } from '@/components/icons/icon';
+import { ClientIcon, AdminIcon, OrderIcon, BasketIcon, RefreshIcon } from '@/components/icons/icon';
 import BarChart from "@/components/Charts/bar.vue";
 import { useI18n } from "vue-i18n";
 const { t, locale } = useI18n();
@@ -190,11 +190,11 @@ onMounted(() => {
             <!-- Store Card -->
             <n-card style="background-color: #0d9488; border-radius: 10px; color: white;" class="rounded-lg shadow-lg">
                 <template #footer>
-                    <h2 class="text-lg font-semibold mb-2">{{ t('stores') }}</h2>
+                    <h2 class="text-lg font-semibold mb-2">{{ t('products') }}</h2>
                     <n-divider class="my-2 bg-white opacity-30" />
                     <div class="flex items-center justify-between">
                         <n-icon size="40">
-                            <StoreIcon />
+                            <BasketIcon />
                         </n-icon>
                         <h1 class="text-2xl font-bold">
                             <n-number-animation :from="0" :to="infoCard.store" />
@@ -224,11 +224,11 @@ onMounted(() => {
             <!-- Battery Card -->
             <n-card style="background-color: #f59e0b; border-radius: 10px; color: white;" class="rounded-lg shadow-lg">
                 <template #footer>
-                    <h2 class="text-lg font-semibold mb-2">{{ t('batteries') }}</h2>
+                    <h2 class="text-lg font-semibold mb-2">{{ t('orders') }}</h2>
                     <n-divider class="my-2 bg-white opacity-30" />
                     <div class="flex items-center justify-between">
                         <n-icon size="40">
-                            <BatteryIcon />
+                            <OrderIcon />
                         </n-icon>
                         <h1 class="text-2xl font-bold">
                             <n-number-animation :from="0" :to="infoCard.battery" />

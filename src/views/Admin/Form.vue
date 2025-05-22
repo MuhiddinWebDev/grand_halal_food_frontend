@@ -10,11 +10,15 @@
             </p>
             <div class="flex flex-col sm:flex-row gap-2">
               <n-button @click="save" type="success" :disabled="spinner" class="min-w-[120px]">
-                <template #icon><n-icon><SaveIcon /></n-icon></template>
+                <template #icon><n-icon>
+                    <SaveIcon />
+                  </n-icon></template>
                 {{ $t('save') }} <span class="ml-1 text-xs">Enter</span>
               </n-button>
               <n-button @click="exitBtn" type="warning" class="min-w-[120px]">
-                <template #icon><n-icon><ExitIcon /></n-icon></template>
+                <template #icon><n-icon>
+                    <ExitIcon />
+                  </n-icon></template>
                 {{ $t('exit') }} <span class="ml-1 text-xs">Esc</span>
               </n-button>
             </div>
@@ -22,7 +26,8 @@
 
           <!-- Upload -->
           <div class="space-y-4">
-            <n-upload :max="1" accept="image/png, image/jpeg" list-type="image" directory-dnd @update:file-list="updateUpload" @remove="removeUpload">
+            <n-upload :max="1" accept="image/png, image/jpeg" list-type="image" directory-dnd
+              @update:file-list="updateUpload" @remove="removeUpload">
               <n-upload-dragger>
                 <n-text class="text-base">{{ $t('upload_image') }}</n-text>
                 <n-p class="text-sm mt-2">{{ $t('drop_image') }}</n-p>
@@ -38,15 +43,18 @@
             </n-form-item>
 
             <n-form-item :label="$t('phone')" path="phone">
-              <n-input @keydown="keySave" :allow-input="phoneFormat" v-model:value="form_data.phone" maxlength="12" minlength="12" show-count clearable />
+              <n-input @keydown="keySave" :allow-input="phoneFormat" v-model:value="form_data.phone" maxlength="12"
+                minlength="12" show-count clearable />
             </n-form-item>
 
             <n-form-item :label="$t('password')" path="password">
-              <n-input type="password" show-password-on="mousedown" v-model:value="form_data.password" minlength="3" show-count clearable />
+              <n-input type="password" show-password-on="mousedown" v-model:value="form_data.password" minlength="3"
+                show-count clearable />
             </n-form-item>
 
             <n-form-item :label="$t('role')" path="role">
-              <n-select :options="globalStore.roleOption" value-field="key" :label-field="'name_' + locale" v-model:value="form_data.role" filterable />
+              <n-select :options="globalStore.roleOption" value-field="key" :label-field="'name_' + locale"
+                v-model:value="form_data.role" filterable />
             </n-form-item>
           </div>
         </div>
@@ -127,7 +135,7 @@ const save = async () => {
     serviceCall
       .then((res) => emit(props.type, res))
       .catch(() => (spinner.value = false));
-  } catch {}
+  } catch { }
 };
 
 const exitBtn = () => emit("close");

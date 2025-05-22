@@ -82,6 +82,7 @@ const tableColumn = computed(() => [
     title: t("active"),
     key: "status",
     align: "center",
+    fixed: "right",
     width: 100,
     render(row) {
       return h(NSwitch, {
@@ -115,7 +116,6 @@ const tableColumn = computed(() => [
           {
             size: "small",
             type: "success",
-            disabled: !globalStore.allowRole.update,
             onClick: (e) => {
               model_act.value.update_id = row.id;
               model_act.value.update = true;
@@ -135,7 +135,6 @@ const tableColumn = computed(() => [
           {
             size: "small",
             type: "warning",
-            disabled: !globalStore.allowRole.delete,
             onClick: () => {
               dialog.warning({
                 title: t("warning"),

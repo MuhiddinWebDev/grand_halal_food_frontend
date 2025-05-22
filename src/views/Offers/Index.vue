@@ -87,6 +87,7 @@ const tableColumn = computed(() => [
         title: t("action"),
         key: "action",
         align: "center",
+        fixed: "right",
         width: 120,
         render(row) {
             return [

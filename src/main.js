@@ -1,20 +1,17 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
-
 import axios from 'axios';
-
 import Provider from './components/Provider.vue';
 import Print from 'vue3-print-nb'
-
 import { createI18n } from "vue-i18n";
 import messages from "@intlify/unplugin-vue-i18n/messages";
 import router from './router';
 import naive from 'naive-ui';
-
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import { QuillEditor } from '@vueup/vue-quill'
-
 import dayjs from 'dayjs'
+import './assets/tailwind.css' 
+
 const i18n = createI18n({
   legacy: false,
   globalInjection: true,

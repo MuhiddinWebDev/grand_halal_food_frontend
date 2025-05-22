@@ -88,6 +88,7 @@ const tableColumn = computed(() => [
         key: "action",
         align: "center",
         width: 120,
+        fixed: "right",
         render(row) {
             return [
                 h(NButton,

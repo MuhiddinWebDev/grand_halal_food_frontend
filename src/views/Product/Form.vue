@@ -54,9 +54,8 @@
               :format="useFormatnumber" :step="1000" clearable />
           </n-form-item>
           <n-form-item :label="t('unit')" path="unit">
-            <n-select style="width: 150px;" :options="globalStore.unitOption" fitlerable clearable @keydown="keySave"
-              v-model:value="form_data.unit" @update:value="changeCategory" :label-field="'title_' + locale"
-              value-field="element" />
+            <n-select style="width: 150px;" :options="globalStore.unitOption" fitlerable @keydown="keySave"
+              v-model:value="form_data.unit" :label-field="'title_' + locale" value-field="element" />
           </n-form-item>
         </n-space>
 
@@ -141,26 +140,21 @@ const getAllBrand = () => {
     brandOption.value = res;
   })
 }
-const createValidator = (field) => ({
+const createValidator = (message) => ({
   required: true,
   trigger: "blur",
   validator: (rule, value) => {
-    if (!value) return new Error(t(field === 'image' ? 'require_image' : 'require_name'));
+    if (!value) return new Error(t(message));
   }
 });
 
 const rules = {
-  title_uz: createValidator("title_uz"),
-  title_ko: createValidator("title_ko"),
-  title_ru: createValidator("title_ru"),
-  title_en: createValidator("title_en"),
-  category_id: {
-    required: true,
-    trigger: "blur",
-    validator: (rule, value) => {
-      if (!value) return new Error(t('require_category'));
-    }
-  },
+  title_uz: createValidator("input require"),
+  title_ko: createValidator("input require"),
+  title_ru: createValidator("input require"),
+  title_en: createValidator("input require"),
+  category_id: createValidator("choose require"),
+  brand_id: createValidator("choose require"),
 };
 
 onMounted(async () => {

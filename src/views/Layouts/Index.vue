@@ -2,7 +2,7 @@
 import { ref, h, onMounted, computed, watch, inject } from "vue";
 import { useNotification } from "naive-ui";
 import { useRouter, useRoute } from "vue-router";
-import { c, NIcon, useDialog } from "naive-ui";
+import { NIcon, useDialog } from "naive-ui";
 import { useI18n } from "vue-i18n";
 import { useGlobalStore } from "@/stores/global";
 import usersService from "@/services/users.service.js";
@@ -55,9 +55,6 @@ const userSetting = (e) => {
       onPositiveClick: () => {
         localStorage.clear();
         router.push({ name: "Login" });
-        Object.keys(globalStore.allowRole).forEach(key => {
-          globalStore.allowRole[key] = true;
-        });
       }
     });
   }
@@ -221,7 +218,7 @@ const updateMenu = (e) => {
       </n-layout-sider>
 
       <!-- Main Layout -->
-      <n-layout class="flex-1 bg-gray-100">
+      <n-layout class="flex-1 bg-gray-50">
         <!-- Header -->
         <div class="flex justify-between items-center px-4 py-3 bg-white shadow-sm">
           <n-button @click="openMenuEvent">

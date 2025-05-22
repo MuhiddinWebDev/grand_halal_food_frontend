@@ -4,6 +4,7 @@ import { useNotification } from 'naive-ui';
 import { useRouter } from 'vue-router';
 import { useGlobalStore } from "@/stores/global"
 import { EyeIcon, EyeOffIcon } from '@/components/icons/icon';
+import MainLogo from "@/assets/icons/logo.png"
 import axios from 'axios';
 import { useI18n } from "vue-i18n";
 const { t, locale } = useI18n();
@@ -14,7 +15,7 @@ const passwordInput = ref(null);
 const showPassword = ref(false);
 const form_data = ref({
     phone: "+998907788769",
-    password: "987654321!s",
+    password: "987654321!",
 })
 
 const length = ref(0);
@@ -87,13 +88,15 @@ onMounted(() => {
                 :options="globalStore.langOption" />
         </div>
         <div class="contact-wrapper">
+            <div class="flex items-center justify-center shadow-2xs"><img class="logo" style="width: 200px;"
+                    :src="MainLogo" alt="logo"></div>
             <header class="login-cta">
                 <h2>{{ t('login') }}</h2>
             </header>
             <form>
                 <div class="form-row">
-                    <input @keydown="keyPhone" v-model="form_data.phone" type="text" 
-                        required maxlength="19" ref="phoneInput" :placeholder="locale == 'uz' ? '+998' : '+82'">
+                    <input @keydown="keyPhone" v-model="form_data.phone" type="text" required maxlength="19"
+                        ref="phoneInput" :placeholder="locale == 'uz' ? '+998' : '+82'">
                     <span>{{ t('phone') }}</span>
                 </div>
 
@@ -123,8 +126,10 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-$primaryColor: #115D33;
-$colorDark: #2d2d2d;
+@use "sass:color";
+
+// #115D33: #115D33;
+// #2d2d2d: #2d2d2d;
 
 .lang-top {
     position: fixed;
@@ -186,7 +191,10 @@ $colorDark: #2d2d2d;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, $primaryColor, lighten($primaryColor, 10%), lighten($primaryColor, 20%));
+    background: linear-gradient(135deg,
+            #115D33,
+            color.adjust(#115D33, $lightness: +10%),
+            color.adjust(#115D33, $lightness: +20%));
     min-height: 100vh;
     padding: 1rem;
     position: relative;
@@ -204,7 +212,7 @@ $colorDark: #2d2d2d;
 }
 
 .login-cta>h2 {
-    color: $colorDark;
+    color: #2d2d2d;
     font-size: 1.75rem;
     text-align: center;
 }
@@ -251,17 +259,17 @@ form {
             &:focus+span {
                 top: 0;
                 font-size: .85rem;
-                color: $primaryColor;
+                color: #115D33;
             }
 
             &:focus {
-                border-color: $primaryColor;
+                border-color: #115D33;
                 outline: none;
             }
         }
 
         button {
-            background: $primaryColor;
+            background: #115D33;
             border: none;
             color: #fff;
             cursor: pointer;
@@ -271,11 +279,11 @@ form {
 
             &:focus {
                 outline: none;
-                box-shadow: 0 0 0 3px lighten($primaryColor, 20%);
+                box-shadow: 0 0 0 3px color.adjust(#115D33, $lightness: +20%);
             }
 
             &:hover {
-                background-color: darken($primaryColor, 5);
+                background-color: #0a8140;
             }
         }
     }

@@ -1,25 +1,16 @@
 <script setup>
-import { ref, reactive, computed, onMounted, watch, watchEffect, h, inject } from "vue";
-import { useRouter } from "vue-router";
-import { useMagicKeys } from "@vueuse/core";
-import { useMessage, useDialog, NIcon, NImage, NSwitch, NAvatar, NButton } from "naive-ui";
-import { AddIcon, RefreshIcon, PenIcon, DeleteIcon, SearchIcon } from '@/components/icons/icon';
-import { useGlobalStore } from "@/stores/global";
+import { ref, computed, onMounted, h, } from "vue";
+import { NIcon, NButton } from "naive-ui";
+import { PenIcon, } from '@/components/icons/icon';
 import { useI18n } from "vue-i18n";
 import ModelForm from "./Form.vue";
 import ModelService from "@/services/contact.service";
 
-const { t, locale } = useI18n();
-const { insert, shift, r } = useMagicKeys();
-const router = useRouter();
-const dialog = useDialog();
-const message = useMessage();
-const globalStore = useGlobalStore();
-const fileUrl = inject("fileUrl");
+const { t } = useI18n();
 
 const tableData = ref([]);
 const loading = ref(false);
-const activeLoading = ref(false);
+
 const filterHeader = ref({ text: "" });
 
 const model_act = ref({
@@ -27,6 +18,7 @@ const model_act = ref({
     update: false,
     update_id: null,
 });
+
 
 const getAllData = (action) => {
     loading.value = true;
@@ -65,6 +57,7 @@ const tableColumn = computed(() => [
         title: t("action"),
         key: "action",
         align: "center",
+        fixed: "right",
         width: 120,
         render(row) {
             return [
@@ -96,17 +89,18 @@ const showClose = (action) => (model_act.value[action] = false);
 const modalEmit = (action) => getAllData(action);
 
 
-onMounted(() => getAllData());
+onMounted(() => {
+    getAllData();
+});
 </script>
 <template>
     <div class="p-2 space-y-2">
-        <!-- Header -->
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <h2 class="text-xl font-bold">{{ t('contact') }}</h2>
         </div>
 
-        <n-data-table :loading="loading" :columns="tableColumn" :data="tableData" :bordered="true" :single-line="false"
-            size="small" :scroll-x="400" />
+        <n-data-table class="mobile-table" :loading="loading" :columns="tableColumn" :data="tableData" :bordered="true"
+            :single-line="false" size="small" :scroll-x="1300" />
 
         <n-modal transform-origin="center" v-model:show="model_act.create">
             <n-card class="w-full max-w-3xl" :bordered="false" role="dialog" aria-modal="true">
@@ -122,3 +116,4 @@ onMounted(() => getAllData());
         </n-modal>
     </div>
 </template>
+
