@@ -58,7 +58,6 @@
               v-model:value="form_data.unit" :label-field="'title_' + locale" value-field="element" />
           </n-form-item>
         </n-space>
-
         <n-space>
           <n-form-item :label="t('active')" path="is_active">
             <n-switch @keydown="keySave" v-model:value="form_data.is_active" />
@@ -85,19 +84,41 @@
           <n-input type="textarea" @keydown="keySave" v-model:value="form_data.description_en" show-count clearable />
         </n-form-item>
       </div>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-2">
+        <div class="md:col-span-2">
+          <n-upload :max="5" accept="image/png, image/jpeg" directory-dnd
+            @update:file-list="updateUpload" @remove="removeUpload">
+            <n-upload-dragger accept="image/png, image/jpeg">
+              <n-text class="text-base">
+                {{ $t('upload_image') }}
+              </n-text>
+              <n-p depth="3" class="mt-2">
+                {{ $t('drop_image') }}
+              </n-p>
+            </n-upload-dragger>
+          </n-upload>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-6  gap-2 mt-2">
+        <div v-for="(file, index) in form_data.product_images" :key="index">
+          <n-image v-if="file.name" :src="fileUrl + file.name" width="120" height="80" class="rounded" />
+        </div>
+      </div>
     </n-spin>
   </n-form>
 </template>
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, inject } from "vue";
 import { useI18n } from "vue-i18n";
 import { useGlobalStore } from "@/stores/global";
 import ModelService from "@/services/product.service";
 import categoryService from "@/services/category.service";
 import brandService from "@/services/brand.service";
+import uploadService from "@/services/upload.service";
 import { ExitIcon, SaveIcon } from "@/components/icons/icon";
 import { useFormatnumber, useParsenumber } from "@/composible/NumberFormat";
 const globalStore = useGlobalStore();
+const fileUrl = inject('fileUrl');
 const { t, locale } = useI18n();
 const props = defineProps({
   type: String,
@@ -163,6 +184,7 @@ onMounted(async () => {
     try {
       const res = await ModelService.getOne(props.id);
       form_data.value = res;
+      if (res.product_images) form_data.value.product_images = [];
       getAllBrand();
     } catch (error) {
       console.error("Ma'lumot yuklashda xatolik:", error);
@@ -209,4 +231,46 @@ const changeCategory = (category_id) => {
 const keySave = (e) => {
   if (e.code === "Enter") save();
 };
+
+// Faylni serverdan o‘chirish
+const deletedFile = async (file) => {
+  if (file) {
+    try {
+      await uploadService.delFile(file);
+    } catch (err) {
+      console.warn("Faylni o‘chirishda xatolik:", err);
+    }
+  }
+};
+
+// Yangi fayl yuklandi
+const updateUpload = async (data) => {
+  if (data && data.length > 0) {
+    const lastItem = data[data.length - 1];
+    if (lastItem && lastItem.file) {
+      const sendData = new FormData();
+      sendData.append("file", lastItem.file);
+      try {
+        const res = await uploadService.uploadFile(sendData);
+        console.log(res)
+        console.log(form_data.value)
+        form_data.value.product_images.push({ name: res.file });
+      } catch (err) {
+        console.error("Yuklashda xatolik:", err);
+      }
+    }
+  }
+};
+
+
+// Fayl o‘chirish
+const removeUpload = async (file) => {
+  try {
+    await uploadService.delFile(file.name);
+    form_data.value.product_images = form_data.value.product_images.filter(f => f.name !== file.name);
+  } catch (err) {
+    console.warn("Faylni o‘chirishda xatolik:", err);
+  }
+};
+
 </script>
