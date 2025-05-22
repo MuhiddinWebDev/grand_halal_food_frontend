@@ -258,7 +258,7 @@ const updateMenu = (e) => {
     <!-- Mobile Drawer -->
     <n-drawer v-model:show="responsiveMenu" :style="{ height: '100vh', width: '80vw', background: '#115D33' }"
       placement="left">
-      <n-drawer-content title="Menu" closable>
+      <n-drawer-content title="GRAND HALAL FOOD" :header-style="{ color: '#fff' }" closable>
         <n-menu v-model:value="selectMenu" :options="menuOptions" :on-update:value="updateMenu" />
       </n-drawer-content>
     </n-drawer>
