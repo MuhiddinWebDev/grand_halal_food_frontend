@@ -4,7 +4,6 @@ import { useNotification } from 'naive-ui';
 import { useRouter } from 'vue-router';
 import { useGlobalStore } from "@/stores/global"
 import { EyeIcon, EyeOffIcon } from '@/components/icons/icon';
-import { inputPhoneNumberFormat } from '@/composible/NumberFormat';
 import axios from 'axios';
 import { useI18n } from "vue-i18n";
 const { t, locale } = useI18n();
@@ -14,8 +13,8 @@ const router = useRouter();
 const passwordInput = ref(null);
 const showPassword = ref(false);
 const form_data = ref({
-    phone: "+",
-    password: "",
+    phone: "+998907788769",
+    password: "987654321!s",
 })
 
 const length = ref(0);

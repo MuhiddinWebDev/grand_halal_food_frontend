@@ -35,7 +35,7 @@ onMounted(() => {
     let element = props.coordinates;
     if (element.update) {
         coordinates.value[0] = element.lat;
-        coordinates.value[1] = element.long;
+        coordinates.value[1] = element.lon;
     }
 })
 </script>
