@@ -94,6 +94,7 @@
   "service report": "서비스 보고서",
   "service sverka": "서비스 대조",
   "order": "주문",
+  "orders": "주문들",
   "order report": "주문 보고서",
   "order sverka": "주문 대조",
   "refund": "반품된 상품",
@@ -167,5 +168,8 @@
   "product":"제품",
   "products":"제품",
   "limit":"제한",
-  "quantity":"수량"
+  "quantity":"수량",
+  "location":"위치",
+  "discount":"할인",
+  "discount price":"할인가격"
 }

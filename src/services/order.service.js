@@ -3,8 +3,7 @@ const END_POINT = "/order";
 
 class Service {
   all(filter) {
-    let url = filter?.text ? '?text=' + filter.text : '';
-    return axios.get(END_POINT + "/" + url).then((res) => {
+    return axios.get(END_POINT + "/all").then((res) => {
       return res;
     });
   }

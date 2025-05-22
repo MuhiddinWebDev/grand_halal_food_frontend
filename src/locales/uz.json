@@ -94,6 +94,7 @@
     "service report": "Xizmat ko'rsatish hisoboti",
     "service sverka": "Xizmat ko'rsatish sverka",
     "order": "Buyurtma",
+    "orders": "Buyurtmalar",
     "order report": "Buyurtma hisoboti",
     "order sverka": "Buyurtma sverka",
     "refund": "Qaytarilgan mahsulot",
@@ -168,5 +169,8 @@
     "products":"Mahsulotlar",
     "limit":"Limit",
     "quantity":"Miqdor",
-    "kirim":"Kirim"
+    "kirim":"Kirim",
+    "location":"Joylashuv",
+    "discount":"Chegirma",
+    "discount price":"Chegirma narxi"
 }

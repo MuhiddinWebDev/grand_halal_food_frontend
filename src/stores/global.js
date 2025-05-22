@@ -325,25 +325,25 @@ export const useGlobalStore = defineStore('global', () => {
   ]);
   const orderStatus = ref([
     {
-      value: 'new',
-      label_uz: 'Yangi',
-      label_ru: 'Новый',
-      label_en: 'New',
-      label_ka: "Янги",
+      value: 'pending',
+      label_uz: 'Kutilmoqda',
+      label_ru: 'в ожидании',
+      label_en: 'Pending',
+      label_ko: "보류 중",
     },
     {
-      value: 'finished',
-      label_uz: 'Tugallandi',
-      label_ru: 'Законченный',
-      label_en: 'Finished',
-      label_ka: "Тугалланди"
+      value: 'completed',
+      label_uz: 'Bajarildi',
+      label_ru: 'Завершенный',
+      label_en: 'Completed',
+      label_ko: "완전한"
     },
     {
-      value: 'canceled',
+      value: 'cancelled',
       label_uz: 'Bekor qilingan',
       label_ru: 'Отменено',
-      label_en: 'Canceled',
-      label_ka: "Бекор қилинган"
+      label_en: 'Cancelled',
+      label_ko: "취소"
     }
   ])
   const errorPage = ref({

@@ -94,6 +94,7 @@
   "service report": "Отчет об обслуживании",
   "service sverka": "Сверка обслуживания",
   "order": "Заказ",
+  "orders": "Заказы",
   "order report": "Отчет о заказах",
   "order sverka": "Сверка заказов",
   "refund": "Возвращенный товар",
@@ -168,5 +169,8 @@
   "products":"Продукция",
   "limit":"Лимит",
   "quantity":"Количество",
-  "kirim":"Ввод"
+  "kirim":"Ввод",
+  "location":"Расположение",
+  "discount":"Скидка",
+  "discount price":"Цена со скидкой"
 }

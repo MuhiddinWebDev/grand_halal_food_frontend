@@ -94,6 +94,7 @@
   "service report": "Service report",
   "service sverka": "Service reconciliation",
   "order": "Order",
+  "orders": "Orders",
   "order report": "Order report",
   "order sverka": "Order reconciliation",
   "refund": "Returned product",
@@ -167,5 +168,8 @@
   "product":"Product",
   "products":"Products",
   "limit":"Limit",
-  "quantity":"Quantity"
+  "quantity":"Quantity",
+  "location":"Location",
+  "discount":"Discount",
+  "dicount price":"Discount price"
 } 

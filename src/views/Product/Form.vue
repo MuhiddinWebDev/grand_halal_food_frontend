@@ -59,6 +59,7 @@
               value-field="element" />
           </n-form-item>
         </n-space>
+
         <n-space>
           <n-form-item :label="t('active')" path="is_active">
             <n-switch @keydown="keySave" v-model:value="form_data.is_active" />
@@ -67,8 +68,13 @@
             <n-switch @keydown="keySave" v-model:value="form_data.top" />
           </n-form-item>
         </n-space>
-                <n-form-item :label="t('comment') + ' UZB'" path="description_uz">
-          <n-input type="textarea"  @keydown="keySave" v-model:value="form_data.description_uz" show-count clearable />
+        <n-form-item :label="t('discount')" path="discount">
+          <n-input-number @keydown="keySave" v-model:value="form_data.discount" :parse="useParsenumber"
+            :format="useFormatnumber" :step="1000" clearable />
+        </n-form-item>
+        <n-form-item></n-form-item>
+        <n-form-item :label="t('comment') + ' UZB'" path="description_uz">
+          <n-input type="textarea" @keydown="keySave" v-model:value="form_data.description_uz" show-count clearable />
         </n-form-item>
         <n-form-item :label="t('comment') + ' KOR'" path="description_ko">
           <n-input type="textarea" @keydown="keySave" v-model:value="form_data.description_ko" show-count clearable />
@@ -123,7 +129,7 @@ const form_data = ref({
   description_en: '',
   is_active: true,
   top: false,
-  product_images:[]
+  product_images: []
 });
 const getAllCategory = () => {
   categoryService.all().then(res => {
@@ -184,6 +190,7 @@ const save = async () => {
       const res = await ModelService.create(form_data.value);
       emit("create", res);
     } else if (props.type === "update") {
+      if (!form_data.value.product_images) form_data.value.product_images = [];
       const res = await ModelService.update(props.id, form_data.value);
       emit("update", res);
     }

@@ -101,7 +101,7 @@ const menuOptions = computed(() => [
     icon: renderIcon(BuildIcon),
     children: [
       { label: t("prixod"), key: "stock-entries", icon: renderIcon(WarehouseIcon) },
-      { label: t("order"), key: "order", icon: renderIcon(OrderIcon) },
+      { label: t("orders"), key: "order", icon: renderIcon(OrderIcon) },
     ]
   },
   {

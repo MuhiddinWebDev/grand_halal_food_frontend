@@ -33,7 +33,7 @@
             <template #icon><n-icon>
                 <AddIcon />
               </n-icon></template>
-            {{ t('add_product') }}
+            {{ t('product') + ' ' + t('add').toLocaleLowerCase() }}
           </n-button>
         </n-form-item>
       </div>
