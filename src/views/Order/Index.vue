@@ -52,14 +52,18 @@ onMounted(() => getOrders());
     <div v-if="loading">Yuklanmoqda...</div>
     <div class="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-4">
       <div v-for="order in orders" :key="order.id">
-        <n-card :title="`${t('order')} #${order.id} ${order.client.first_name} ${order.client.last_name}`" size="medium">
+        <n-card :title="`${t('order')} #${order.id} ${order.client.first_name} ${order.client.last_name}`"
+          size="medium">
           <template #header-extra>
             <n-select v-model:value="order.status" :options="globalStore.orderStatus" :label-field="`label_` + locale"
               size="small" @update:value="val => updateStatus(order.id, val)" />
           </template>
           <p><strong>{{ t('datetime') }}:</strong> {{ dayJS(order.datetime).format('YYYY-MM-DD HH:mm:ss') }}</p>
-          <p><strong>{{ t('phone') }}:</strong> <a :href="'tel:' + order.client.phone_number" class="text-blue-500">{{ order.client.phone_number }}</a></p>
-          <p><strong>{{ t('additional phone number') }}:</strong> <a :href="'tel:' + order.phone2" class="text-blue-500">{{ order.phone2 }}</a></p>
+          <p><strong>{{ t('phone') }}:</strong> <a :href="'tel:' + order.client.phone_number" class="text-blue-500">{{
+            order.client.phone_number }}</a></p>
+          <p><strong>{{ t('additional phone number') }}:</strong> <a :href="'tel:' + order.phone2"
+              class="text-blue-500">{{
+                order.phone2 }}</a></p>
           <p><strong>{{ t('address') }}:</strong> {{ order.address }}</p>
           <p>
             <strong>{{ t('location') }}:</strong>
@@ -77,7 +81,7 @@ onMounted(() => getOrders());
                   <th>{{ t('product') }}</th>
                   <th>{{ t('quantity') }}</th>
                   <th>{{ t('price') }}</th>
-                  <th>{{ t('total') + ' ' + t('summa')  }}</th>
+                  <th>{{ t('total') + ' ' + t('summa') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -105,5 +109,17 @@ onMounted(() => getOrders());
         </n-card>
       </div>
     </div>
+    <div v-if="!loading && orders.length === 0"
+      class="flex flex-col items-center justify-center p-6 bg-gray-100 rounded-2xl border border-dashed border-gray-300 shadow-sm">
+      <!-- Icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h18M3 7h18M5 11h14M7 15h10M9 19h6" />
+      </svg>
+
+      <!-- Text -->
+      <p class="text-gray-600 text-lg font-medium">Buyurtma mavjud emas</p>
+    </div>
+
   </div>
 </template>
