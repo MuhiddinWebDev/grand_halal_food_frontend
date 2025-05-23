@@ -100,8 +100,15 @@
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-6  gap-2 mt-2">
-        <div v-for="(file, index) in form_data.product_images" :key="index">
+        <div v-for="(file, index) in form_data.photos" :key="index" class="flex gap-2 ">
           <n-image v-if="file.name" :src="fileUrl + file.name" width="120" height="80" class="rounded" />
+          <n-button type="error">
+            <template #icon>
+            <n-icon size="30" color="#fff">
+              <TrashIcon @click="removeUpload(file)" />
+            </n-icon>
+            </template>
+          </n-button>
         </div>
       </div>
     </n-spin>
@@ -115,7 +122,7 @@ import ModelService from "@/services/product.service";
 import categoryService from "@/services/category.service";
 import brandService from "@/services/brand.service";
 import uploadService from "@/services/upload.service";
-import { ExitIcon, SaveIcon } from "@/components/icons/icon";
+import { ExitIcon, SaveIcon, TrashIcon } from "@/components/icons/icon";
 import { useFormatnumber, useParsenumber } from "@/composible/NumberFormat";
 const globalStore = useGlobalStore();
 const fileUrl = inject('fileUrl');
@@ -149,7 +156,7 @@ const form_data = ref({
   description_en: '',
   is_active: true,
   top: false,
-  product_images: []
+  photos: []
 });
 const getAllCategory = () => {
   categoryService.all().then(res => {
@@ -184,7 +191,7 @@ onMounted(async () => {
     try {
       const res = await ModelService.getOne(props.id);
       form_data.value = res;
-      if (res.product_images) form_data.value.product_images = [];
+      if (!res.photos) form_data.value.photos = [];
       getAllBrand();
     } catch (error) {
       console.error("Ma'lumot yuklashda xatolik:", error);
@@ -206,7 +213,7 @@ const save = async () => {
       const res = await ModelService.create(form_data.value);
       emit("create", res);
     } else if (props.type === "update") {
-      if (!form_data.value.product_images) form_data.value.product_images = [];
+      if (!form_data.value.photos) form_data.value.photos = [];
       const res = await ModelService.update(props.id, form_data.value);
       emit("update", res);
     }
@@ -252,9 +259,7 @@ const updateUpload = async (data) => {
       sendData.append("file", lastItem.file);
       try {
         const res = await uploadService.uploadFile(sendData);
-        console.log(res)
-        console.log(form_data.value)
-        form_data.value.product_images.push({ name: res.file });
+        form_data.value.photos.push({ name: res.file });
       } catch (err) {
         console.error("Yuklashda xatolik:", err);
       }
@@ -267,7 +272,7 @@ const updateUpload = async (data) => {
 const removeUpload = async (file) => {
   try {
     await uploadService.delFile(file.name);
-    form_data.value.product_images = form_data.value.product_images.filter(f => f.name !== file.name);
+    form_data.value.photos = form_data.value.photos.filter(f => f.name !== file.name);
   } catch (err) {
     console.warn("Faylni o‘chirishda xatolik:", err);
   }
