@@ -3,7 +3,7 @@ const END_POINT = "/order";
 
 class Service {
   all(filter) {
-    return axios.get(END_POINT + "/all").then((res) => {
+    return axios.post(END_POINT + "/all", filter).then((res) => {
       return res;
     });
   }
@@ -15,7 +15,13 @@ class Service {
   }
 
   update(id, data) {
-    return axios.patch(END_POINT + `/${id}`, data).then((res) => {
+    return axios.patch(END_POINT + `/update${id}`, data).then((res) => {
+      return res;
+    });
+  }
+
+  updateStatus(id, data) {
+    return axios.patch(END_POINT + `/updateStatus/${id}`, data).then((res) => {
       return res;
     });
   }

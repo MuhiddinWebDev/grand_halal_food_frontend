@@ -173,5 +173,13 @@
   "discount":"Discount",
   "dicount price":"Discount price",
   "additional phone number":"Additional phone number",
-  "order not available":"Order not available"
+  "order not available":"Order not available",
+  "summa":"Summa",
+  "payment image":"Payment image",
+  "delivery_summa":"Delivery summa",
+  "image not found":"Image not found",
+  "updated status":"Updated status",
+  "piece": "Piece",
+  "kg": "Kilogram",
+  "ltr": "Litr"
 } 

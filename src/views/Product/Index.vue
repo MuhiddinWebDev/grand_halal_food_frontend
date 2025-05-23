@@ -123,7 +123,7 @@ const tableColumn = computed(() => [
         align: "right",
         titleAlign: "left",
         render(row) {
-            const colorClass = row.limit < 0 ? 'text-red-500' : 'text-green-500';
+            const colorClass = row.limit <= 0 ? 'text-red-500' : 'text-green-500';
             return h("span", { class: `font-semibold ${colorClass}` }, '' + row.limit);
         }
 

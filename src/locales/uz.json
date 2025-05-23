@@ -174,5 +174,13 @@
     "discount":"Chegirma",
     "discount price":"Chegirma narxi",
     "additional phone number":"Qo'shimcha telefon raqami",
-    "order not available":"Buyurtma mavjud emas"
+    "order not available":"Buyurtma mavjud emas",
+    "summa":"Summa",
+    "payment image":"To'lov rasmi",
+    "delivery_summa":"Yetkazib berish summasi",
+    "image not found":"Rasm topilmadi",
+    "updated status":"Statusni yangilandi",
+    "piece":"Dona",
+    "kg":"Kg",
+    "ltr":"Litr"
 }

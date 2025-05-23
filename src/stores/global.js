@@ -356,7 +356,7 @@ export const useGlobalStore = defineStore('global', () => {
       element: "piece",
       title_uz: "Dona",
       title_ru: "Кусок",
-      title_en: "Litre",
+      title_en: "Piece",
       title_ko: "조각"
     },
     {
