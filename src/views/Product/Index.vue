@@ -82,6 +82,25 @@ const tableColumn = computed(() => [
     {
         title: t("name"),
         key: "title_" + locale.value,
+        render(row) {
+            console.log(row)
+            return h("div", { class: "flex items-center" }, [
+                row.image
+                    ? h(NImage, {
+                        src: fileUrl + row.image,
+                        height: 35,
+                        width: 50,
+                        style: { borderRadius: "35px", marginRight: "8px" },
+                        lazy: true,
+                        previewDisabled: true,
+                    })
+                    : h(NAvatar, {
+                        size: "small",
+                        style: { marginRight: "8px" },
+                    }),
+                h("span", { class: "font-semibold" }, row['title_' + locale.value]),
+            ]);
+        },
     },
     {
         title: t("price"),
@@ -91,13 +110,23 @@ const tableColumn = computed(() => [
             return h("span", { class: "font-semibold" }, useSummaFormat(row.price));
         }
     },
-      {
+    {
         title: t("discount"),
         align: "right",
         titleAlign: "left",
         render(row) {
             return h("span", { class: "font-semibold" }, useSummaFormat(row.discount));
         }
+    },
+    {
+        title: t("limit"),
+        align: "right",
+        titleAlign: "left",
+        render(row) {
+            const colorClass = row.limit < 0 ? 'text-red-500' : 'text-green-500';
+            return h("span", { class: `font-semibold ${colorClass}` }, '' + row.limit);
+        }
+
     },
     {
         title: t("active"),
@@ -138,7 +167,7 @@ const tableColumn = computed(() => [
             })
         }
     },
-      {
+    {
         title: t("admin_one"),
         key: "name",
         render(row) {
