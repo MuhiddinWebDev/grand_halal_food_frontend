@@ -1,0 +1,1 @@
+import{O as r}from"./index-CzxFKPxk.js";const n="/client";class c{all(e){let t=e!=null&&e.text?"?text="+e.text:"";return r.get(n+"/all"+t).then(u=>u)}create(e){return r.post(n+"/",e).then(t=>t)}update(e,t){return r.patch(n+`/${e}`,t).then(u=>u)}getOne(e){return r.get(n+`/${e}`).then(t=>t)}delete(e){return r.delete(n+`/${e}`).then(t=>t)}}const o=new c;export{o as c};

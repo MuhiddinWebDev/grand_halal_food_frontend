@@ -153,7 +153,7 @@ watch(
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="(item, index) in order.items" :key="item.id">
+                      <tr v-for="(item, index) in order.products" :key="item.id">
                         <td style="width: 50px;text-align: center;">{{ index + 1 }}</td>
                         <td>{{ item.product?.['title_' + locale] }}</td>
                         <td class="text-right">{{ item.quantity }} {{ t(item.product?.unit) }}</td>
