@@ -3,7 +3,7 @@ import { ref, reactive, computed, onMounted, watch, watchEffect, h, inject } fro
 import { useRouter } from "vue-router";
 import { useMagicKeys } from "@vueuse/core";
 import { useMessage, useDialog, NIcon, NImage, NSwitch, NAvatar, NButton } from "naive-ui";
-import { RefreshIcon, PenIcon, DeleteIcon, SearchIcon } from '@/components/icons/icon';
+import { RefreshIcon, PenIcon, TourIcon, SearchIcon } from '@/components/icons/icon';
 import { useGlobalStore } from "@/stores/global";
 import { useI18n } from "vue-i18n";
 import ModelService from "@/services/clients.service";
@@ -11,7 +11,7 @@ import { usePhoneFormat } from "@/composible/NumberFormat";
 
 const { t, locale } = useI18n();
 const { insert, shift, r } = useMagicKeys();
-const dayJS =inject('dayJS')
+const dayJS = inject('dayJS')
 const router = useRouter();
 const dialog = useDialog();
 const message = useMessage();
@@ -78,6 +78,33 @@ const tableColumn = computed(() => [
         key: "login",
         render: (row) => dayJS(row.datetime).format("YYYY-MM-DD HH:mm:ss"),
     },
+    {
+        title: t('send'),
+        key: "status",
+        width: 80,
+        render(row) {
+            return [
+                h(NButton,
+                    {
+                        size: "small",
+                        type: "success",
+                        onClick: (e) => {
+                            ModelService.sendNotification(row.id).then(() => { });
+                        },
+                        style: {
+                            marginRight: '8px'
+                        }
+                    },
+                    {
+                        icon: () => h(NIcon, {
+                            component: TourIcon,
+                            size: 22,
+                        }),
+                    },
+                ),
+            ];
+        },
+    }
 ]);
 
 const pagination = reactive({
@@ -115,7 +142,7 @@ watchEffect(() => {
 onMounted(() => getAllData());
 </script>
 <template>
-    <div class="p-2 space-y-2">
+    <div class="p-2 space-y-2 bg-white rounded-xl shadow-md overflow-x-auto">
         <!-- Header -->
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <h2 class="text-xl font-bold">{{ t('client') }}</h2>

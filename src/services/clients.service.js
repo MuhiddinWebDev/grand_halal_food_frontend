@@ -28,6 +28,12 @@ class Service {
     });
   }
 
+  sendNotification(id) {
+    return axios.get(END_POINT + `/send-notification/${id}`).then((res) => {
+      return res;
+    });
+  }
+
   delete(id) {
     return axios.delete(END_POINT + `/${id}`).then((res) => {
       return res;

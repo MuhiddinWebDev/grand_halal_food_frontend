@@ -174,7 +174,7 @@ watchEffect(() => {
 onMounted(() => getAllData());
 </script>
 <template>
-    <div class="p-4 space-y-4 bg-white rounded-xl shadow-md overflow-x-auto">
+    <div class="p-2 space-y-2 bg-white rounded-xl shadow-md overflow-x-auto">
         <!-- Header -->
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <h2 class="text-xl font-bold">{{ t('category') }}</h2>
