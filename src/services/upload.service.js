@@ -1,5 +1,5 @@
 import axios from "axios";
-const END_POINT = "/uploads";
+const END_POINT = "/upload-files";
 
 class Service {
 
