@@ -17,14 +17,14 @@ const orders = ref([]);
 const loading = ref(false);
 const dayJS = inject('dayJS')
 const fileUrl = inject("fileUrl");
-const activeTab = ref('pending');
+const activeTab = ref('waiting');
 const clientOption = ref([]);
 const filterHeader = ref({
   range: [
     dayJS().subtract(6, 'day').startOf('day').valueOf(),
     dayJS().endOf('day').valueOf()
   ],
-  status: "pending",
+  status: "waiting",
 });
 
 const getOrders = async () => {

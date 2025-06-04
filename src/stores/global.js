@@ -325,11 +325,25 @@ export const useGlobalStore = defineStore('global', () => {
   ]);
   const orderStatus = ref([
     {
-      value: 'pending',
+      value: 'waiting',
       label_uz: 'Kutilmoqda',
       label_ru: 'в ожидании',
-      label_en: 'Pending',
+      label_en: 'Waiting',
       label_ko: "보류 중",
+    },
+    {
+      value: 'accepted',
+      label_uz: 'Qabul qilindi',
+      label_ru: 'Принято',
+      label_en: 'Accepted',
+      label_ko: "통신",
+    },
+    {
+      value: 'delivering',
+      label_uz: 'Yetkazilmoqda',
+      label_ru: 'в доставке',
+      label_en: 'Delivering',
+      label_ko: "발송중",
     },
     {
       value: 'completed',

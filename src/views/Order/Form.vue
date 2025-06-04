@@ -12,7 +12,7 @@ const emit = defineEmits(["update", "close"]);
 const props = defineProps({ id: Number });
 
 const form_data = ref({
-  status: "pending"
+  status: "waiting",
 });
 
 const loading = ref(false);
