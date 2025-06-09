@@ -7,6 +7,7 @@ import { AddIcon, RefreshIcon, PenIcon, DeleteIcon, SearchIcon } from '@/compone
 import { useGlobalStore } from "@/stores/global";
 import { useI18n } from "vue-i18n";
 import ModelForm from "./Form.vue";
+import MoreForm from './MoreForm.vue';
 import ModelService from "@/services/product.service";
 import { useSummaFormat } from "@/composible/NumberFormat";
 
@@ -25,6 +26,7 @@ const filterHeader = ref({ text: "" });
 const model_act = ref({
     create: false,
     update: false,
+    more_create: false,
     update_id: null,
 });
 
@@ -83,7 +85,6 @@ const tableColumn = computed(() => [
         title: t("name"),
         key: "title_" + locale.value,
         render(row) {
-            console.log(row)
             return h("div", { class: "flex items-center" }, [
                 row.image
                     ? h(NImage, {
@@ -103,7 +104,7 @@ const tableColumn = computed(() => [
         },
     },
     {
-        title: t("price"),
+        title: t("get price"),
         align: "right",
         titleAlign: "left",
         render(row) {
@@ -116,6 +117,23 @@ const tableColumn = computed(() => [
         titleAlign: "left",
         render(row) {
             return h("span", { class: "font-semibold" }, useSummaFormat(row.discount));
+        }
+    },
+    
+    {
+        title: t("selling price"),
+        align: "right",
+        titleAlign: "left",
+        render(row) {
+            return h("span", { class: "font-semibold" }, useSummaFormat(row.get_price));
+        }
+    },
+     {
+        title: t("profit"),
+        align: "right",
+        titleAlign: "left",
+        render(row) {
+            return h("span", { class: "font-semibold" }, useSummaFormat((row.price - row.discount) - row.get_price));
         }
     },
     {
@@ -161,7 +179,6 @@ const tableColumn = computed(() => [
                         is_active: row.is_active,
                         top: !row.top
                     };
-                    console.log(data);
                     ModelService.updateTools(row.id, data).then(() => getAllData());
                 },
             })
@@ -273,6 +290,9 @@ const updateBtn = () => {
     getAllData();
 };
 const mainAdd = () => (model_act.value.create = true);
+const addMoreProduct = () => {
+    model_act.value.more_create = true;
+};
 const showClose = (action) => (model_act.value[action] = false);
 const modalEmit = (action) => getAllData(action);
 
@@ -313,6 +333,14 @@ onMounted(() => getAllData());
                     </template>
                     {{ t('add') }} <span class="ml-1 text-xs">Insert</span>
                 </n-button>
+                <n-button type="success" @click="addMoreProduct">
+                    <template #icon>
+                        <n-icon>
+                            <AddIcon />
+                        </n-icon>
+                    </template>
+                    {{ t('add more') }}
+                </n-button>
             </div>
         </div>
 
@@ -323,6 +351,12 @@ onMounted(() => getAllData());
         <n-modal transform-origin="center" v-model:show="model_act.create">
             <n-card class="w-full max-w-5xl" :bordered="false" role="dialog" aria-modal="true">
                 <ModelForm @close="showClose('create')" @create="modalEmit('create')" type="create" />
+            </n-card>
+        </n-modal>
+
+        <n-modal transform-origin="center" v-model:show="model_act.more_create">
+            <n-card class="w-full max-w-7xl" :bordered="false" role="dialog" aria-modal="true">
+                <MoreForm @close="showClose('more_create')" @create="modalEmit('more_create')" type="more_create" />
             </n-card>
         </n-modal>
 

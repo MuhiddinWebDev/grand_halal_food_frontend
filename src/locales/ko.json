@@ -181,5 +181,9 @@
   "updated status":"업데이트된 상태",
   "piece": "조각",
   "kg": "킬로그램",
-  "ltr": "리터"
+  "ltr": "리터",
+  "add more":"더 추가하세요",
+  "get price":"가격 구하기",
+  "selling price":"판매가격",
+  "profit":"평가"
 }

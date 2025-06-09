@@ -323,43 +323,7 @@ export const useGlobalStore = defineStore('global', () => {
       disabled: currentData.value.role == "Programmer" ? false : true,
     },
   ]);
-  const orderStatus = ref([
-    {
-      value: 'waiting',
-      label_uz: 'Kutilmoqda',
-      label_ru: 'в ожидании',
-      label_en: 'Waiting',
-      label_ko: "보류 중",
-    },
-    {
-      value: 'accepted',
-      label_uz: 'Qabul qilindi',
-      label_ru: 'Принято',
-      label_en: 'Accepted',
-      label_ko: "통신",
-    },
-    {
-      value: 'delivering',
-      label_uz: 'Yetkazilmoqda',
-      label_ru: 'в доставке',
-      label_en: 'Delivering',
-      label_ko: "발송중",
-    },
-    {
-      value: 'completed',
-      label_uz: 'Bajarildi',
-      label_ru: 'Завершенный',
-      label_en: 'Completed',
-      label_ko: "완전한"
-    },
-    {
-      value: 'cancelled',
-      label_uz: 'Bekor qilingan',
-      label_ru: 'Отменено',
-      label_en: 'Cancelled',
-      label_ko: "취소"
-    }
-  ])
+ 
   const errorPage = ref({
     error_code: 0,
     message: ""
@@ -397,7 +361,6 @@ export const useGlobalStore = defineStore('global', () => {
     langOption,
     roleOption,
     currentLang,
-    orderStatus,
     unitOption
   }
 })

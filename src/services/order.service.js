@@ -8,6 +8,12 @@ class Service {
     });
   }
 
+  statusOption() {
+    return axios.get(END_POINT + "/status").then((res) => {
+      return res;
+    });
+  }
+
   create(data) {
     return axios.post(END_POINT + "/", data).then((res) => {
       return res;

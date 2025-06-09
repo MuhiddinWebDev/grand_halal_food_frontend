@@ -181,5 +181,9 @@
   "updated status":"Updated status",
   "piece": "Piece",
   "kg": "Kilogram",
-  "ltr": "Litr"
+  "ltr": "Litr",
+  "add more":"Add more",
+  "get price":"Arrival price",
+  "selling price":"Selling price",
+  "profit":"Profit"
 } 

@@ -49,16 +49,21 @@
             :label-field="'title_' + locale" value-field="id" />
         </n-form-item>
         <n-space>
-          <n-form-item :label="t('price')" path="price">
-            <n-input-number @keydown="keySave" v-model:value="form_data.price" :parse="useParsenumber"
+          <n-form-item :label="t('get price')" path="get_price">
+            <n-input-number @keydown="keySave" v-model:value="form_data.get_price" :parse="useParsenumber"
               :format="useFormatnumber" :step="1000" clearable />
           </n-form-item>
+
           <n-form-item :label="t('unit')" path="unit">
             <n-select style="width: 150px;" :options="globalStore.unitOption" fitlerable @keydown="keySave"
               v-model:value="form_data.unit" :label-field="'title_' + locale" value-field="element" />
           </n-form-item>
         </n-space>
         <n-space>
+          <n-form-item :label="t('selling price')" path="price">
+            <n-input-number @keydown="keySave" v-model:value="form_data.price" :parse="useParsenumber"
+              :format="useFormatnumber" :step="1000" clearable />
+          </n-form-item>
           <n-form-item :label="t('active')" path="is_active">
             <n-switch @keydown="keySave" v-model:value="form_data.is_active" />
           </n-form-item>
@@ -86,8 +91,8 @@
       </div>
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-2">
         <div class="md:col-span-2">
-          <n-upload :max="5" accept="image/png, image/jpeg" directory-dnd
-            @update:file-list="updateUpload" @remove="removeUpload">
+          <n-upload :max="5" accept="image/png, image/jpeg" directory-dnd @update:file-list="updateUpload"
+            @remove="removeUpload">
             <n-upload-dragger accept="image/png, image/jpeg">
               <n-text class="text-base">
                 {{ $t('upload_image') }}
@@ -104,9 +109,9 @@
           <n-image v-if="file.name" :src="fileUrl + file.name" width="120" height="80" class="rounded" />
           <n-button type="error">
             <template #icon>
-            <n-icon size="30" color="#fff">
-              <TrashIcon @click="removeUpload(file)" />
-            </n-icon>
+              <n-icon size="30" color="#fff">
+                <TrashIcon @click="removeUpload(file)" />
+              </n-icon>
             </template>
           </n-button>
         </div>
@@ -154,6 +159,7 @@ const form_data = ref({
   description_ru: '',
   description_ko: '',
   description_en: '',
+  get_price: 0,
   is_active: true,
   top: false,
   photos: []
