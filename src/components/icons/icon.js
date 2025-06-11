@@ -63,9 +63,11 @@ import SettingIcon from "./setting.vue";
 import LockCloseIcon from "./lockClose.vue";
 import LockOpenIcon from "./lockOpen.vue";
 import NewsIcon from "./news.vue";
-import BasketIcon from "./baseket.vue"
+import BasketIcon from "./baseket.vue";
+import DeliveryIcon from "./delivery.vue"
 // Export all icons
 export {
+  DeliveryIcon,
   SMSIcon,
   LockCloseIcon,
   NewsIcon,
