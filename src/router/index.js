@@ -60,10 +60,15 @@ const router = createRouter({
           name: "order",
           component: () => import("@/views/Order/Index.vue"),
         },
-         {
+        {
           path: "/delivery-summa-table",
           name: "delivery summa",
           component: () => import("@/views/DeliverySumma/Index.vue"),
+        },
+        {
+          path: "/offerta-table",
+          name: "offerta",
+          component: () => import("@/views/Offerta/Index.vue"),
         }
       ]
     },

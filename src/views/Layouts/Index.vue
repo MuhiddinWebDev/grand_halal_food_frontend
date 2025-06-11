@@ -113,6 +113,7 @@ const menuOptions = computed(() => [
       { label: t("brand"), key: "brand", icon: renderIcon(BrandIcon) },
       { label: t("products"), key: "product", icon: renderIcon(BasketIcon) },
       { label: t("delivery_summa"), key: "delivery summa", icon: renderIcon(DeliveryIcon) },
+      { label: t("general offerta"), key: "offerta", icon: renderIcon(threeLineIcon) },
       { label: t("contact"), key: "contact", icon: renderIcon(ContactIcon) },
       { label: t("offers"), key: "offers", icon: renderIcon(EventIcon) },
       { label: t("news"), key: "news", icon: renderIcon(NewsIcon) },
