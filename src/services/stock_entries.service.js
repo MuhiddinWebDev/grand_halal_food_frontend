@@ -2,9 +2,14 @@ import axios from "axios";
 const END_POINT = "/stock-entries";
 
 class Service {
-  all(filter) {
-    let url = filter?.text ? '?text=' + filter.text : '';
-    return axios.get(END_POINT + "/all" + url).then((res) => {
+  all(data) {
+    return axios.post(END_POINT + "/all", data).then((res) => {
+      return res;
+    });
+  }
+
+   productResidual(data) {
+    return axios.post(END_POINT + "/product-residual", data).then((res) => {
       return res;
     });
   }

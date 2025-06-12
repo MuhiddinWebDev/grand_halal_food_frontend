@@ -3,7 +3,7 @@
     <n-spin :show="spinner">
       <!-- Header -->
       <div class="flex justify-between items-center mb-4">
-        <p class="text-xl font-semibold">{{ t('prixod') }}</p>
+        <p class="text-xl font-semibold">{{ t('sklad') }}</p>
         <div class="flex gap-2">
           <n-button @click="save" type="success" :disabled="spinner">
             <template #icon><n-icon>
@@ -95,7 +95,14 @@ const productOption = ref([]);
 const form_data = ref({
   comment: "",
   datetime: new Date().getTime(),
-  entries: []
+  entries: [
+    {
+      product_id: null,
+      price: 0,
+      quantity: 1,
+      total: 0
+    }
+  ]
 });
 
 // Mahsulotlar yuklash

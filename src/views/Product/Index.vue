@@ -346,7 +346,7 @@ onMounted(() => getAllData());
         </div>
 
         <n-data-table :row-props="rowProps" :pagination="pagination" :loading="loading" :columns="tableColumn"
-            :data="tableData" :bordered="true" :single-line="false" size="small" :scroll-x="1300"
+            :data="tableData" :bordered="true" :single-line="false" size="small" :scroll-x="1800"
             max-height="calc(100vh - 315px)" />
 
         <n-modal transform-origin="center" v-model:show="model_act.create">

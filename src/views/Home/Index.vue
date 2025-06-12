@@ -4,7 +4,7 @@ import reportService from "../../services/report.service";
 import { ClientIcon, AdminIcon, OrderIcon, BasketIcon, RefreshIcon } from '@/components/icons/icon';
 import BarChart from "@/components/Charts/bar.vue";
 import { useI18n } from "vue-i18n";
-const { t, locale } = useI18n();
+const { t } = useI18n();
 let chartBatteryData = ref({
     region: [],
     battery: [],
@@ -12,7 +12,6 @@ let chartBatteryData = ref({
     data2: []
 })
 const selectOption = ref({
-    region: [],
     battery: []
 })
 const infoCard = ref({

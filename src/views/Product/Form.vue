@@ -91,9 +91,9 @@
       </div>
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-2">
         <div class="md:col-span-2">
-          <n-upload :max="5" accept="image/png, image/jpeg" directory-dnd @update:file-list="updateUpload"
+          <n-upload :max="5"  directory-dnd @update:file-list="updateUpload"
             @remove="removeUpload">
-            <n-upload-dragger accept="image/png, image/jpeg">
+            <n-upload-dragger >
               <n-text class="text-base">
                 {{ $t('upload_image') }}
               </n-text>
@@ -257,22 +257,27 @@ const deletedFile = async (file) => {
 };
 
 // Yangi fayl yuklandi
-const updateUpload = async (data) => {
-  if (data && data.length > 0) {
-    const lastItem = data[data.length - 1];
-    if (lastItem && lastItem.file) {
-      const sendData = new FormData();
-      sendData.append("file", lastItem.file);
-      try {
-        const res = await uploadService.uploadFile(sendData);
-        form_data.value.photos.push({ name: res.file });
-      } catch (err) {
-        console.error("Yuklashda xatolik:", err);
+const updateUpload = async (fileList) => {
+  if (fileList && fileList.length > 0) {
+    const lastFiles = fileList.slice(-1); // oxirgi qo‘shilgan faylni olamiz
+    for (const fileItem of lastFiles) {
+      if (fileItem && fileItem.file) {
+        const formData = new FormData();
+        formData.append("file", fileItem.file);
+        try {
+          const res = await uploadService.uploadFile(formData);
+          if (res && res.file) {
+            form_data.value.photos.push({ name: res.file });
+          } else {
+            console.error("❌ Javobda file yo‘q:", res);
+          }
+        } catch (err) {
+          console.error("❌ Yuklashda xatolik:", err);
+        }
       }
     }
   }
 };
-
 
 // Fayl o‘chirish
 const removeUpload = async (file) => {

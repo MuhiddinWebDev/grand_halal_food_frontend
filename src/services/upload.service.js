@@ -9,13 +9,6 @@ class Service {
     });
   }
 
-  downloadDatabase() {
-    return axios.get(END_POINT + `/download-database`, {
-      responseType: "blob"
-    }).then((res) => {
-      return res;
-    });
-  }
 
   uploadFile(data) {
     return axios
