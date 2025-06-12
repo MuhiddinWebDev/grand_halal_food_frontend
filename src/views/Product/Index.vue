@@ -104,11 +104,19 @@ const tableColumn = computed(() => [
         },
     },
     {
-        title: t("get price"),
+        title: t("selling price"),
         align: "right",
         titleAlign: "left",
         render(row) {
             return h("span", { class: "font-semibold" }, useSummaFormat(row.price));
+        }
+    },
+    {
+        title: t("get price"),
+        align: "right",
+        titleAlign: "left",
+        render(row) {
+            return h("span", { class: "font-semibold" }, useSummaFormat(row.get_price));
         }
     },
     {
@@ -119,16 +127,9 @@ const tableColumn = computed(() => [
             return h("span", { class: "font-semibold" }, useSummaFormat(row.discount));
         }
     },
-    
+
+
     {
-        title: t("selling price"),
-        align: "right",
-        titleAlign: "left",
-        render(row) {
-            return h("span", { class: "font-semibold" }, useSummaFormat(row.get_price));
-        }
-    },
-     {
         title: t("profit"),
         align: "right",
         titleAlign: "left",

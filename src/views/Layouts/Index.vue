@@ -98,7 +98,7 @@ const menuOptions = computed(() => [
     key: "documents",
     icon: renderIcon(BuildIcon),
     children: [
-      { label: t("prixod"), key: "stock-entries", icon: renderIcon(WarehouseIcon) },
+      { label: t("sklad"), key: "stock-entries", icon: renderIcon(WarehouseIcon) },
       { label: t("orders"), key: "order", icon: renderIcon(OrderIcon) },
     ]
   },
@@ -116,8 +116,8 @@ const menuOptions = computed(() => [
       { label: t("general offerta"), key: "offerta", icon: renderIcon(threeLineIcon) },
       { label: t("contact"), key: "contact", icon: renderIcon(ContactIcon) },
       { label: t("offers"), key: "offers", icon: renderIcon(EventIcon) },
-      { label: t("news"), key: "news", icon: renderIcon(NewsIcon) },
-      { label: "F.A.Q", key: "F.A.Q", icon: renderIcon(FaqIcon) }
+      // { label: t("news"), key: "news", icon: renderIcon(NewsIcon) },
+      // { label: "F.A.Q", key: "F.A.Q", icon: renderIcon(FaqIcon) }
     ]
   },
   // {

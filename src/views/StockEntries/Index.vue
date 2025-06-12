@@ -1,6 +1,5 @@
 <script setup>
 import { ref, reactive, computed, onMounted, watch, watchEffect, h } from "vue";
-import { useRouter } from "vue-router";
 import { useMagicKeys } from "@vueuse/core";
 import { useMessage, useDialog, NIcon, NButton } from "naive-ui";
 import { AddIcon, RefreshIcon, DeleteIcon, SearchIcon } from '@/components/icons/icon';
@@ -10,7 +9,6 @@ import ModelService from "@/services/stock_entries.service";
 
 const { t } = useI18n();
 const { insert, shift, r } = useMagicKeys();
-const router = useRouter();
 const dialog = useDialog();
 const message = useMessage();
 
@@ -168,7 +166,14 @@ onMounted(() => getAllData());
         </n-button>
       </div>
     </div>
-
+    <n-tabs type="line" animated>
+      <n-tab-pane name="oasis" tab="Oasis">
+      </n-tab-pane>
+      <n-tab-pane name="the beatles" tab="the Beatles">
+      </n-tab-pane>
+      <n-tab-pane name="jay chou" tab="Jay Chou">
+      </n-tab-pane>
+    </n-tabs>
     <n-data-table :row-props="rowProps" :pagination="pagination" :loading="loading" :columns="tableColumn"
       :data="tableData" :bordered="true" :single-line="false" size="small" :scroll-x="1100"
       max-height="calc(100vh - 315px)" />
