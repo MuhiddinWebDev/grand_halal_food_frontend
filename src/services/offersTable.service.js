@@ -27,6 +27,12 @@ class NewsService {
     });
   }
 
+  sendOfferToMobile(id) {
+    return axios.get(END_POINT + `/send-mobile/${id}`).then((res) => {
+      return res;
+    });
+  }
+
   delete(id) {
     return axios.delete(END_POINT + `/delete/${id}`).then((res) => {
       return res;

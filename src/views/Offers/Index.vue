@@ -3,7 +3,7 @@ import { ref, reactive, computed, onMounted, watch, watchEffect, h, inject } fro
 import { useRouter } from "vue-router";
 import { useMagicKeys } from "@vueuse/core";
 import { useMessage, useDialog, NIcon, NImage, NAvatar, NButton } from "naive-ui";
-import { AddIcon, RefreshIcon, PenIcon, DeleteIcon, SearchIcon } from '@/components/icons/icon';
+import { AddIcon, RefreshIcon, PenIcon, DeleteIcon, SearchIcon, TourIcon } from '@/components/icons/icon';
 import { useGlobalStore } from "@/stores/global";
 import { useI18n } from "vue-i18n";
 import ModelForm from "./Form.vue";
@@ -80,7 +80,7 @@ const tableColumn = computed(() => [
         key: "title_en",
     },
     {
-        title: t("link") ,
+        title: t("link"),
         key: "link",
     },
     {
@@ -88,9 +88,27 @@ const tableColumn = computed(() => [
         key: "action",
         align: "center",
         fixed: "right",
-        width: 120,
+        width: 160,
         render(row) {
             return [
+                h(NButton,
+                    {
+                        size: "small",
+                        type: "info",
+                        onClick: (e) => {
+                            ModelService.sendOfferToMobile(row.id).then(() => { });
+                        },
+                        style: {
+                            marginRight: '8px'
+                        }
+                    },
+                    {
+                        icon: () => h(NIcon, {
+                            component: TourIcon,
+                            size: 22,
+                        }),
+                    },
+                ),
                 h(NButton,
                     {
                         size: "small",
