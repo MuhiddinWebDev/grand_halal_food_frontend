@@ -77,10 +77,10 @@ const tableColumn = computed(() => [
             ]);
         },
     },
-    {
-        title: t("brand"),
-        key: "brand.title_" + locale.value,
-    },
+    // {
+    //     title: t("brand"),
+    //     key: "brand.title_" + locale.value,
+    // },
     {
         title: t("name"),
         key: "title_" + locale.value,

@@ -44,10 +44,10 @@
             v-model:value="form_data.category_id" @update:value="changeCategory" :label-field="'title_' + locale"
             value-field="id" />
         </n-form-item>
-        <n-form-item :label="t('brand')" path="brand_id">
+        <!-- <n-form-item :label="t('brand')" path="brand_id">
           <n-select :options="brandOption" fitlerable clearable @keydown="keySave" v-model:value="form_data.brand_id"
             :label-field="'title_' + locale" value-field="id" />
-        </n-form-item>
+        </n-form-item> -->
         <n-space>
           <n-form-item :label="t('get price')" path="get_price">
             <n-input-number @keydown="keySave" v-model:value="form_data.get_price" :parse="useParsenumber"
@@ -188,7 +188,7 @@ const rules = {
   title_ru: createValidator("input require"),
   title_en: createValidator("input require"),
   category_id: createValidator("choose require"),
-  brand_id: createValidator("choose require"),
+  // brand_id: createValidator("choose require"),
 };
 
 onMounted(async () => {
