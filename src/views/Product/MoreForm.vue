@@ -33,9 +33,10 @@
               <n-select :options="categoryOption" v-model:value="product.category_id" :label-field="'title_' + locale"
                 value-field="id" @update:value="() => loadBrands(index)" />
             </n-form-item>
-            <n-form-item :label="t('brand')">
-              <n-select :options="product.brandOption" v-model:value="product.brand_id" :label-field="'title_' + locale"
-                value-field="id" />
+            <!-- <n-form-item :label="t('brand')"> -->
+            <n-form-item>
+              <!-- <n-select :options="product.brandOption" v-model:value="product.brand_id" :label-field="'title_' + locale"
+                value-field="id" /> -->
             </n-form-item>
 
             <n-space>

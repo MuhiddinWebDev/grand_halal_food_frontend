@@ -44,10 +44,12 @@
             v-model:value="form_data.category_id" @update:value="changeCategory" :label-field="'title_' + locale"
             value-field="id" />
         </n-form-item>
-        <!-- <n-form-item :label="t('brand')" path="brand_id">
+        <n-form-item>
+          <!-- <n-form-item :label="t('brand')" path="brand_id">
           <n-select :options="brandOption" fitlerable clearable @keydown="keySave" v-model:value="form_data.brand_id"
             :label-field="'title_' + locale" value-field="id" />
         </n-form-item> -->
+        </n-form-item>
         <n-space>
           <n-form-item :label="t('get price')" path="get_price">
             <n-input-number @keydown="keySave" v-model:value="form_data.get_price" :parse="useParsenumber"
@@ -91,9 +93,8 @@
       </div>
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-2">
         <div class="md:col-span-2">
-          <n-upload :max="5"  directory-dnd @update:file-list="updateUpload"
-            @remove="removeUpload">
-            <n-upload-dragger >
+          <n-upload :max="5" directory-dnd @update:file-list="updateUpload" @remove="removeUpload">
+            <n-upload-dragger>
               <n-text class="text-base">
                 {{ $t('upload_image') }}
               </n-text>
