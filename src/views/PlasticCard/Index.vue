@@ -43,20 +43,24 @@ const tableColumn = computed(() => [
         render: (_, index) => index + 1,
     },
     {
-        title: t("comment") + ' KOR',
-        key: "comment_ko",
+        title: t("plastic card"),
+        key: "number",
     },
     {
-        title: t("comment") + ' RUS',
-        key: "comment_ru",
+        title: t("name") + ' UZB',
+        key: "name_uz",
     },
     {
-        title: t("comment") + ' ENG',
-        key: "comment_en",
+        title: t("name") + ' KOR',
+        key: "name_ko",
     },
     {
-        title: t("link"),
-        key: "link",
+        title: t("name") + ' RUS',
+        key: "name_ru",
+    },
+    {
+        title: t("name") + ' ENG',
+        key: "name_en",
     },
     {
         title: t("action"),
@@ -66,24 +70,6 @@ const tableColumn = computed(() => [
         width: 160,
         render(row) {
             return [
-                h(NButton,
-                    {
-                        size: "small",
-                        type: "info",
-                        onClick: (e) => {
-                            ModelService.sendOfferToMobile(row.id).then(() => { });
-                        },
-                        style: {
-                            marginRight: '8px'
-                        }
-                    },
-                    {
-                        icon: () => h(NIcon, {
-                            component: TourIcon,
-                            size: 22,
-                        }),
-                    },
-                ),
                 h(NButton,
                     {
                         size: "small",
@@ -99,35 +85,6 @@ const tableColumn = computed(() => [
                     {
                         icon: () => h(NIcon, {
                             component: PenIcon,
-                            size: 22,
-                        }),
-                    },
-                ),
-                h(NButton,
-                    {
-                        size: "small",
-                        type: "warning",
-                        onClick: () => {
-                            dialog.warning({
-                                title: t("warning"),
-                                content: t("delete_row"),
-                                positiveText: t("yes"),
-                                negativeText: t("no"),
-                                onPositiveClick: () => {
-                                    ModelService.delete(row.id)
-                                        .then(() => getAllData())
-                                        .catch((err) => {
-                                            globalStore.errorPage = err.data;
-                                            router.push({ name: "error page" });
-                                        });
-                                },
-                                onNegativeClick: () => message.success(t("cancel")),
-                            });
-                        },
-                    },
-                    {
-                        icon: () => h(NIcon, {
-                            component: DeleteIcon,
                             size: 22,
                         }),
                     },
@@ -166,9 +123,8 @@ onMounted(() => getAllData());
             </div>
         </div>
 
-        <n-data-table :loading="loading" :columns="tableColumn"
-            :data="tableData" :bordered="true" :single-line="false" size="small" :scroll-x="1300"
-            max-height="calc(100vh - 315px)" />
+        <n-data-table :loading="loading" :columns="tableColumn" :data="tableData" :bordered="true" :single-line="false"
+            size="small" :scroll-x="1300" max-height="calc(100vh - 315px)" />
         <n-modal transform-origin="center" v-model:show="model_act.update">
             <n-card class="w-full max-w-3xl" :bordered="false" role="dialog" aria-modal="true">
                 <ModelForm type="update" :id="model_act.update_id" @close="showClose('update')"

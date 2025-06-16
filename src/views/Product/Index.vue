@@ -65,28 +65,6 @@ const tableColumn = computed(() => [
             return dayJS(row.datetime).format("YYYY-MM-DD HH:mm:ss");
         }
     },
-    {
-        title: t("category"),
-        key: "name",
-        render(row) {
-            return h("div", { class: "flex items-center" }, [
-                row.category?.image
-                    ? h(NImage, {
-                        src: fileUrl + row.category?.image,
-                        height: 35,
-                        width: 50,
-                        style: { borderRadius: "35px", marginRight: "8px" },
-                        lazy: true,
-                        previewDisabled: true,
-                    })
-                    : h(NAvatar, {
-                        size: "small",
-                        style: { marginRight: "8px" },
-                    }),
-                h("span", { class: "font-semibold" }, row.category?.['title_' + locale.value]),
-            ]);
-        },
-    },
     // {
     //     title: t("brand"),
     //     key: "brand.title_" + locale.value,
@@ -277,7 +255,6 @@ const tableColumn = computed(() => [
         },
     },
 ]);
-
 
 
 const pagination = reactive({
