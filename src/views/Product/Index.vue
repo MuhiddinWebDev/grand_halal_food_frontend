@@ -9,6 +9,7 @@ import { useI18n } from "vue-i18n";
 import ModelForm from "./Form.vue";
 import MoreForm from './MoreForm.vue';
 import ModelService from "@/services/product.service";
+import CategoryService from "@/services/category.service";
 import { useSummaFormat } from "@/composible/NumberFormat";
 
 const { t, locale } = useI18n();
@@ -21,8 +22,11 @@ const fileUrl = inject("fileUrl");
 const dayJS = inject('dayJS')
 const tableData = ref([]);
 const loading = ref(false);
-const filterHeader = ref({ text: "" });
-
+const filterHeader = ref({ 
+    category_id: null,
+    text: null
+});
+const categoryOption = ref([]);
 const model_act = ref({
     create: false,
     update: false,
@@ -38,6 +42,12 @@ const getAllData = (action) => {
         if (action) model_act.value[action] = false;
     });
 };
+
+const getAllCategory = () => {
+    CategoryService.all().then(res => {
+        categoryOption.value = res;
+    })
+}
 
 const tableColumn = computed(() => [
     {
@@ -268,6 +278,8 @@ const tableColumn = computed(() => [
     },
 ]);
 
+
+
 const pagination = reactive({
     page: 1,
     pageSize: 10,
@@ -290,6 +302,13 @@ const updateBtn = () => {
     filterHeader.value.text = "";
     getAllData();
 };
+
+const updateTabs = (index) => {
+    let cat_id = categoryOption.value.find((item, child_index) => child_index == index)?.id;
+    filterHeader.value.category_id = cat_id;
+    getAllData();
+};
+
 const mainAdd = () => (model_act.value.create = true);
 const addMoreProduct = () => {
     model_act.value.more_create = true;
@@ -298,11 +317,16 @@ const showClose = (action) => (model_act.value[action] = false);
 const modalEmit = (action) => getAllData(action);
 
 watch(insert, (v) => v && mainAdd());
+
+
 watchEffect(() => {
     if (shift.value && r.value) getAllData();
 });
 
-onMounted(() => getAllData());
+onMounted(() => {
+    updateTabs(0);
+    getAllCategory()
+});
 </script>
 <template>
     <div class="p-2 space-y-2 bg-white rounded-xl shadow-md overflow-x-auto">
@@ -344,10 +368,19 @@ onMounted(() => getAllData());
                 </n-button>
             </div>
         </div>
-
-        <n-data-table :row-props="rowProps" :pagination="pagination" :loading="loading" :columns="tableColumn"
-            :data="tableData" :bordered="true" :single-line="false" size="small" :scroll-x="1800"
-            max-height="calc(100vh - 315px)" />
+        <n-tabs type="card" animated :default-value="0" @update:value="updateTabs">
+            <n-tab-pane v-for="(category, index) in categoryOption" :key="index" :name="index">
+                <template #tab>
+                    <n-flex align="center">
+                        <n-avatar round :size="48" :src="fileUrl + category.image" />
+                        {{ category['title_' + locale] || category.title_ko }}
+                    </n-flex>
+                </template>
+                <n-data-table :row-props="rowProps" :pagination="pagination" :loading="loading" :columns="tableColumn"
+                    :data="tableData" :bordered="true" :single-line="false" size="small" :scroll-x="1800"
+                    max-height="calc(100vh - 315px)" />
+            </n-tab-pane>
+        </n-tabs>
 
         <n-modal transform-origin="center" v-model:show="model_act.create">
             <n-card class="w-full max-w-5xl" :bordered="false" role="dialog" aria-modal="true">

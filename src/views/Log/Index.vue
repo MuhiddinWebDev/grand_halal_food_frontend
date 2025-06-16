@@ -14,8 +14,8 @@ const router = useRouter();
 const passwordInput = ref(null);
 const showPassword = ref(false);
 const form_data = ref({
-    phone: "+998907788769",
-    password: "987654321!",
+    phone: "",
+    password: "",
 })
 
 const length = ref(0);

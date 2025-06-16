@@ -69,7 +69,13 @@ const router = createRouter({
           path: "/offerta-table",
           name: "offerta",
           component: () => import("@/views/Offerta/Index.vue"),
+        },
+        {
+          path: "/plastic-card-table",
+          name: "plastic-card",
+          component: () => import("@/views/PlasticCard/Index.vue"),
         }
+
       ]
     },
     {

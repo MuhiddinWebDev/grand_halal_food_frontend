@@ -1,9 +1,9 @@
 import axios from "axios";
-const END_POINT = "/product";
+const END_POINT = "/plastic-card";
 
 class Service {
-  all(filter) {
-    return axios.post(END_POINT + "/all", filter).then((res) => {
+  all() {
+    return axios.get(END_POINT + "/all").then((res) => {
       return res;
     });
   }
@@ -16,12 +16,6 @@ class Service {
 
   update(id, data) {
     return axios.patch(END_POINT + `/update/${id}`, data).then((res) => {
-      return res;
-    });
-  }
-
-  updateTools(id, data) {
-    return axios.patch(END_POINT + `/update-tools/${id}`, data).then((res) => {
       return res;
     });
   }

@@ -187,5 +187,9 @@
   "selling price":"Selling price",
   "profit":"Profit",
   "general offerta":"Public offer",
-  "all":"All"
+  "all":"All",
+  "plastic card":"Plastic card",
+  "paid":"Paid",
+  "unpaid":"Unpaid",
+  "payment": "Payment"
 } 

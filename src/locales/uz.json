@@ -188,5 +188,9 @@
     "selling price": "Sotish narxi",
     "profit": "Foyda",
     "general offerta": "Ommaviy offerta",
-    "all":"Barchasi"
+    "all":"Barchasi",
+    "plastic card":"Plastika karta",
+    "paid":"To'langan",
+    "unpaid":"To'lanmagan",
+    "payment": "To'lov"
 }

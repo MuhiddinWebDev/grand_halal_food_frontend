@@ -187,5 +187,9 @@
   "selling price":"판매가격",
   "profit":"평가",
   "general offerta":"공개 제안",
-  "all":"전체"
+  "all":"전체",
+  "plastic card":"피라스카드",
+  "paid":"올파드",
+  "unpaid":"올파드 없음",
+  "payment": "효과"
 }

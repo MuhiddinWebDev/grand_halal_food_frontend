@@ -27,7 +27,8 @@ import {
   ContactIcon,
   BasketIcon,
   WarehouseIcon,
-  DeliveryIcon
+  DeliveryIcon,
+  SubCategoryIcon
 } from "../../components/icons/icon.js";
 
 const emits = defineEmits(["updatelang"]);
@@ -116,6 +117,7 @@ const menuOptions = computed(() => [
       { label: t("general offerta"), key: "offerta", icon: renderIcon(threeLineIcon) },
       { label: t("contact"), key: "contact", icon: renderIcon(ContactIcon) },
       { label: t("offers"), key: "offers", icon: renderIcon(EventIcon) },
+      { label: t("plastic card"), key: "plastic-card", icon: renderIcon(SettingIcon) },
       // { label: t("news"), key: "news", icon: renderIcon(NewsIcon) },
       // { label: "F.A.Q", key: "F.A.Q", icon: renderIcon(FaqIcon) }
     ]

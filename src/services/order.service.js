@@ -32,6 +32,12 @@ class Service {
     });
   }
 
+  updatePaid(id) {
+    return axios.patch(END_POINT + `/paid/${id}`).then((res) => {
+      return res;
+    });
+  }
+
   getOne(id) {
     return axios.get(END_POINT + `/${id}`).then((res) => {
       return res;
