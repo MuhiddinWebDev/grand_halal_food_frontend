@@ -1,159 +1,105 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
 import reportService from "../../services/report.service";
-import { ClientIcon, AdminIcon, OrderIcon, BasketIcon, RefreshIcon } from '@/components/icons/icon';
-import BarChart from "@/components/Charts/bar.vue";
+import { ClientIcon, StoreIcon, OrderIcon, BasketIcon, RefreshIcon } from '@/components/icons/icon';
+import ChartTemp from "@/components/Charts/Index.vue";
 import { useI18n } from "vue-i18n";
-const { t } = useI18n();
-let chartBatteryData = ref({
-    region: [],
-    battery: [],
-    data1: [],
-    data2: []
+import { useRouter } from "vue-router";
+const { t, locale } = useI18n();
+const router = useRouter();
+let chartCategoryData = ref({
+    product: [],
+    category: {
+        uz: [],
+        ru: [],
+        en: [],
+        ko: []
+    },
+    data: []
 })
-const selectOption = ref({
-    battery: []
-})
+
 const infoCard = ref({
     client: 0,
-    store: 0,
-    user: 0,
-    battery: 0,
+    product: 0,
+    sklad: 0,
+    orders: 0,
 });
 const currentDate = new Date();
 const beginDate = new Date(currentDate.getFullYear(), 0, 1)
 const filterHeader = ref({
     range: [beginDate.getTime(), currentDate.getTime()],
-    battery_id: null,
-    region_id: null
+    category_id: null,
 })
 
 const getReport = () => {
     reportService.homeReport().then((res) => {
         infoCard.value = res;
     })
+    reportService.productReportByCategory().then((res) => {
+        chartCategoryData.value = res;
+    })
 }
 
+const pieDataByCategory = computed(() => {
+    const categoryTitles = chartCategoryData.value.category[locale.value] || [];
+    const productList = chartCategoryData.value.product || [];
+    const data = productList.map((item, index) => ({
+        name: categoryTitles[index] || `Kategoriya ${index + 1}`,
+        value: item.product_count ?? 0
+    }));
 
-
-
-const barDataByRegion = computed(() => {
     return {
-        responsive: true,
-        maintainAspectRatio: false,
-        title: {
-        },
-        xAxis: [
-            {
-                type: 'category',
-                data: chartBatteryData.value.region,
-                axisTick: {
-                    alignWithLabel: true
-                },
-                axisLabel: {
-                    interval: 0,
-                    rotate: 30
-                }
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value'
-            }
-        ],
-        grid: {
-            left: '2%',
-            right: '2%',
-            bottom: '10%',
-            containLabel: true
-        },
         tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
-            }
+            trigger: 'item',
+            formatter: '{b}<br/>Mahsulotlar soni: {c} ({d}%)'
         },
-        toolbox: {
-            show: true,
-            orient: 'vertical',
-            left: 'right',
-            top: 'center',
-            feature: {
-                mark: { show: true },
-                dataView: { show: true, readOnly: false },
-                magicType: { show: true, type: ['line', 'bar', 'stack'] },
-                restore: { show: true },
-                saveAsImage: { show: true }
-            }
+        legend: {
+            type: 'scroll',
+            orient: 'horizontal',  // <--- pastga chiqarish uchun horizontal qilish
+            top: 10,            // <--- pastdan joy
+            left: 'center',        // <--- o‘rtaga hizalash
+            textStyle: {
+                fontSize: 14
+            },
+            itemWidth: 14,
+            itemHeight: 10,
+            padding: [10, 20, 10, 20]
         },
+
         series: [
             {
-                type: 'bar',
-                barWidth: '95%',
-                data: chartBatteryData.value.data1
-            },
-        ]
-    }
-});
-
-const barDataByBattery = computed(() => {
-    return {
-        responsive: true,
-        maintainAspectRatio: false,
-        title: {
-        },
-        xAxis: [
-            {
-                type: 'category',
-                data: chartBatteryData.value.battery,
-                axisTick: {
-                    alignWithLabel: true
+                name: 'Mahsulotlar soni',
+                type: 'pie',
+                radius: ['40%', '70%'], // donut
+                roseType: 'radius', // bo‘lak radiusi son asosida farqlanadi
+                minAngle: 3, // juda kichik sonli bo‘laklar ham ko‘rinsin
+                padAngle: 2,
+                itemStyle: {
+                    borderRadius: 8,
+                    borderColor: '#fff',
+                    borderWidth: 2
                 },
-                axisLabel: {
-                    interval: 0,
-                    rotate: 30
-                }
+                label: {
+                    show: true,
+                    position: 'outside',
+                    formatter: '{b}: {c}',
+                    fontSize: 14,
+                    lineHeight: 16
+                },
+                labelLayout: {
+                    hideOverlap: true,
+                    moveOverlap: 'shiftY'
+                },
+                labelLine: {
+                    show: true,
+                    length: 15,
+                    length2: 10,
+                    smooth: true
+                },
+                data
             }
-        ],
-        yAxis: [
-            {
-                type: 'value'
-            }
-        ],
-        grid: {
-            left: '2%',
-            right: '2%',
-            bottom: '10%', // Ensure space for rotated labels
-            containLabel: true
-        },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
-            }
-        },
-        toolbox: {
-            show: true,
-            orient: 'vertical',
-            left: 'right',
-            top: 'center',
-            feature: {
-                mark: { show: true },
-                dataView: { show: true, readOnly: false },
-                magicType: { show: true, type: ['line', 'bar', 'stack'] },
-                restore: { show: true },
-                saveAsImage: { show: true }
-            }
-        },
-        series: [
-            {
-                name: t('battery'),
-                type: 'bar',
-                barWidth: '95%',
-                data: chartBatteryData.value.data2
-            },
         ]
-    }
+    };
 });
 
 const updateDiagramm = () => {
@@ -161,7 +107,7 @@ const updateDiagramm = () => {
 
 
 onMounted(() => {
-    // getReport();
+    getReport();
 })
 </script>
 
@@ -169,8 +115,8 @@ onMounted(() => {
     <div class="p-2 space-y-2">
         <!-- Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Client Card -->
-            <n-card style="background-color: #059669; border-radius: 10px; color: white;" class="rounded-lg shadow-lg">
+            <n-card @click="router.push({ name: 'client' })"
+                class="rounded-lg shadow-lg cursor-pointer bg-emerald-600 text-white hover:bg-emerald-700 transition duration-300 ease-in-out">
                 <template #footer>
                     <h2 class="text-lg font-semibold mb-2">{{ t('client') }}</h2>
                     <n-divider class="my-2 bg-white opacity-30" />
@@ -185,9 +131,8 @@ onMounted(() => {
                 </template>
             </n-card>
 
-
-            <!-- Store Card -->
-            <n-card style="background-color: #0d9488; border-radius: 10px; color: white;" class="rounded-lg shadow-lg">
+            <n-card @click="router.push({ name: 'product' })"
+                class="rounded-lg shadow-lg cursor-pointer bg-teal-600 text-white hover:bg-teal-700 transition duration-300 ease-in-out">
                 <template #footer>
                     <h2 class="text-lg font-semibold mb-2">{{ t('products') }}</h2>
                     <n-divider class="my-2 bg-white opacity-30" />
@@ -196,32 +141,30 @@ onMounted(() => {
                             <BasketIcon />
                         </n-icon>
                         <h1 class="text-2xl font-bold">
-                            <n-number-animation :from="0" :to="infoCard.store" />
+                            <n-number-animation :from="0" :to="infoCard.product" />
                         </h1>
                     </div>
                 </template>
             </n-card>
 
-
-            <!-- Admin Card -->
-            <n-card style="background-color: #dc2626; border-radius: 10px; color: white;" class="rounded-lg shadow-lg">
+            <n-card @click="router.push({ name: 'stock-entries' })"
+                class="rounded-lg shadow-lg cursor-pointer bg-red-600 text-white hover:bg-red-700 transition duration-300 ease-in-out">
                 <template #footer>
-                    <h2 class="text-lg font-semibold mb-2">{{ t('admin') }}</h2>
+                    <h2 class="text-lg font-semibold mb-2">{{ t('sklad') }}</h2>
                     <n-divider class="my-2 bg-white opacity-30" />
                     <div class="flex items-center justify-between">
                         <n-icon size="40">
-                            <AdminIcon />
+                            <StoreIcon />
                         </n-icon>
                         <h1 class="text-2xl font-bold">
-                            <n-number-animation :from="0" :to="infoCard.user" />
+                            <n-number-animation :from="0" :to="infoCard.sklad" />
                         </h1>
                     </div>
                 </template>
             </n-card>
 
-
-            <!-- Battery Card -->
-            <n-card style="background-color: #f59e0b; border-radius: 10px; color: white;" class="rounded-lg shadow-lg">
+            <n-card @click="router.push({ name: 'order' })"
+                class="rounded-lg shadow-lg cursor-pointer bg-amber-500 text-white hover:bg-amber-600 transition duration-300 ease-in-out">
                 <template #footer>
                     <h2 class="text-lg font-semibold mb-2">{{ t('orders') }}</h2>
                     <n-divider class="my-2 bg-white opacity-30" />
@@ -230,12 +173,11 @@ onMounted(() => {
                             <OrderIcon />
                         </n-icon>
                         <h1 class="text-2xl font-bold">
-                            <n-number-animation :from="0" :to="infoCard.battery" />
+                            <n-number-animation :from="0" :to="infoCard.orders" />
                         </h1>
                     </div>
                 </template>
             </n-card>
-
         </div>
 
         <!-- Charts & Filters -->
@@ -253,15 +195,17 @@ onMounted(() => {
                         {{ t('update') }}
                     </n-button>
                 </div>
-
-                <!-- Chart 1 -->
                 <div class="w-full">
-                    <BarChart :data="barDataByRegion" />
+                    <ChartTemp :data="pieDataByCategory" width="800px" height="800px" />
                 </div>
-
-                <!-- Chart 2 -->
-                <div class="w-full">
-                    <BarChart :data="barDataByBattery" />
+                 <div class="w-full">
+                    <ChartTemp :data="pieDataByCategory" width="800px" height="800px" />
+                </div>
+                 <div class="w-full">
+                    <ChartTemp :data="pieDataByCategory" width="800px" height="800px" />
+                </div>
+                 <div class="w-full">
+                    <ChartTemp :data="pieDataByCategory" width="800px" height="800px" />
                 </div>
             </div>
         </div>

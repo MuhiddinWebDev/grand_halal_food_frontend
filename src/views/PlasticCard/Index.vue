@@ -1,21 +1,15 @@
 <script setup>
-import { ref, reactive, computed, onMounted, watch, watchEffect, h, inject } from "vue";
-import { useRouter } from "vue-router";
+import { ref, computed, onMounted, watchEffect, h } from "vue";
 import { useMagicKeys } from "@vueuse/core";
-import { useMessage, useDialog, NIcon, NImage, NAvatar, NButton } from "naive-ui";
-import { AddIcon, RefreshIcon, PenIcon, DeleteIcon, SearchIcon, TourIcon } from '@/components/icons/icon';
-import { useGlobalStore } from "@/stores/global";
+import {  NIcon, NButton } from "naive-ui";
+import { RefreshIcon, PenIcon, } from '@/components/icons/icon';
 import { useI18n } from "vue-i18n";
 import ModelForm from "./Form.vue";
 import ModelService from "@/services/plastic_card.service";
 
 const { t } = useI18n();
-const { insert, shift, r } = useMagicKeys();
-const router = useRouter();
-const dialog = useDialog();
-const message = useMessage();
-const globalStore = useGlobalStore();
-const fileUrl = inject("fileUrl");
+const { shift, r } = useMagicKeys();
+
 
 const tableData = ref([]);
 const loading = ref(false);
