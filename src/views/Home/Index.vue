@@ -47,7 +47,6 @@ const pieDataByCategory = computed(() => {
         name: categoryTitles[index] || `Kategoriya ${index + 1}`,
         value: item.product_count ?? 0
     }));
-
     return {
         title: {
             text: 'Mahsulotlar soni',
