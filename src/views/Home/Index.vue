@@ -49,6 +49,12 @@ const pieDataByCategory = computed(() => {
     }));
 
     return {
+        title: {
+            text: 'Mahsulotlar soni',
+            textStyle: {
+                fontSize: 16
+            }
+        },
         tooltip: {
             trigger: 'item',
             formatter: '{b}<br/>Mahsulotlar soni: {c} ({d}%)'
