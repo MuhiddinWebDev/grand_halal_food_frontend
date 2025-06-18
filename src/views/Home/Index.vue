@@ -7,6 +7,22 @@ import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 const { t, locale } = useI18n();
 const router = useRouter();
+const orderStatusChart = ref({
+    statusChart: {
+        uz: [],
+        ru: [],
+        en: [],
+        ko: []
+    },
+})
+const saleProductChart = ref({
+    topProducts: {
+        uz: [],
+        ru: [],
+        en: [],
+        ko: []
+    },
+})
 let chartCategoryData = ref({
     product: [],
     category: {
@@ -38,6 +54,12 @@ const getReport = () => {
     reportService.productReportByCategory().then((res) => {
         chartCategoryData.value = res;
     })
+    reportService.orderByStatusChart(filterHeader.value).then((res) => {
+        orderStatusChart.value = res;
+    })
+    reportService.saleTopProductReport(filterHeader.value).then((res) => {
+        saleProductChart.value = res;
+    })
 }
 
 const pieDataByCategory = computed(() => {
@@ -49,14 +71,14 @@ const pieDataByCategory = computed(() => {
     }));
     return {
         title: {
-            text: 'Mahsulotlar soni',
+            text: t('products count'),
             textStyle: {
                 fontSize: 16
             }
         },
         tooltip: {
             trigger: 'item',
-            formatter: '{b}<br/>Mahsulotlar soni: {c} ({d}%)'
+            formatter: `{b}<br/>${t('products count')}: {c} ({d}%)`
         },
         legend: {
             type: 'scroll',
@@ -73,7 +95,7 @@ const pieDataByCategory = computed(() => {
 
         series: [
             {
-                name: 'Mahsulotlar soni',
+                name: t('products count'),
                 type: 'pie',
                 radius: ['40%', '70%'], // donut
                 roseType: 'radius', // bo‘lak radiusi son asosida farqlanadi
@@ -106,6 +128,108 @@ const pieDataByCategory = computed(() => {
         ]
     };
 });
+
+const barChartTopProducts = computed(() => {
+    const data = saleProductChart.value.topProducts[locale.value] || [];
+
+    return {
+        title: {
+            text: t('best selling products'),
+            left: 'center',
+            top: 10,
+            textStyle: { fontSize: 16 }
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: { type: 'shadow' }
+        },
+        xAxis: {
+            type: 'category',
+            data: data.map(item => item.name),
+            axisLabel: { interval: 0, rotate: 40 }
+        },
+        yAxis: {
+            type: 'value',
+        },
+        series: [
+            {
+                name: t('count'),
+                type: 'bar',
+                data: data.map((item, index) => ({
+                    value: item.value,
+                })),
+                barWidth: '50%',
+                itemStyle: {
+                    borderRadius: [4, 4, 0, 0]
+                },
+                label: {
+                    show: true,
+                    position: 'outside',
+                    fontSize: 14
+                }
+            }
+        ]
+    };
+});
+
+const pieDataOrders = computed(() => {
+    const data = orderStatusChart.value.statusChart[locale.value] || [];
+    return {
+        title: {
+            text: t('orders count'),
+            textStyle: {
+                fontSize: 16,
+            }
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: `{b}<br/> ${t('orders count')}: {c} ({d}%)`
+        },
+        legend: {
+            type: 'scroll',
+            orient: 'horizontal',
+            top: 10,
+            left: 'center',
+            textStyle: {
+                fontSize: 14
+            }
+        },
+        series: [
+            {
+                name: t('orders status'),
+                type: 'pie',
+                radius: ['40%', '70%'],
+                roseType: 'radius',
+                minAngle: 3,
+                padAngle: 2,
+                itemStyle: {
+                    borderRadius: 8,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                label: {
+                    show: true,
+                    position: 'outside',
+                    formatter: '{b}: {c}',
+                    fontSize: 14,
+                },
+                labelLayout: {
+                    hideOverlap: true,
+                    moveOverlap: 'shiftY'
+                },
+                labelLine: {
+                    show: true,
+                    length: 15,
+                    length2: 10,
+                    smooth: true
+                },
+                data
+            }
+        ]
+    };
+});
+
+
 
 const updateDiagramm = () => {
 }
@@ -187,32 +311,28 @@ onMounted(() => {
 
         <!-- Charts & Filters -->
         <div class="space-y-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <!-- Filter Row -->
-                <div class="col-span-full flex flex-wrap gap-4 items-center">
-                    <n-date-picker v-model:value="filterHeader.range" type="daterange" />
-                    <n-button @click="updateDiagramm" type="success">
-                        <template #icon>
-                            <n-icon>
-                                <RefreshIcon />
-                            </n-icon>
-                        </template>
-                        {{ t('update') }}
-                    </n-button>
-                </div>
-                <div class="w-full">
-                    <ChartTemp :data="pieDataByCategory" width="800px" height="800px" />
-                </div>
-                 <div class="w-full">
-                    <ChartTemp :data="pieDataByCategory" width="800px" height="800px" />
-                </div>
-                 <div class="w-full">
-                    <ChartTemp :data="pieDataByCategory" width="800px" height="800px" />
-                </div>
-                 <div class="w-full">
-                    <ChartTemp :data="pieDataByCategory" width="800px" height="800px" />
-                </div>
+            <!-- Filter -->
+            <div class="flex flex-wrap gap-4 items-center">
+                <n-date-picker v-model:value="filterHeader.range" type="daterange" />
+                <n-button @click="updateDiagramm" type="success">
+                    <template #icon><n-icon>
+                            <RefreshIcon />
+                        </n-icon></template>
+                    {{ t('update') }}
+                </n-button>
+            </div>
+
+            <!-- Bar Chart: Top Product -->
+            <div class="w-full">
+                <ChartTemp :data="barChartTopProducts" class="w-full max-w-full" style="height: 500px;" />
+            </div>
+
+            <!-- 2 pie charts yonma-yon -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <ChartTemp :data="pieDataOrders" class="w-full" style="height: 400px;" />
+                <ChartTemp :data="pieDataByCategory" class="w-full" style="height: 400px;" />
             </div>
         </div>
+
     </div>
 </template>

@@ -12,5 +12,15 @@ class Service {
       return res;
     });
   }
+  orderByStatusChart(filter) {
+    return axios.post(END_POINT + "/order-chart", filter).then((res) => {
+      return res;
+    });
+  }
+  saleTopProductReport(filter) {
+    return axios.post(END_POINT + "/sale-top-product", filter).then((res) => {
+      return res;
+    });
+  }
 }
 export default new Service();

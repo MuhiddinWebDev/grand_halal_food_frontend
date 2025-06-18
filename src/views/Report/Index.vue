@@ -55,13 +55,6 @@ const report_table = computed(() => [
         s_path: '/sverka-sms',
     },
     {
-        title: t('client battery'),
-        report: t('client battery report'),
-        sverka: t('client battery sverka'),
-        r_path: '/report-client-battery',
-        s_path: '/sverka-client-battery',
-    },
-    {
         title: t('client engagement'),
         report: t('client engagement report'),
         sverka: t('client engagement sverka'),
