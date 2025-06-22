@@ -1,21 +1,16 @@
 <script setup>
 import { ref, reactive, computed, onMounted, watch, watchEffect, h, inject } from "vue";
-import { useRouter } from "vue-router";
 import { useMagicKeys } from "@vueuse/core";
-import { useMessage, useDialog, NIcon, NImage, NSwitch, NAvatar, NButton } from "naive-ui";
-import { RefreshIcon, PenIcon, TourIcon, SearchIcon } from '@/components/icons/icon';
-import { useGlobalStore } from "@/stores/global";
+import { NIcon, NImage, NAvatar, NButton } from "naive-ui";
+import { RefreshIcon, TourIcon, SearchIcon } from '@/components/icons/icon';
 import { useI18n } from "vue-i18n";
 import ModelService from "@/services/clients.service";
 import { usePhoneFormat } from "@/composible/NumberFormat";
 
-const { t, locale } = useI18n();
+const { t, } = useI18n();
 const { insert, shift, r } = useMagicKeys();
 const dayJS = inject('dayJS')
-const router = useRouter();
-const dialog = useDialog();
-const message = useMessage();
-const globalStore = useGlobalStore();
+
 const fileUrl = inject("fileUrl");
 
 const tableData = ref([]);
@@ -75,7 +70,7 @@ const tableColumn = computed(() => [
     },
     {
         title: t("login") + " / " + t("datetime"),
-        key: "login",
+        key: "datetime",
         render: (row) => dayJS(row.datetime).format("YYYY-MM-DD HH:mm:ss"),
     },
     {
@@ -131,8 +126,6 @@ const updateBtn = () => {
     getAllData();
 };
 const mainAdd = () => (model_act.value.create = true);
-const showClose = (action) => (model_act.value[action] = false);
-const modalEmit = (action) => getAllData(action);
 
 watch(insert, (v) => v && mainAdd());
 watchEffect(() => {

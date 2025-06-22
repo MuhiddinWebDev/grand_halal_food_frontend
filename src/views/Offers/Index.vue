@@ -141,10 +141,6 @@ const tableColumn = computed(() => [
                                 onPositiveClick: () => {
                                     ModelService.delete(row.id)
                                         .then(() => getAllData())
-                                        .catch((err) => {
-                                            globalStore.errorPage = err.data;
-                                            router.push({ name: "error page" });
-                                        });
                                 },
                                 onNegativeClick: () => message.success(t("cancel")),
                             });

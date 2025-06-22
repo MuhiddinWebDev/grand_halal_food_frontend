@@ -212,9 +212,10 @@ onMounted(async () => {
 
 // Save action
 const save = async () => {
+  if (spinner.value) return;
+  spinner.value = true;
   try {
     await formRef.value?.validate();
-    spinner.value = true;
 
     if (props.type === "create") {
       const res = await ModelService.create(form_data.value);
