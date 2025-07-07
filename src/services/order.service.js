@@ -45,7 +45,7 @@ class Service {
   }
 
   delete(id) {
-    return axios.delete(END_POINT + `/${id}`).then((res) => {
+    return axios.delete(END_POINT + `/delete/${id}`).then((res) => {
       return res;
     });
   }

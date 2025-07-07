@@ -1,9 +1,11 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
+import { useNotification } from 'naive-ui';
 import { useI18n } from "vue-i18n"
 const { t } = useI18n();
 const router = useRouter();
+const notification = useNotification();
 const report_table = computed(() => [
     {
         title: t('prixod'),
@@ -13,83 +15,74 @@ const report_table = computed(() => [
         s_path: '/sverka-kirim',
     },
     {
-        title: t('rasxod'),
-        report: t('rasxod report'),
-        sverka: t('rasxod sverka'),
-        r_path: '/report-chiqim',
-        s_path: '/sverka-chiqim',
+        title: t('orders'),
+        report: t('orders report'),
+        sverka: t('orders sverka'),
+        r_path: '/report-orders',
+        r_path: '/sverka-orders',
     },
     {
-        title: t('sklad'),
-        report: t('sklad report'),
-        sverka: t('sklad sverka'),
-        r_path: '/report-sklad',
-        s_path: '/sverka-sklad',
+        title: t('most sold products'),
+        report: t('most sold report'),
+        sverka: t('most sold sverka'),
+        r_path: '/report-most-sold',
+        r_path: '/sverka-most-sold',
     },
     {
-        title: t('order'),
-        report: t('order report'),
-        sverka: t('order sverka'),
-        r_path: '/report-order',
-        s_path: '/sverka-order',
+        title: t('most profitable products'),
+        report: t('most profitable report'),
+        sverka: t('most profitable sverka'),
+        r_path: '/report-most-profit',
+        r_path: '/sverka-most-profit',
     },
     {
-        title: t('service'),
-        report: t('service report'),
-        sverka: t('service sverka'),
-        r_path: '/report-service',
-        s_path: '/sverka-service',
-    },
-    {
-        title: t('refund'),
-        report: t('refund report'),
-        sverka: t('refund sverka'),
-        r_path: '/report-refund',
-        s_path: '/sverka-refund',
-    },
-    {
-        title: t('sms service'),
-        report: t('sms service report'),
-        sverka: t('sms service sverka'),
-        r_path: '/report-sms',
-        s_path: '/sverka-sms',
-    },
-    {
-        title: t('client engagement'),
-        report: t('client engagement report'),
-        sverka: t('client engagement sverka'),
-        r_path: '/report-client-login',
-        s_path: '/sverka-client-login',
-    },
-    {
-        title: t('serial number'),
-        report: t('serial number report'),
-        r_path: '/report-serial-number',
+        title: t('warehouse stock'),
+        report: t('stock report'),
+        sverka: t('warehouse sverka'),
+        r_path: '/report-warehouse',
+        r_path: '/sverka-warehouse',
     },
 ]);
+
 const nextToReport = (path) => {
-    router.push({ path: path })
+    notification.warning({
+        title: "Ogohlantirish",
+        content: "Texnik ishlar olib borilmoqda",
+        keepAliveOnHover: true,
+        duration: 1000
+    })
+    // router.push({ path: path })
 }
 </script>
 <template>
-    <div class="report">
-        <n-grid cols="2 s:2 m:3 l:4 xl:4" responsive="screen" :x-gap="8" :y-gap="8">
-            <n-grid-item v-for="(item, index) in report_table " :key="index">
-                <div class="report-box">
-                    <div class="report-box_title">
-                        <h2>{{ item.title }}</h2>
+    <div class="p-2 sm:p-4">
+        <n-grid cols="1 s:2 m:2 l:3 xl:4" responsive="screen" :x-gap="8" :y-gap="8">
+            <n-grid-item v-for="(item, index) in report_table" :key="index">
+                <div
+                    class=" rounded-xl p-4 bg-[#E7F4EC] dark:bg-[#103D26] shadow hover:shadow-lg transition-all cursor-pointer">
+                    <div class="mb-2">
+                        <h2 class="text-lg font-bold text-center text-[#115D33] dark:text-white">
+                            {{ item.title }}
+                        </h2>
                     </div>
                     <n-divider :style="{ margin: '4px 0px' }"></n-divider>
-                    <div class="report-box_content">
-                        <div class="report-box_item" @click="nextToReport(item.r_path)">
-                            <h3>{{ item.report }}</h3>
+                    <div class="space-y-2 mt-2">
+                        <div class=" bg-[#C7EAD5] dark:bg-[#115D33] p-2 rounded hover:bg-[#A8DFC1]"
+                            @click="nextToReport(item.r_path)">
+                            <h3 class="text-center font-semibold text-[#115D33] dark:text-white">
+                                {{ item.report }}
+                            </h3>
                         </div>
-                        <div v-if="item.sverka" class="report-box_item" @click="nextToReport(item.s_path)">
-                            <h3>{{ item.sverka }}</h3>
+                        <div v-if="item.sverka" class="bg-[#B2E5C9] dark:bg-[#0F4A2A] p-2 rounded hover:bg-[#92D9B3]"
+                            @click="nextToReport(item.s_path)">
+                            <h3 class="text-center font-semibold text-[#115D33] dark:text-white">
+                                {{ item.sverka }}
+                            </h3>
                         </div>
                     </div>
                 </div>
             </n-grid-item>
         </n-grid>
     </div>
+
 </template>

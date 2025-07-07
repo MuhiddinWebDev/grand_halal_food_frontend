@@ -176,10 +176,17 @@
     "selling price": "Sotish narxi",
     "profit": "Foyda",
     "general offerta": "Ommaviy offerta",
-    "all":"Barchasi",
-    "plastic card":"Plastika karta",
-    "paid":"To'langan",
-    "unpaid":"To'lanmagan",
+    "all": "Barchasi",
+    "plastic card": "Plastika karta",
+    "paid": "To'langan",
+    "unpaid": "To'lanmagan",
     "payment": "To'lov",
-    "best selling products":"Eng ko'p sotilgan mahsulotlar"
+    "best selling products": "Eng ko'p sotilgan mahsulotlar",
+    "orders report": "Buyurtma hisoboti",
+    "most sold products": "Eng ko‘p sotilgan mahsulotlar",
+    "most sold report": "Sotuv bo‘yicha hisobot",
+    "most profitable products": "Eng ko‘p foyda keltirayotgan mahsulotlar",
+    "most profitable report": "Foyda hisoboti",
+    "warehouse stock": "Ombor qoldig‘i",
+    "stock report": "Ombor hisoboti"
 }

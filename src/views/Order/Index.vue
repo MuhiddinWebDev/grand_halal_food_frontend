@@ -84,7 +84,13 @@ const updateTabs = (label) => {
   activeTab.value = label;
   getOrders();
 }
-
+const deleteOrders = (order_id) => {
+  console.log(order_id)
+  ModelService.delete(order_id).then(res => {
+    console.log(res)
+    getOrders()
+  })
+}
 onMounted(() => {
   getAllClients();
   getOrders();
@@ -215,7 +221,7 @@ watch(
 
             <!-- Delete tugmasi -->
             <div class="flex justify-end mt-4">
-              <n-button size="small" type="error" @click="ModelService.delete(order.id).then(getOrders)">
+              <n-button size="small" type="error" @click="deleteOrders(order.id)">
                 <template #icon>
                   <n-icon>
                     <DeleteIcon />

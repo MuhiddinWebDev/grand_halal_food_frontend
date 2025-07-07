@@ -74,6 +74,11 @@ const router = createRouter({
           path: "/plastic-card-table",
           name: "plastic-card",
           component: () => import("@/views/PlasticCard/Index.vue"),
+        },
+        {
+          path: "/reports",
+          name: "reports",
+          component: () => import("@/views/Report/Index.vue"),
         }
 
       ]

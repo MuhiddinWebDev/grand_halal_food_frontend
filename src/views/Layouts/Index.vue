@@ -89,11 +89,11 @@ const menuOptions = computed(() => [
     key: "home",
     icon: renderIcon(Home24Icon)
   },
-  // {
-  //   label: t("report"),
-  //   key: "Hisobotlar",
-  //   icon: renderIcon(ReportIcon)
-  // },
+  {
+    label: t("report"),
+    key: "reports",
+    icon: renderIcon(ReportIcon)
+  },
   {
     label: t("document"),
     key: "documents",
