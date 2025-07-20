@@ -46,19 +46,19 @@ const tableColumn = computed(() => [
         key: "fullname",
         render(row) {
             return h("div", { class: "flex items-center" }, [
-                row.image
-                    ? h(NImage, {
-                        src: fileUrl + row.image,
-                        height: 35,
-                        width: 50,
-                        style: { borderRadius: "35px", marginRight: "8px" },
-                        lazy: true,
-                        previewDisabled: true,
-                    })
-                    : h(NAvatar, {
-                        size: "small",
-                        style: { marginRight: "8px" },
-                    }),
+                // row.image
+                //     ? h(NImage, {
+                //         src: fileUrl + row.image,
+                //         height: 35,
+                //         width: 50,
+                //         style: { borderRadius: "35px", marginRight: "8px" },
+                //         lazy: true,
+                //         previewDisabled: true,
+                //     })
+                //     : h(NAvatar, {
+                //         size: "small",
+                //         style: { marginRight: "8px" },
+                //     }),
                 h("span", { class: "font-semibold" }, row.fullname),
             ]);
         },
