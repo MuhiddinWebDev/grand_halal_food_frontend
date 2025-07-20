@@ -14,19 +14,39 @@ export function useFormatnumber(value) {
   const formattedString = decimalPart ? `${integerWithSpaces}.${decimalPart}` : integerWithSpaces;
   return formattedString;
 }
-
 export function usePhoneFormat(phoneNumber) {
-  if (phoneNumber) {
-    const cleaned = phoneNumber.replace(/\D/g, "");
-    const match = cleaned.match(/^998(\d{2})(\d{3})(\d{4})$/);
+  if (!phoneNumber) return "";
 
-    if (match) {
-      return `+998 ${match[1]}  ${match[2]}  ${match[3].slice(0, 2)} ${match[3].slice(2, 4)}`;
-    }
-    return phoneNumber;
+  // +998 yoki +82 boshidagi raqamlar bo'lsa 0 bilan almashtiramiz
+  const normalized = phoneNumber
+    .replace(/^\+998/, "998")
+    .replace(/^\+82/, "82");
+
+  const cleaned = normalized.replace(/\D/g, "");
+
+  // O'zbekiston raqami (998 XX XXX XX XX)
+  const uzbekMatch = cleaned.match(/^998(\d{2})(\d{3})(\d{2})(\d{2})$/);
+  if (uzbekMatch) {
+    return `+998 ${uzbekMatch[1]} ${uzbekMatch[2]} ${uzbekMatch[3]} ${uzbekMatch[4]}`;
   }
-  return ""
+
+  // Koreya mobil raqami (010-1234-5678)
+  const koreaMobileMatch = cleaned.match(/^82?1([0|1|6|7|8|9])(\d{3,4})(\d{4})$/);
+  if (koreaMobileMatch) {
+    return `010-${koreaMobileMatch[2]}-${koreaMobileMatch[3]}`;
+  }
+
+  // Koreya shahar raqami (e.g., 02-123-4567)
+  const koreaLandlineMatch = cleaned.match(/^82?(\d{1,2})(\d{3,4})(\d{4})$/);
+  if (koreaLandlineMatch) {
+    return `0${koreaLandlineMatch[1]}-${koreaLandlineMatch[2]}-${koreaLandlineMatch[3]}`;
+  }
+
+  // Fallback (agar hech biri tushmasa)
+  return phoneNumber;
 }
+
+
 
 export function useSummaFormat(summa, lang = 'ru-RU', room = 2) {
   return new Intl.NumberFormat(lang, {
