@@ -39,11 +39,31 @@ const getOrders = async () => {
 };
 const getAllClients = async () => {
   try {
-    clientOption.value = await clientsService.all();
-  } catch (e) {
+    const response = await clientsService.all();
+    clientOption.value = response.map(client => {
+      // Har bir maydonni tekshirish va kerakli qiymatni olish
+      const name = client.fullname ? client.fullname.trim() : '';
+      const phone = client.phone_number ? client.phone_number.trim() : '';
+      const email = client.mail ? client.mail.trim() : '';
 
+      // Mavjud bo'lsa, label yaratish
+      const labelParts = [];
+      if (name) labelParts.push(name);
+      if (phone) labelParts.push(`📞 ${phone}`);
+      if (email) labelParts.push(`✉️ ${email}`);
+
+      const label = labelParts.length > 0 ? labelParts.join(' | ') : '';
+
+      return {
+        ...client,
+        label
+      };
+    });
+  } catch (e) {
+    console.error("Client fetch error:", e);
   }
-}
+};
+
 const getAllStatusOption = async () => {
   try {
     let data = await ModelService.statusOption();
@@ -117,8 +137,10 @@ watch(
         </n-date-picker>
         <div>
           <n-select :options="clientOption" v-model:value="filterHeader.client_id" @update:value="getOrders"
-            :placeholder="t('client_one')" filterable clearable label-field="fullname" value-field="id">
-          </n-select>
+            placeholder="Mijozni tanlang" filterable clearable label-field="label" 
+            value-field="id"
+            />
+
         </div>
       </div>
       <n-button type="warning" @click="getOrders">
