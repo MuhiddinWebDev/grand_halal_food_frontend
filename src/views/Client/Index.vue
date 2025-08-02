@@ -69,6 +69,10 @@ const tableColumn = computed(() => [
         render: (row) => usePhoneFormat(row.phone_number),
     },
     {
+        title: t("email"),
+        key: "mail",
+    },
+    {
         title: t("login") + " / " + t("datetime"),
         key: "datetime",
         render: (row) => dayJS(row.datetime).format("YYYY-MM-DD HH:mm:ss"),

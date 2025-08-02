@@ -43,6 +43,8 @@ const getAllData = () => {
     tableData.value = res.data;
     pagination.itemCount = res.total;
     loading.value = false;
+    model_act.value.create = false;
+    model_act.value.update = false;
   });
 };
 
@@ -143,15 +145,15 @@ const pagination = reactive({
   },
 });
 const paginationProduct = reactive({
-    page: 1,
-    pageSize: 10,
-    showSizePicker: true,
-    pageSizes: [10, 15, 20],
-    onChange: (page) => (pagination.page = page),
-    onUpdatePageSize: (size) => {
-        pagination.pageSize = size;
-        pagination.page = 1;
-    },
+  page: 1,
+  pageSize: 10,
+  showSizePicker: true,
+  pageSizes: [10, 15, 20],
+  onChange: (page) => (pagination.page = page),
+  onUpdatePageSize: (size) => {
+    pagination.pageSize = size;
+    pagination.page = 1;
+  },
 });
 
 const tableColumnProduct = computed(() => [
@@ -269,9 +271,9 @@ const updateTabs = (tab) => {
         </div>
       </n-tab-pane>
       <n-tab-pane name="limit" :tab="t('limit')">
-        <n-data-table :row-props="rowProps" :pagination="paginationProduct" :loading="loading" :columns="tableColumnProduct"
-          :data="productResidual" :bordered="true" :single-line="false" size="small" :scroll-x="700"
-          max-height="calc(100vh - 315px)" />
+        <n-data-table :row-props="rowProps" :pagination="paginationProduct" :loading="loading"
+          :columns="tableColumnProduct" :data="productResidual" :bordered="true" :single-line="false" size="small"
+          :scroll-x="700" max-height="calc(100vh - 315px)" />
       </n-tab-pane>
     </n-tabs>
     <n-modal transform-origin="center" v-model:show="model_act.create">

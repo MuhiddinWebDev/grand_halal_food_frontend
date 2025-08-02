@@ -141,7 +141,11 @@ const chooseProduct = (product_id, index) => {
 const save = async () => {
   try {
     spinner.value = true;
-    if (form_data.value.entries.length === 0) return message.warning("Mahsulot tanlanmagan");
+    console.log(form_data.value.entries)
+    if (form_data.value.entries.some((item) => !item.product_id)) {
+      message.warning("Mahsulot tanlanmagan");
+      return
+    }
 
     const payload = form_data.value.entries.map((item) => ({
       product_id: item.product_id,
