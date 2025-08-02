@@ -80,6 +80,7 @@ const updateLang = (lang) => {
 onMounted(() => {
     updateLang(globalStore.currentLang);
 })
+
 </script>
 <template>
     <div class="form_body">
