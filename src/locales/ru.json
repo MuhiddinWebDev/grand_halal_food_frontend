@@ -82,7 +82,11 @@
     "username": "Имя пользователя",
     "choose address": "Адрес выбран",
     "prixod": "Поступление товара",
+    "prixod report":"Отчет о вводе продукта",
+    "prixod sverka": "Переключатель ввода продукта",
     "rasxod": "Расход",
+    "rasxod report": "Отчет о выпуске продукции",
+    "rasxod sverka": "Выход продукта сверка",
     "count": "Количество",
     "order": "Заказ",
     "orders": "Заказы",
@@ -171,8 +175,11 @@
     "orders report": "Отчёт по заказам",
     "most sold products": "Самые продаваемые товары",
     "most sold report": "Отчёт по продажам",
+    "most sold sverka": "Продавщица сверка",
     "most profitable products": "Самые прибыльные товары",
     "most profitable report": "Отчёт по прибыли",
+    "most profitable sverka": "Прибыльная сверка",
     "warehouse stock": "Складские остатки",
+    "warehouse sverka": "Провести инвентаризацию",
     "stock report": "Складской отчёт"
 }

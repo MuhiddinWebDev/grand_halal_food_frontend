@@ -87,9 +87,9 @@
     "serial number": "Seriya raqam",
     "input serial number": "Seriya raqamni kiriting",
     "prixod report": "Mahsulot kirim hisoboti",
-    "rasxod report": "Chiqim hisoboti",
+    "rasxod report": "Mahsulot chiqim hisoboti",
     "prixod sverka": "Mahsulot kirim sverka",
-    "rasxod sverka": "Chiqim sverka",
+    "rasxod sverka": "Mahsulot chiqim sverka",
     "service": "Xizmat ko'rsatish",
     "service report": "Xizmat ko'rsatish hisoboti",
     "service sverka": "Xizmat ko'rsatish sverka",
@@ -185,8 +185,11 @@
     "orders report": "Buyurtma hisoboti",
     "most sold products": "Eng ko‘p sotilgan mahsulotlar",
     "most sold report": "Sotuv bo‘yicha hisobot",
+    "most sold sverka": "Sotuv bo‘yicha sverka",
     "most profitable products": "Eng ko‘p foyda keltirayotgan mahsulotlar",
     "most profitable report": "Foyda hisoboti",
+    "most profitable sverka": "Foyda bo‘yicha sverka",
     "warehouse stock": "Ombor qoldig‘i",
+    "warehouse sverka":"Ombor sverka",
     "stock report": "Ombor hisoboti"
 }

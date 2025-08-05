@@ -160,8 +160,11 @@
     "orders report": "Orders Report",
     "most sold products": "Most Sold Products",
     "most sold report": "Sales Report",
+    "most sold sverka": "Sales reconciliation",
     "most profitable products": "Most Profitable Products",
     "most profitable report": "Profit Report",
+    "most profitable sverka": "Profit reconciliation",
     "warehouse stock": "Warehouse Stock",
+    "warehouse sverka":"Perform inventory",
     "stock report": "Stock Report"
 }

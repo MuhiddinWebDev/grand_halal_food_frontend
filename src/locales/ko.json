@@ -170,8 +170,11 @@
     "orders report": "주문 보고서",
     "most sold products": "가장 많이 팔린 제품",
     "most sold report": "판매 보고서",
+    "most sold sverka": "판매 대조",
     "most profitable products": "가장 수익성이 높은 제품",
     "most profitable report": "수익 보고서",
+    "most profitable sverka": "수익 대조",
     "warehouse stock": "창고 재고",
+    "warehouse sverka":"창고 재고 확인",
     "stock report": "재고 보고서"
 }

@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useNotification } from 'naive-ui';
+import { ReportIcon, SverkaIcon } from '@/components/icons/icon';
 import { useI18n } from "vue-i18n"
 const { t } = useI18n();
 const router = useRouter();
@@ -14,10 +15,24 @@ const report_table = computed(() => [
         r_path: '/report-kirim',
         s_path: '/sverka-kirim',
     },
+      {
+        title: t('rasxod'),
+        report: t('rasxod report'),
+        sverka: t('rasxod sverka'),
+        r_path: '/report-kirim',
+        s_path: '/sverka-kirim',
+    },
+    {
+        title: t('warehouse stock'),
+        report: t('stock report'),
+        sverka: t('warehouse sverka'),
+        r_path: '/report-warehouse',
+        r_path: '/sverka-warehouse',
+    },
     {
         title: t('orders'),
-        report: t('orders report'),
-        sverka: t('orders sverka'),
+        report: t('order report'),
+        sverka: t('order sverka'),
         r_path: '/report-orders',
         r_path: '/sverka-orders',
     },
@@ -35,13 +50,7 @@ const report_table = computed(() => [
         r_path: '/report-most-profit',
         r_path: '/sverka-most-profit',
     },
-    {
-        title: t('warehouse stock'),
-        report: t('stock report'),
-        sverka: t('warehouse sverka'),
-        r_path: '/report-warehouse',
-        r_path: '/sverka-warehouse',
-    },
+    
 ]);
 
 const nextToReport = (path) => {
@@ -69,15 +78,25 @@ const nextToReport = (path) => {
                     <div class="space-y-2 mt-2">
                         <div class=" bg-[#C7EAD5] dark:bg-[#115D33] p-2 rounded hover:bg-[#A8DFC1]"
                             @click="nextToReport(item.r_path)">
-                            <h3 class="text-center font-semibold text-[#115D33] dark:text-white">
-                                {{ item.report }}
-                            </h3>
+                            <div class="flex items-center gap-2">
+                                <n-icon size="22" color="#fff">
+                                    <ReportIcon/>
+                                </n-icon>
+                                <h3 class="font-semibold text-[#115D33] dark:text-white">
+                                    {{ item.report }}
+                                </h3>
+                            </div>
                         </div>
                         <div v-if="item.sverka" class="bg-[#B2E5C9] dark:bg-[#0F4A2A] p-2 rounded hover:bg-[#92D9B3]"
                             @click="nextToReport(item.s_path)">
-                            <h3 class="text-center font-semibold text-[#115D33] dark:text-white">
-                                {{ item.sverka }}
-                            </h3>
+                            <div class="flex items-center gap-2">
+                                <n-icon size="22" color="#fff">
+                                    <sverka-icon/>
+                                </n-icon>
+                                <h3 class="font-semibold text-[#115D33] dark:text-white">
+                                    {{ item.sverka }}
+                                </h3>
+                            </div>
                         </div>
                     </div>
                 </div>

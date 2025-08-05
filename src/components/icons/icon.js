@@ -64,9 +64,11 @@ import LockCloseIcon from "./lockClose.vue";
 import LockOpenIcon from "./lockOpen.vue";
 import NewsIcon from "./news.vue";
 import BasketIcon from "./baseket.vue";
-import DeliveryIcon from "./delivery.vue"
+import DeliveryIcon from "./delivery.vue";
+import SverkaIcon from "./sverka.vue";
 // Export all icons
 export {
+  SverkaIcon,
   DeliveryIcon,
   SMSIcon,
   LockCloseIcon,
