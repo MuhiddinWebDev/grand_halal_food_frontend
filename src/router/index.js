@@ -89,10 +89,15 @@ const router = createRouter({
       component: () => import("@/views/Log/Index.vue"),
     },
     {
-      path: "/:pathMatch(.*)*",
-      name: 'error page',
-      component: () => import('../views/error.vue')
-    }
+      path: "/report-warehouse",
+      name: "report-warehouse",
+      component: () => import("@/views/Report/sklad_report.vue"),
+    },
+    // {
+    //   path: "/:pathMatch(.*)*",
+    //   name: 'error page',
+    //   component: () => import('../views/error.vue')
+    // }
   ],
 });
 

@@ -9,58 +9,44 @@ const router = useRouter();
 const notification = useNotification();
 const report_table = computed(() => [
     {
-        title: t('prixod'),
-        report: t('prixod report'),
-        sverka: t('prixod sverka'),
-        r_path: '/report-kirim',
-        s_path: '/sverka-kirim',
-    },
-      {
-        title: t('rasxod'),
-        report: t('rasxod report'),
-        sverka: t('rasxod sverka'),
-        r_path: '/report-kirim',
-        s_path: '/sverka-kirim',
-    },
-    {
         title: t('warehouse stock'),
         report: t('stock report'),
         sverka: t('warehouse sverka'),
         r_path: '/report-warehouse',
-        r_path: '/sverka-warehouse',
+        s_path: '/sverka-warehouse',
     },
     {
         title: t('orders'),
         report: t('order report'),
         sverka: t('order sverka'),
         r_path: '/report-orders',
-        r_path: '/sverka-orders',
+        s_path: '/sverka-orders',
     },
     {
         title: t('most sold products'),
         report: t('most sold report'),
         sverka: t('most sold sverka'),
         r_path: '/report-most-sold',
-        r_path: '/sverka-most-sold',
+        s_path: '/sverka-most-sold',
     },
     {
         title: t('most profitable products'),
         report: t('most profitable report'),
         sverka: t('most profitable sverka'),
         r_path: '/report-most-profit',
-        r_path: '/sverka-most-profit',
+        s_path: '/sverka-most-profit',
     },
     
 ]);
 
 const nextToReport = (path) => {
-    notification.warning({
-        title: "Ogohlantirish",
-        content: "Texnik ishlar olib borilmoqda",
-        keepAliveOnHover: true,
-        duration: 1000
-    })
-    // router.push({ path: path })
+    // notification.warning({
+    //     title: "Ogohlantirish",
+    //     content: "Texnik ishlar olib borilmoqda",
+    //     keepAliveOnHover: true,
+    //     duration: 1000
+    // })
+    router.push({ path: path })
 }
 </script>
 <template>
