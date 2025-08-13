@@ -93,11 +93,26 @@ const router = createRouter({
       name: "report-warehouse",
       component: () => import("@/views/Report/sklad_report.vue"),
     },
-    // {
-    //   path: "/:pathMatch(.*)*",
-    //   name: 'error page',
-    //   component: () => import('../views/error.vue')
-    // }
+    {
+      path: "/sverka-warehouse",
+      name: "sverka-warehouse",
+      component: () => import("@/views/Report/sklad_sverka.vue"),
+    },
+    {
+      path: "/report-orders",
+      name: "report-orders",
+      component: () => import("@/views/Report/order_report.vue"),
+    },
+    {
+      path: "/sverka-orders",
+      name: "sverka-orders",
+      component: () => import("@/views/Report/order_sverka.vue"),
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      name: 'error page',
+      component: () => import('../views/error.vue')
+    }
   ],
 });
 

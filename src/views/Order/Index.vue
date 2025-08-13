@@ -2,16 +2,12 @@
 import { ref, onMounted, inject, watch } from "vue";
 import { useMessage, NCard, NSelect, NButton, NIcon } from "naive-ui";
 import { RefreshIcon, DeleteIcon } from '@/components/icons/icon';
-import { useRouter } from "vue-router";
 import ModelService from "@/services/order.service";
 import clientsService from "@/services/clients.service";
 import { useI18n } from "vue-i18n";
-import { useGlobalStore } from "@/stores/global";
 import { useSummaFormat } from "@/composible/NumberFormat";
 
 const { t, locale } = useI18n();
-const globalStore = useGlobalStore();
-const router = useRouter();
 const message = useMessage();
 const orders = ref([]);
 const loading = ref(false);
@@ -20,7 +16,6 @@ const fileUrl = inject("fileUrl");
 const activeTab = ref('waiting');
 const clientOption = ref([]);
 const statusOption = ref([]);
-const bigStatusOption = ref({});
 const filterHeader = ref({
   range: [
     dayJS().subtract(6, 'day').startOf('day').valueOf(),
@@ -66,9 +61,7 @@ const getAllClients = async () => {
 
 const getAllStatusOption = async () => {
   try {
-    let data = await ModelService.statusOption();
-    bigStatusOption.value = data;
-    statusOption.value = data[locale.value];
+    statusOption.value = await ModelService.statusOption();
 
     // activeTab ni birinchi elementga sozlash
     if (statusOption.value?.length > 0) {
@@ -116,14 +109,6 @@ onMounted(() => {
   getOrders();
   getAllStatusOption();
 });
-
-watch(
-  () => locale.value,
-  (newLocale) => {
-    statusOption.value = bigStatusOption.value[newLocale];
-  },
-  { immediate: true }
-);
 
 </script>
 

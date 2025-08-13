@@ -323,7 +323,7 @@ export const useGlobalStore = defineStore('global', () => {
       disabled: currentData.value.role == "Programmer" ? false : true,
     },
   ]);
- 
+
   const errorPage = ref({
     error_code: 0,
     message: ""
@@ -352,6 +352,22 @@ export const useGlobalStore = defineStore('global', () => {
       title_ko: "리터"
     },
   ])
+  const skladType = ref([
+    {
+      id: "in",
+      title_uz: "Kirim",
+      title_ru: "Приход",
+      title_en: "Input",
+      title_ko: "입고"
+    },
+    {
+      id: 'out',
+      title_uz: "Chiqim",
+      title_ru: "Выход",
+      title_en: "Output",
+      title_ko: "출고"
+    }
+  ])
   return {
     currentData,
     uzUz,
@@ -361,6 +377,7 @@ export const useGlobalStore = defineStore('global', () => {
     langOption,
     roleOption,
     currentLang,
-    unitOption
+    unitOption,
+    skladType
   }
 })

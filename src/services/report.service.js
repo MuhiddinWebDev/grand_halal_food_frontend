@@ -22,5 +22,27 @@ class Service {
       return res;
     });
   }
+
+  omborReport(filter) {
+    return axios.post(END_POINT + "/ombor-report", filter).then((res) => {
+      return res;
+    });
+  }
+  omborSverka(filter) {
+    return axios.post(END_POINT + "/ombor-sverka", filter).then((res) => {
+      return res;
+    });
+  }
+
+  orderReport(filter) {
+    return axios.post(END_POINT + "/order-report", filter).then((res) => {
+      return res;
+    });
+  }
+  orderSverka(filter) {
+    return axios.post(END_POINT + "/order-sverka", filter).then((res) => {
+      return res;
+    });
+  }
 }
 export default new Service();
