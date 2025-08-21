@@ -44,5 +44,16 @@ class Service {
       return res;
     });
   }
+
+  mostSoldReport(filter) {
+    return axios.post(END_POINT + "/most-sold-report", filter).then((res) => {
+      return res;
+    });
+  }
+  mostSoldSverka(filter) {
+    return axios.post(END_POINT + "/most-sold-sverka", filter).then((res) => {
+      return res;
+    });
+  }
 }
 export default new Service();

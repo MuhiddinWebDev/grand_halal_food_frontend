@@ -46,6 +46,7 @@ const getAllData = (action) => {
 const getAllCategory = () => {
     CategoryService.all().then(res => {
         categoryOption.value = res;
+        updateTabs(0);
     })
 }
 
@@ -297,7 +298,6 @@ watchEffect(() => {
 });
 
 onMounted(() => {
-    updateTabs(0);
     getAllCategory()
 });
 </script>

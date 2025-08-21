@@ -109,6 +109,26 @@ const router = createRouter({
       component: () => import("@/views/Report/order_sverka.vue"),
     },
     {
+      path: "/report-most-sold",
+      name: "report-most-sold",
+      component: () => import("@/views/Report/best_seller_report.vue"),
+    },
+    {
+      path: "/sverka-most-sold",
+      name: "sverka-most-sold",
+      component: () => import("@/views/Report/best_seller_sverka.vue"),
+    },
+    {
+      path: "/report-most-profit",
+      name: "report-most-profit",
+      component: () => import("@/views/Report/most_profitable_report.vue"),
+    },
+    {
+      path: "/sverka-most-profit",
+      name: "sverka-most-profit",
+      component: () => import("@/views/Report/most_profitable_sverka.vue"),
+    },
+    {
       path: "/:pathMatch(.*)*",
       name: 'error page',
       component: () => import('../views/error.vue')

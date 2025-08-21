@@ -22,13 +22,13 @@ const report_table = computed(() => [
         r_path: '/report-orders',
         s_path: '/sverka-orders',
     },
-    {
-        title: t('most sold products'),
-        report: t('most sold report'),
-        sverka: t('most sold sverka'),
-        r_path: '/report-most-sold',
-        s_path: '/sverka-most-sold',
-    },
+    // {
+    //     title: t('most sold products'),
+    //     report: t('most sold report'),
+    //     sverka: t('most sold sverka'),
+    //     r_path: '/report-most-sold',
+    //     s_path: '/sverka-most-sold',
+    // },
     {
         title: t('most profitable products'),
         report: t('most profitable report'),

@@ -226,12 +226,11 @@ const updateMenu = (e) => {
       <n-layout class="flex-1 bg-gray-50">
         <!-- Header -->
         <div class="flex justify-between items-center px-4 py-3 bg-white shadow-sm">
-          <div></div>
-          <!-- <n-button @click="openMenuEvent">
+          <n-button @click="openMenuEvent">
             <n-icon size="24">
               <threeLineIcon />
             </n-icon>
-          </n-button> -->
+          </n-button>
 
           <div class="flex items-center gap-4">
             <n-select class="w-[150px]" v-model:value="locale" @update:value="updateLang"

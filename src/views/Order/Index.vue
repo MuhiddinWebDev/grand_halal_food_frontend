@@ -62,10 +62,9 @@ const getAllClients = async () => {
 const getAllStatusOption = async () => {
   try {
     statusOption.value = await ModelService.statusOption();
-
     // activeTab ni birinchi elementga sozlash
     if (statusOption.value?.length > 0) {
-      activeTab.value = statusOption.value[0].label;
+      activeTab.value = statusOption.value[0].value;
       updateTabs(activeTab.value);
     }
   } catch (e) {
@@ -91,14 +90,13 @@ const updatePaid = async (id) => {
     message.error("Xatolik yuz berdi");
   }
 }
-const updateTabs = (label) => {
-  let status = statusOption.value.find((item) => item.label == label);
+const updateTabs = (tab_val) => {
+  let status = statusOption.value.find((item) => item.value == tab_val);
   filterHeader.value.status = status.value;
-  activeTab.value = label;
+  activeTab.value = tab_val;
   getOrders();
 }
 const deleteOrders = (order_id) => {
-  console.log(order_id)
   ModelService.delete(order_id).then(res => {
     console.log(res)
     getOrders()
@@ -122,9 +120,7 @@ onMounted(() => {
         </n-date-picker>
         <div>
           <n-select :options="clientOption" v-model:value="filterHeader.client_id" @update:value="getOrders"
-            placeholder="Mijozni tanlang" filterable clearable label-field="label" 
-            value-field="id"
-            />
+            placeholder="Mijozni tanlang" filterable clearable label-field="label" value-field="id" />
 
         </div>
       </div>
@@ -138,7 +134,8 @@ onMounted(() => {
       </n-button>
     </div>
     <n-tabs type="line" animated v-model:value="activeTab" @update:value="updateTabs">
-      <n-tab-pane v-for="(status, index) in statusOption" :key="index" :name="status.label" :tab="status.label">
+      <n-tab-pane v-for="(status, index) in statusOption" :key="index" :name="status.value"
+        :tab="status['label_' + locale]">
         <div class="grid gap-2 
                 grid-cols-[repeat(auto-fill,minmax(320px,1fr))] 
                 md:grid-cols-[repeat(auto-fill,minmax(620px,1fr))]">
@@ -151,7 +148,7 @@ onMounted(() => {
                 }}
               </h2>
               <n-select style="max-width: 200px;" v-model:value="order.status" :options="statusOption"
-                label-field="label" size="small" @update:value="val => updateStatus(order.id, val)" />
+                :label-field="'label_' + locale" size="small" @update:value="val => updateStatus(order.id, val)" />
             </div>
 
             <div class="text-sm space-y-1 text-gray-700">

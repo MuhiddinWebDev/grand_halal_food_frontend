@@ -1,1 +1,0 @@
-import{O as t}from"./index-Bw_DMt4G.js";const e="/report";class n{homeReport(){return t.get(e+"/home").then(r=>r)}productReportByCategory(){return t.get(e+"/category-product").then(r=>r)}orderByStatusChart(r){return t.post(e+"/order-chart",r).then(o=>o)}saleTopProductReport(r){return t.post(e+"/sale-top-product",r).then(o=>o)}}const s=new n;export{s as r};

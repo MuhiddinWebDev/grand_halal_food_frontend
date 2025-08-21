@@ -50,40 +50,113 @@
 
             <div class="p-4">
                 <n-spin :show="spinner" class="w-full">
-                    <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden border">
-                        <thead>
-                            <tr class="bg-gray-200 text-left border">
-                                <th class="px-4 py-2 text-sm w-10">#</th>
-                                <th class="px-4 py-2 text-sm w-[150px]">{{ t('datetime') }}</th>
-                                <th class="px-4 py-2 text-sm">{{ t('product') }}</th>
-                                <th class="px-4 py-2 text-sm">{{ t('kirim') }}</th>
-                                <th class="px-4 py-2 text-sm">{{ t('rasxod') }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(item, index) in reportData.data" :key="index" class="border hover:bg-gray-50">
-                                <td class="px-4 py-2 border">{{ index + 1 }}</td>
-                                <td class="px-4 py-2 border">{{ dayJS(item.createdAt).format('YYYY-MM-DD HH:mm') }}</td>
-                                <td class="px-4 py-2 border">{{ item.product?.['title_' + locale] }}</td>
-                                <td class="px-4 py-2 text-right border">{{ item.in_total_quantity }}</td>
-                                <td class="px-4 py-2 text-right border">{{ item.out_total_quantity }}</td>
-                            </tr>
-                            <tr class="bg-gray-100">
-                                <td colspan="3" class="px-4 py-2 text-center font-semibold border">{{ t('total') }}
-                                </td>
-                                <td class="px-4 py-2 text-right border">{{ reportData.total_in || 0 }}</td>
-                                <td class="px-4 py-2 text-right border">{{ reportData.total_out || 0 }}</td>
-                            </tr>
-                            <tr class="bg-gray-100">
-                                <td colspan="3" class="px-4 py-2 text-center font-semibold border">{{ t('limit') }}
-                                </td>
-                                <td colspan="2" class="px-4 py-2 text-center border">{{ (reportData.total_in -
-                                    reportData.total_out)
-                                    || 0 }}</td>
-                            </tr>
-                        </tbody>
+                    <!-- MOBILE LIST (md dan kichik) -->
+                    <div class="md:hidden space-y-3">
+                        <div v-for="(item, index) in reportData.data" :key="index"
+                            class="rounded-lg border p-3 shadow-sm bg-white">
+                            <!-- Top: # va sana -->
+                            <div class="flex justify-between text-xs text-slate-500">
+                                <span>#{{ index + 1 }}</span>
+                                <span>{{ dayJS(item.createdAt).format('DD.MM.YYYY HH:mm') }}</span>
+                            </div>
 
-                    </table>
+                            <!-- Mahsulot nomi -->
+                            <div class="mt-1 text-sm">
+                                <div class="text-slate-500 text-xs">{{ t('product') }}</div>
+                                <div class="font-medium truncate">
+                                    {{ item.product?.['title_' + locale] || '—' }}
+                                </div>
+                            </div>
+
+                            <!-- Kirim / Rasxod -->
+                            <div class="mt-2 grid grid-cols-2 gap-2">
+                                <div>
+                                    <div class="text-slate-500 text-xs">{{ t('kirim') }}</div>
+                                    <div class="font-semibold">{{ item.in_total_quantity || 0 }}</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-slate-500 text-xs">{{ t('rasxod') }}</div>
+                                    <div class="font-semibold">{{ item.out_total_quantity || 0 }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mobile totals card -->
+                        <div class="rounded-lg border p-3 bg-gray-50 sticky bottom-5">
+                            <div class="flex justify-between text-sm">
+                                <span>{{ t('total') }} {{ t('kirim') }}</span>
+                                <span class="font-semibold">{{ reportData.total_in || 0 }}</span>
+                            </div>
+                            <div class="flex justify-between text-sm mt-1">
+                                <span>{{ t('total') }} {{ t('rasxod') }}</span>
+                                <span class="font-semibold">{{ reportData.total_out || 0 }}</span>
+                            </div>
+                            <div class="flex justify-between text-sm mt-1">
+                                <span>{{ t('limit') }}</span>
+                                <span class="font-semibold">
+                                    {{ (Number(reportData.total_in) || 0) - (Number(reportData.total_out) || 0) }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Bo'sh holat -->
+                        <div v-if="!reportData.data?.length && !spinner" class="rounded-lg border p-6 bg-white">
+                            <n-empty />
+                        </div>
+                    </div>
+
+                    <!-- DESKTOP TABLE (md va katta) -->
+                    <div class="hidden md:block">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden border table-auto">
+                                <thead>
+                                    <tr class="bg-gray-200 text-left border">
+                                        <th class="px-4 py-2 text-sm w-10">#</th>
+                                        <th class="px-4 py-2 text-sm w-[150px]">{{ t('datetime') }}</th>
+                                        <th class="px-4 py-2 text-sm">{{ t('product') }}</th>
+                                        <th class="px-4 py-2 text-sm">{{ t('kirim') }}</th>
+                                        <th class="px-4 py-2 text-sm">{{ t('rasxod') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(item, index) in reportData.data" :key="index"
+                                        class="border hover:bg-gray-50">
+                                        <td class="px-4 py-2 border">{{ index + 1 }}</td>
+                                        <td class="px-4 py-2 border">{{ dayJS(item.createdAt).format('YYYY-MM-DD HH:mm')
+                                            }}</td>
+                                        <td class="px-4 py-2 border">{{ item.product?.['title_' + locale] }}</td>
+                                        <td class="px-4 py-2 text-right border">{{ item.in_total_quantity }}</td>
+                                        <td class="px-4 py-2 text-right border">{{ item.out_total_quantity }}</td>
+                                    </tr>
+
+                                    <!-- Bo'sh holat -->
+                                    <tr v-if="!reportData.data?.length && !spinner">
+                                        <td colspan="5" class="px-4 py-6 text-center text-slate-500">
+                                            <n-empty />
+                                        </td>
+                                    </tr>
+
+                                    <!-- Totals -->
+                                    <tr class="bg-gray-100">
+                                        <td colspan="3" class="px-4 py-2 text-center font-semibold border">
+                                            {{ t('total') }}
+                                        </td>
+                                        <td class="px-4 py-2 text-right border">{{ reportData.total_in || 0 }}</td>
+                                        <td class="px-4 py-2 text-right border">{{ reportData.total_out || 0 }}</td>
+                                    </tr>
+                                    <tr class="bg-gray-100">
+                                        <td colspan="3" class="px-4 py-2 text-center font-semibold border">
+                                            {{ t('limit') }}
+                                        </td>
+                                        <td colspan="2" class="px-4 py-2 text-center border">
+                                            {{ (Number(reportData.total_in) || 0) - (Number(reportData.total_out) || 0) }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                 </n-spin>
             </div>
         </div>
